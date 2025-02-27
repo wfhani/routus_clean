@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart'; // Import ScreenUtil
 import 'package:google_fonts/google_fonts.dart';
+
 import '../components/dot_indicator.dart';
 import '../components/next_button.dart';
 import '../components/skip_button.dart'; // Import SkipButton
@@ -41,7 +42,7 @@ class _Onboarding1State extends State<Onboarding1> {
                 ClipPath(
                   clipper: FirstContainerClipper(),
                   child: Container(
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       gradient: LinearGradient(
                         begin: Alignment.topCenter,
                         end: Alignment.bottomCenter,
@@ -94,7 +95,7 @@ class _Onboarding1State extends State<Onboarding1> {
                       style: GoogleFonts.nunito(
                         fontSize: 28.sp, // Responsive font size
                         fontWeight: FontWeight.bold, // Bold
-                        color: Color(0xff052A43), // Navy blue color
+                        color: const Color(0xff052A43), // Navy blue color
                       ),
                       textAlign: TextAlign.center,
                     ),
@@ -108,7 +109,7 @@ class _Onboarding1State extends State<Onboarding1> {
                       style: GoogleFonts.comfortaa(
                         fontSize: 16.sp, // Responsive font size
                         fontWeight: FontWeight.normal, // Regular
-                        color: Color(0xff052A43), // Navy blue color
+                        color: const Color(0xff052A43), // Navy blue color
                       ),
                     ),
                   ),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:shared_project/features/parent_home/presentation/screens/home.dart';
+import 'package:routus_clean/features/parent_home/presentation/screens/home.dart';
+
 import 'core/theme/app_theme.dart';
 import 'features/auth/presentation/screens/forgot_password.dart';
 import 'features/auth/presentation/screens/sign_in_screen.dart';
@@ -8,20 +9,18 @@ import 'features/auth/presentation/screens/sign_up_screen.dart';
 import 'features/onboarding/onboarding1/onboarding1.dart';
 import 'features/onboarding/onboarding2/onboarding2.dart';
 import 'features/onboarding/onboarding3/onboarding3.dart';
-import 'features/onboarding/spla.dart';
-import 'features/onboarding/splash.dart';
-import 'features/role_selection/presentation/screens/role_selection_screen.dart';
 import 'features/settings/presentation/screens/help&support/contact_us.dart';
-import 'features/settings/presentation/screens/settings/settings_screen.dart';
 
 
 
 void main() {
   //init();
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
@@ -34,14 +33,14 @@ class MyApp extends StatelessWidget {
           theme: appTheme, // Use the theme defined in app_theme.dart
           initialRoute: '/',
           routes: {
-            '/': (context) => HomeScreen (),
+            '/': (context) => const HomeScreen (),
             '/signin': (context) => SignInScreen(),
             '/signup': (context) => SignUpScreen(),
-            '/forgetpassword': (context) => ForgetPasswordScreen(),
-            '/onboarding1': (context) => Onboarding1(),
-            '/onboarding2': (context) => Onboarding2(),
-            '/onboarding3': (context) => Onboarding3(),
-            '/contactus': (context) => ContactUsScreen(),
+            '/forgetpassword': (context) => const ForgetPasswordScreen(),
+            '/onboarding1': (context) => const Onboarding1(),
+            '/onboarding2': (context) => const Onboarding2(),
+            '/onboarding3': (context) => const Onboarding3(),
+            '/contactus': (context) => const ContactUsScreen(),
           },
         );
       },

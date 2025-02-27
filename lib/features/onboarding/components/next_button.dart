@@ -4,7 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 class NextButton extends StatelessWidget {
   final VoidCallback onPressed;
 
-  const NextButton({required this.onPressed, Key? key}) : super(key: key);
+  const NextButton({required this.onPressed, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -14,13 +14,13 @@ class NextButton extends StatelessWidget {
       child: TextButton(
         onPressed: onPressed,
         style: ButtonStyle(
-          backgroundColor: MaterialStateProperty.all<Color>(const Color(0xffFDC70A)), // Button background color
-          shape: MaterialStateProperty.all<OutlinedBorder>(
+          backgroundColor: WidgetStateProperty.all<Color>(const Color(0xffFDC70A)), // Button background color
+          shape: WidgetStateProperty.all<OutlinedBorder>(
             RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(15), // Rounded corners
             ),
           ),
-          overlayColor: MaterialStateProperty.all<Color>(Colors.black.withOpacity(0.1)), // Ripple effect
+          overlayColor: WidgetStateProperty.all<Color>(Colors.black.withOpacity(0.1)), // Ripple effect
         ),
         child: Text(
           "Next",

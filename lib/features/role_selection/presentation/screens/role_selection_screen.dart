@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:shared_project/features/role_selection/presentation/widgets/role_list_view.dart';
+import 'package:routus_clean/features/role_selection/presentation/widgets/role_list_view.dart';
+
 import '../cubit/role_selection_cubit.dart';
 
 class RoleSelectionScreen extends StatelessWidget {
+  const RoleSelectionScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           gradient: LinearGradient(
             colors: [
               Color(0xFF052A43), // Dark blue
@@ -21,8 +24,8 @@ class RoleSelectionScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            SizedBox(height: 40),
-            Text(
+            const SizedBox(height: 40),
+            const Text(
               'Choose your role',
               style: TextStyle(
                 fontFamily: 'Nunito',
@@ -31,8 +34,8 @@ class RoleSelectionScreen extends StatelessWidget {
                 color: Colors.white,
               ),
             ),
-            SizedBox(height: 8),
-            Text(
+            const SizedBox(height: 8),
+            const Text(
               'Select your role to personalize your experience',
               style: TextStyle(
                 fontSize: 20,
@@ -41,20 +44,20 @@ class RoleSelectionScreen extends StatelessWidget {
               ),
               textAlign: TextAlign.center,
             ),
-            SizedBox(height: 50),
-            Expanded(child: RoleListView()),
+            const SizedBox(height: 50),
+            const Expanded(child: RoleListView()),
 
-            SizedBox(height: 50), // Added space between the cards and the button
+            const SizedBox(height: 50), // Added space between the cards and the button
 
             Padding(
               padding: const EdgeInsets.all(16.0),
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Color(0xffFDC70A),
+                  backgroundColor: const Color(0xffFDC70A),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(20),
                   ),
-                  padding: EdgeInsets.symmetric(vertical: 14, horizontal: 150),
+                  padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 150),
                 ),
                 onPressed: () {
                   final selectedIndex = context.read<RoleSelectionCubit>().state;
@@ -66,7 +69,7 @@ class RoleSelectionScreen extends StatelessWidget {
                     );
                   }
                 },
-                child: Text(
+                child: const Text(
                   'Next',
                   style: TextStyle(
                     color: Colors.black,
@@ -77,7 +80,7 @@ class RoleSelectionScreen extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
           ],
         ),
       ),

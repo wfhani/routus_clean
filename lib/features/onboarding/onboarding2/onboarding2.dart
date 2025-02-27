@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart'; // Import ScreenUtil
 import 'package:google_fonts/google_fonts.dart';
+
 import '../components/next_button.dart'; // Import NextButton
 import '../components/skip_button.dart'; // Import SkipButton
 import '../onboarding3/onboarding3.dart'; // Import Onboarding3
@@ -44,7 +45,7 @@ class _Onboarding2State extends State<Onboarding2> {
       width: isActive ? 29.w : 10.w, // Responsive width
       height: 10.h, // Responsive height
       decoration: BoxDecoration(
-        color: isActive ? const Color(0xffFDC70A) : Color(0xffD9D9D9),
+        color: isActive ? const Color(0xffFDC70A) : const Color(0xffD9D9D9),
         borderRadius: BorderRadius.circular(12.r), // Responsive radius
       ),
     );

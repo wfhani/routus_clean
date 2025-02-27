@@ -6,7 +6,7 @@ class CustomRichTextButton extends StatelessWidget {
   final String buttonText;
   final Widget navigateToScreen; // The screen widget to navigate to
 
-  CustomRichTextButton({
+  const CustomRichTextButton({super.key, 
     required this.regularText,
     required this.buttonText,
     required this.navigateToScreen, // Pass the screen widget directly
@@ -19,7 +19,7 @@ class CustomRichTextButton extends StatelessWidget {
         children: [
           TextSpan(
             text: regularText,
-            style: TextStyle(
+            style: const TextStyle(
               color: Colors.white,
               fontFamily: 'Comfortaa',
               fontWeight: FontWeight.w400, // Regular weight
@@ -28,7 +28,7 @@ class CustomRichTextButton extends StatelessWidget {
           ),
           TextSpan(
             text: buttonText,
-            style: TextStyle(
+            style: const TextStyle(
               color: Color(0xffFDC70A),
               fontFamily: 'Comfortaa',
               fontWeight: FontWeight.w400, // Regular weight

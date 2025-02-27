@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:shared_project/features/settings/presentation/screens/preferences/widgets/NotificationCard.dart';
-import 'package:shared_project/features/settings/presentation/screens/preferences/widgets/reset_button.dart';
+import 'package:routus_clean/features/settings/presentation/screens/preferences/widgets/NotificationCard.dart';
+import 'package:routus_clean/features/settings/presentation/screens/preferences/widgets/reset_button.dart';
+
 import '../../../../../core/theme/app_theme.dart';
 
 class NotificationSettingsScreen extends StatefulWidget {

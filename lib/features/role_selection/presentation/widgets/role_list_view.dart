@@ -1,30 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'role_card.dart';
+
 import '../cubit/role_selection_cubit.dart';
+import 'role_card.dart';
 
 class RoleListView extends StatelessWidget {
+  const RoleListView({super.key});
+
   @override
   Widget build(BuildContext context) {
     final List<Map<String, dynamic>> roles = [
       {
         "role": "Parent",
-        "color": Color(0xff887BAA),
+        "color": const Color(0xff887BAA),
         "imagePath": "assets/images/parent.svg",
       },
       {
         "role": "Supervisor",
-        "color": Color(0xff8AC8B2),
+        "color": const Color(0xff8AC8B2),
         "imagePath": "assets/images/supervisor.svg",
       },
       {
         "role": "School Administrator",
-        "color": Color(0xffE1CEC0),
+        "color": const Color(0xffE1CEC0),
         "imagePath": "assets/images/admin.svg",
       },
       {
         "role": "Driver",
-        "color": Color(0xff5F7E93),
+        "color": const Color(0xff5F7E93),
         "imagePath": "assets/images/driver.svg",
       },
 

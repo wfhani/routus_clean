@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import '../../../../components/custom_button.dart';
 import '../../../../components/custom_text_field.dart';
 import '../../../../components/otp_toggle.dart';
-import '../widgets/phone_input_field.dart';
 import '../../../../core/theme/app_theme.dart';
+import '../widgets/phone_input_field.dart';
 import 'OTP_verification.dart';
 
 class ForgetPasswordScreen extends StatefulWidget {
+  const ForgetPasswordScreen({super.key});
+
   @override
   _ForgetPasswordScreenState createState() => _ForgetPasswordScreenState();
 }
@@ -53,7 +56,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                       ),
                       SizedBox(height: 12.h),
                       // Use the same spacing between the email and phone input fields
-                      Container(
+                      SizedBox(
                         width: double.infinity,
                         child: isEmailSelected
                             ? CustomTextField(

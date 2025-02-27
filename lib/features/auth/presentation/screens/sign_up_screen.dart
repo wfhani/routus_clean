@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import '../../../../components/custom_button.dart';
 import '../../../../components/custom_rich_text_button.dart';
 import '../../../../components/custom_text_field.dart';
-import '../widgets/custom_divider_with_text.dart';
 import '../../../../core/theme/app_theme.dart';
-import '../cubit/auth_cubit.dart';
-import 'sign_in_screen.dart';
 import '../../data/repositories/auth_repository.dart';
+import '../cubit/auth_cubit.dart';
+import '../widgets/custom_divider_with_text.dart';
+import 'sign_in_screen.dart';
 
 class SignUpScreen extends StatelessWidget {
   final TextEditingController firstNameController = TextEditingController();
@@ -19,6 +20,8 @@ class SignUpScreen extends StatelessWidget {
   final TextEditingController phoneController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController confirmPasswordController = TextEditingController();
+
+  SignUpScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +38,7 @@ class SignUpScreen extends StatelessWidget {
                     if (state is AuthSuccess) {
                       // Navigate to the next screen or show success message
                       ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(content: Text('Registration successful!')),
+                        const SnackBar(content: Text('Registration successful!')),
                       );
                       // Example: Navigate to the home screen
                       // Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => HomeScreen()));
@@ -126,7 +129,7 @@ class SignUpScreen extends StatelessWidget {
                           onPressed: () {
                             if (passwordController.text != confirmPasswordController.text) {
                               ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(content: Text('Passwords do not match')),
+                                const SnackBar(content: Text('Passwords do not match')),
                               );
                               return;
                             }
@@ -144,7 +147,7 @@ class SignUpScreen extends StatelessWidget {
                         SizedBox(height: 28.0.h),
 
                         // Divider
-                        CustomDividerWithText(
+                        const CustomDividerWithText(
                           text: 'or Sign up with',
                         ),
 
@@ -173,14 +176,14 @@ class SignUpScreen extends StatelessWidget {
                               child: Container(
                                 width: 45.w,
                                 height: 45.h,
-                                decoration: BoxDecoration(
+                                decoration: const BoxDecoration(
                                   color: Colors.white,
                                   shape: BoxShape.circle,
                                 ),
                                 child: Center(
                                   child: FaIcon(
                                     FontAwesomeIcons.facebookF,
-                                    color: Color(0xFF1877F2),
+                                    color: const Color(0xFF1877F2),
                                     size: 25.w,
                                   ),
                                 ),

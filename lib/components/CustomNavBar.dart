@@ -26,7 +26,7 @@ class CurvedNavBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // Primary color for active states
-    final Color primaryColor = Color(0xff052A43).withOpacity(0.8);
+    final Color primaryColor = const Color(0xff052A43).withOpacity(0.8);
     final Color inactiveColor = primaryColor.withOpacity(0.5);
 
     return Container(

@@ -5,7 +5,7 @@ class PhoneInputField extends StatelessWidget {
   final TextEditingController phoneController;
   final String hintText;
 
-  PhoneInputField({
+  const PhoneInputField({super.key, 
     required this.countryCodeController,
     required this.phoneController,
     required this.hintText,
@@ -32,7 +32,7 @@ class PhoneInputField extends StatelessWidget {
           ),
           child: TextField(
             controller: countryCodeController,
-            decoration: InputDecoration(
+            decoration: const InputDecoration(
               hintText: '+20', // Egypt country code
               hintStyle: TextStyle(
                 fontSize: 16.0,
@@ -43,7 +43,7 @@ class PhoneInputField extends StatelessWidget {
               border: InputBorder.none,
               contentPadding: EdgeInsets.symmetric(horizontal: 12.0, vertical: 10.0),
             ),
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 16.0,
               fontWeight: FontWeight.bold,
               fontFamily: 'Comfortaa',
@@ -53,7 +53,7 @@ class PhoneInputField extends StatelessWidget {
             enabled: false, // Make it non-editable
           ),
         ),
-        SizedBox(width: 15.0), // Space between country code and phone number fields
+        const SizedBox(width: 15.0), // Space between country code and phone number fields
 
         // Phone Number Input Field
         Expanded(
@@ -75,16 +75,16 @@ class PhoneInputField extends StatelessWidget {
               keyboardType: TextInputType.phone,
               decoration: InputDecoration(
                 hintText: hintText,
-                hintStyle: TextStyle(
+                hintStyle: const TextStyle(
                   fontSize: 16.0,
                   fontWeight: FontWeight.bold,
                   fontFamily: 'Comfortaa',
                   color: Color(0xFFAFB8BD), // Text color
                 ),
                 border: InputBorder.none,
-                contentPadding: EdgeInsets.symmetric(horizontal: 12.0, vertical: 10.0),
+                contentPadding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 10.0),
               ),
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 16.0,
                 fontWeight: FontWeight.bold,
                 fontFamily: 'Comfortaa',

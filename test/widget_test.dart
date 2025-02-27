@@ -8,7 +8,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:routus/main.dart';
+import 'package:routus_clean/main.dart'; // ✅ Correct
+
 
 void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {

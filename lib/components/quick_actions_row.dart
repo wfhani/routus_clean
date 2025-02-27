@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
+
 import 'quick_action_button.dart';
 
 class QuickActionsRow extends StatelessWidget {
   final List<Map<String, dynamic>> actions;
 
   const QuickActionsRow({
-    Key? key,
+    super.key,
     required this.actions,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

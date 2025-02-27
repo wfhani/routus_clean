@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import '../../weather/data/weather_service.dart';
 import '../weather_cubit.dart';
-import '../widgets/weather_section.dart';
 
 class HomeScreen extends StatelessWidget {
-  HomeScreen({super.key});
+  const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -13,8 +13,8 @@ class HomeScreen extends StatelessWidget {
       create: (context) => WeatherCubit(WeatherService())..loadWeather("Cairo"),
       child: Scaffold(
         appBar: AppBar(title: const Text("Parent Home")),
-        body: Padding(
-          padding: const EdgeInsets.all(16.0),
+        body: const Padding(
+          padding: EdgeInsets.all(16.0),
 
         ),
       ),

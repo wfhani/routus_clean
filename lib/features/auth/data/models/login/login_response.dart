@@ -1,4 +1,4 @@
-import 'package:shared_project/features/auth/data/models/user_model.dart';
+import 'package:routus_clean/features/auth/data/models/user_model.dart';
 
 class LoginResponse {
   final String accessToken;

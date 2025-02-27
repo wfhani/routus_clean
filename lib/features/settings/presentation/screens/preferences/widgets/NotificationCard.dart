@@ -7,12 +7,12 @@ class NotificationCard extends StatelessWidget {
   final Function(bool) onChanged;
 
   const NotificationCard({
-    Key? key,
+    super.key,
     required this.title,
     required this.subtitle,
     required this.value,
     required this.onChanged,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -45,10 +45,10 @@ class NotificationCard extends StatelessWidget {
                 child: Switch(
                   value: value,
                   onChanged: onChanged,
-                  activeColor: const Color(0xffffff),
+                  activeColor: const Color(0x00ffffff),
                   activeTrackColor: const Color(0xff2FD159),
                   inactiveTrackColor: Colors.grey,
-                  inactiveThumbColor: const Color(0xffffff),
+                  inactiveThumbColor: const Color(0x00ffffff),
                   splashRadius: 2,
                 ),
               ),

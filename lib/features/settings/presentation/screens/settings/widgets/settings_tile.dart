@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class SettingsTile extends StatelessWidget {
   final String iconPath;
@@ -8,11 +8,11 @@ class SettingsTile extends StatelessWidget {
   final VoidCallback onTap;
 
   const SettingsTile({
-    Key? key,
+    super.key,
     required this.iconPath,
     required this.title,
     required this.onTap,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +43,7 @@ class SettingsTile extends StatelessWidget {
                   fontSize: 16.sp,
                   fontFamily: 'Comfortaa',
                   fontWeight: FontWeight.w500,
-                  color: Color(0xff052A43),
+                  color: const Color(0xff052A43),
                 ),
               ),
             ),

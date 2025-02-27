@@ -6,10 +6,10 @@ class LanguageButton extends StatelessWidget {
   final VoidCallback onTap;
 
   const LanguageButton({
-    Key? key,
+    super.key,
     required this.language,
     required this.onTap,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -22,9 +22,9 @@ class LanguageButton extends StatelessWidget {
             borderRadius: BorderRadius.circular(15.r),
           ),
           padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 10.w), // 10 padding inside
-          side: BorderSide(color: Color(0xff223947)),
+          side: const BorderSide(color: Color(0xff223947)),
           backgroundColor: Colors.white,
-          shadowColor: Color(0xff223947),
+          shadowColor: const Color(0xff223947),
           elevation: 4, // Adds shadow to the button
         ),
         onPressed: onTap,
@@ -33,7 +33,7 @@ class LanguageButton extends StatelessWidget {
           style: TextStyle(
             fontSize: 16.sp,
 
-            color: Color(0xff223947),
+            color: const Color(0xff223947),
           ),
         ),
       ),

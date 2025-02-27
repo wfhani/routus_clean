@@ -9,13 +9,13 @@ class CustomDividerWithText extends StatelessWidget {
   final double textSize;
 
   const CustomDividerWithText({
-    Key? key,
+    super.key,
     required this.text,
     this.thickness = 1.0,
     this.endIndent = 8.0,
     this.indent = 8.0,
     this.textSize = 16.0,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

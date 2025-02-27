@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import '../../../../../components/custom_button.dart';
 import '../../../../../components/custom_text_field.dart';
 import '../../../../../core/theme/app_theme.dart';
@@ -8,6 +9,8 @@ class ChangePasswordScreen extends StatelessWidget {
   final TextEditingController currentPasswordController = TextEditingController();
   final TextEditingController newPasswordController = TextEditingController();
   final TextEditingController confirmNewPasswordController = TextEditingController();
+
+  ChangePasswordScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
