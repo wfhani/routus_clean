@@ -8,7 +8,7 @@ import '../../../../components/custom_button.dart';
 import '../../../../components/custom_rich_text_button.dart';
 import '../../../../components/custom_text_field.dart';
 import '../../../../core/theme/app_theme.dart';
-import '../../../parent_home/presentation/screens/home.dart';
+import '../../../parent_home/presentation/screens/home_screen.dart';
 import '../../data/repositories/auth_repository.dart';
 import '../cubit/auth_cubit.dart';
 import '../widgets/custom_divider_with_text.dart';

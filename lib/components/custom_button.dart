@@ -5,7 +5,7 @@ class CustomButton extends StatelessWidget {
   final String text;
   final VoidCallback onPressed;
 
-  const CustomButton({
+   CustomButton({
     required this.text,
     required this.onPressed,
     super.key,
@@ -19,7 +19,7 @@ class CustomButton extends StatelessWidget {
       child: ElevatedButton(
         onPressed: onPressed,
         style: ElevatedButton.styleFrom(
-          backgroundColor: const Color(0xffFDC70A),
+          backgroundColor:  Color(0xffFDC70A),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(15.r), // Responsive radius
           ),
@@ -31,7 +31,7 @@ class CustomButton extends StatelessWidget {
             fontFamily: 'Comfortaa',
             fontWeight: FontWeight.w600, // Semi-bold weight
             fontSize: 20.sp, // Responsive font size
-            color: const Color(0xff052A43),
+            color:  Color(0xff052A43),
           ),
         ),
       ),
