@@ -35,7 +35,7 @@ final ThemeData appTheme = ThemeData(
   ),
 );
 
-final LinearGradient appGradient = LinearGradient(
+const LinearGradient appGradient = LinearGradient(
   begin: Alignment.topCenter,
   end: Alignment.bottomCenter,
   colors: [
@@ -47,12 +47,12 @@ final LinearGradient appGradient = LinearGradient(
 class GradientScaffold extends StatelessWidget {
   final Widget child;
 
-  const GradientScaffold({Key? key, required this.child}) : super(key: key);
+  const GradientScaffold({super.key, required this.child});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         gradient: appGradient,
       ),
       child: Scaffold(

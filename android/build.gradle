@@ -1,4 +1,5 @@
 buildscript {
+<<<<<<< HEAD
     repositories {
         google() // ✅ Required for Firebase
         mavenCentral()
@@ -9,6 +10,21 @@ buildscript {
     }
 }
 
+=======
+    ext.kotlin_version = "1.7.10"
+
+    repositories {
+        google()  // ✅ Make sure this exists
+        mavenCentral()  // ✅ Make sure this exists
+    }
+
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath "com.android.tools.build:gradle:8.1.0"  // Ensure this is added
+        classpath "com.google.gms:google-services:4.4.0"  // Ensure this is added for Firebase
+    }
+}
+>>>>>>> origin/master
 allprojects {
     repositories {
         google()
@@ -26,4 +42,11 @@ subprojects {
 
 tasks.register("clean", Delete) {
     delete rootProject.buildDir
+}
+buildscript {
+    ext.kotlin_version = "1.7.10"  // Make sure this version is correct
+
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+    }
 }

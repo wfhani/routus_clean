@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../../../../../core/theme/app_theme.dart';
+
 import 'widgets/contact_card.dart';
 
 class ContactUsScreen extends StatelessWidget {
+  const ContactUsScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

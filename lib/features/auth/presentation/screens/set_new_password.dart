@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import '../../../../components/custom_button.dart';
 import '../../../../components/custom_text_field.dart';
 import '../../../../core/theme/app_theme.dart';
@@ -9,6 +10,8 @@ import '../../../../core/theme/app_theme.dart';
 class SetNewPasswordScreen extends StatelessWidget {
   final TextEditingController newPasswordController = TextEditingController();
   final TextEditingController confirmPasswordController = TextEditingController();
+
+  SetNewPasswordScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +44,7 @@ class SetNewPasswordScreen extends StatelessWidget {
                 obscureText: true,
                 controller: confirmPasswordController,
               ),
-              Expanded(child: SizedBox()), // This pushes the button to the bottom
+              const Expanded(child: SizedBox()), // This pushes the button to the bottom
               SizedBox(height: 16.h), // Adds the space between the button and the bottom
               CustomButton(
                 text: 'Save',

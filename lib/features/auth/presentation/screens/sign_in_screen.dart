@@ -3,20 +3,23 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
 import '../../../../components/custom_button.dart';
 import '../../../../components/custom_rich_text_button.dart';
 import '../../../../components/custom_text_field.dart';
-import '../widgets/custom_divider_with_text.dart';
 import '../../../../core/theme/app_theme.dart';
-import '../../../parent_home/presentation/screens/home.dart';
+import '../../../parent_home/presentation/screens/home_screen.dart';
 import '../../data/repositories/auth_repository.dart';
 import '../cubit/auth_cubit.dart';
+import '../widgets/custom_divider_with_text.dart';
 import 'forgot_password.dart';
 import 'sign_up_screen.dart';
 
 class SignInScreen extends StatelessWidget {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+
+  SignInScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +36,7 @@ class SignInScreen extends StatelessWidget {
                   Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => HomeScreen(),
+                      builder: (context) => const HomeScreen(),
                     ),
                   );
                 } else if (state is AuthFailure) {
@@ -82,14 +85,14 @@ class SignInScreen extends StatelessWidget {
 
                                 if (email.isEmpty || password.isEmpty) {
                                   ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(content: Text('Please fill in all fields')),
+                                    const SnackBar(content: Text('Please fill in all fields')),
                                   );
                                   return;
                                 }
 
                                 if (!email.contains('@')) {
                                   ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(content: Text('Please enter a valid email address')),
+                                    const SnackBar(content: Text('Please enter a valid email address')),
                                   );
                                   return;
                                 }
@@ -106,7 +109,7 @@ class SignInScreen extends StatelessWidget {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => ForgetPasswordScreen(),
+                              builder: (context) => const ForgetPasswordScreen(),
                             ),
                           );
                         },
@@ -114,13 +117,13 @@ class SignInScreen extends StatelessWidget {
                           'Forgot your password?',
                           style: TextStyle(
                             fontFamily: 'Comfortaa',
-                            color: Color(0xffFDC70A),
+                            color: const Color(0xffFDC70A),
                             fontSize: 16.sp,
                           ),
                         ),
                       ),
                       SizedBox(height: 41.0.h),
-                      CustomDividerWithText(
+                      const CustomDividerWithText(
                         text: 'or Sign in with',
                       ),
                       SizedBox(height: 32.0.h),
@@ -146,14 +149,14 @@ class SignInScreen extends StatelessWidget {
                             child: Container(
                               width: 45.w,
                               height: 45.h,
-                              decoration: BoxDecoration(
+                              decoration: const BoxDecoration(
                                 color: Colors.white,
                                 shape: BoxShape.circle,
                               ),
                               child: Center(
                                 child: FaIcon(
                                   FontAwesomeIcons.facebookF,
-                                  color: Color(0xFF1877F2),
+                                  color: const Color(0xFF1877F2),
                                   size: 25.w,
                                 ),
                               ),

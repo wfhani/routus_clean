@@ -6,10 +6,10 @@ class CustomToggle extends StatelessWidget {
   final VoidCallback onToggle;
 
   const CustomToggle({
-    Key? key,
+    super.key,
     required this.isEmailSelected,
     required this.onToggle,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +19,7 @@ class CustomToggle extends StatelessWidget {
         width: double.infinity,
         height: 46.h, // Outer container height
         decoration: BoxDecoration(
-          color: Color(0xff052A43), // Default navy blue background
+          color: const Color(0xff052A43), // Default navy blue background
           borderRadius: BorderRadius.circular(10.r),
         ),
         child: Stack(
@@ -29,7 +29,7 @@ class CustomToggle extends StatelessWidget {
               alignment: isEmailSelected
                   ? Alignment.centerLeft
                   : Alignment.centerRight,
-              duration: Duration(milliseconds: 200),
+              duration: const Duration(milliseconds: 200),
               curve: Curves.easeInOut,
               child: Container(
                 width: 0.45.sw, // Half the width of the container
@@ -53,7 +53,7 @@ class CustomToggle extends StatelessWidget {
                         'Email',
                         style: TextStyle(
                           color: isEmailSelected
-                              ? Color(0xff052A43) // Navy blue text for selected
+                              ? const Color(0xff052A43) // Navy blue text for selected
                               : Colors.white, // White text for unselected
                           fontSize: 16.sp,
                           fontFamily: 'Comfortaa',
@@ -70,7 +70,7 @@ class CustomToggle extends StatelessWidget {
                         style: TextStyle(
                           color: isEmailSelected
                               ? Colors.white // White text for unselected
-                              : Color(0xff052A43), // Navy blue text for selected
+                              : const Color(0xff052A43), // Navy blue text for selected
                           fontSize: 16.sp,
                           fontFamily: 'Comfortaa',
                         ),

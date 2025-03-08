@@ -1,4 +1,3 @@
-import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -37,7 +36,7 @@ void showLanguageBottomSheet(BuildContext context) {
                 fontSize: 24.sp,
                 fontWeight: FontWeight.bold,
                 fontFamily: 'Comfortaa',
-                color: Color(0xff223947),
+                color: const Color(0xff223947),
               ),
             ),
 
@@ -50,7 +49,7 @@ void showLanguageBottomSheet(BuildContext context) {
               style: TextStyle(
                 fontSize: 16.sp,
                 fontFamily: 'Comfortaa',
-                color: Color(0xff223947),
+                color: const Color(0xff223947),
               ),
             ),
 

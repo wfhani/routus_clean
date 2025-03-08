@@ -31,7 +31,7 @@ void showDeleteAccountDialog(BuildContext context) {
                 style: TextStyle(
                   fontSize: 24.sp,
                   fontFamily: 'Nunito',
-                  color: Color(0xFF052A43),
+                  color: const Color(0xFF052A43),
                 ),
               ),
               SizedBox(height: 16.h), // Adjusted spacing
@@ -42,7 +42,7 @@ void showDeleteAccountDialog(BuildContext context) {
                 style: TextStyle(
                   fontSize: 16.sp,
                   fontFamily: 'Comfortaa',
-                  color: Color(0xFF052A43),
+                  color: const Color(0xFF052A43),
                 ),
               ),
               SizedBox(height: 24.h), // Adjusted spacing
@@ -59,7 +59,7 @@ void showDeleteAccountDialog(BuildContext context) {
                         Navigator.of(context).pop();
                       },
                       style: TextButton.styleFrom(
-                        backgroundColor: Color(0xFFF5EEEE),
+                        backgroundColor: const Color(0xFFF5EEEE),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(15.r),
                         ),
@@ -67,7 +67,7 @@ void showDeleteAccountDialog(BuildContext context) {
                       child: Text(
                         'Cancel',
                         style: TextStyle(
-                          color: Color(0xFF052A43),
+                          color: const Color(0xFF052A43),
                           fontSize: 20.sp,
                         ),
                       ),
@@ -84,7 +84,7 @@ void showDeleteAccountDialog(BuildContext context) {
                         // Add account deletion logic here
                       },
                       style: TextButton.styleFrom(
-                        backgroundColor: Color(0xFFD32B2B),
+                        backgroundColor: const Color(0xFFD32B2B),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(15.r),
                         ),

@@ -3,18 +3,24 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class OTPInputField extends StatefulWidget {
+  const OTPInputField({super.key});
+
   @override
   _OTPInputFieldState createState() => _OTPInputFieldState();
 }
 
 class _OTPInputFieldState extends State<OTPInputField> {
-  List<TextEditingController> _controllers = List.generate(4, (_) => TextEditingController());
-  List<FocusNode> _focusNodes = List.generate(4, (_) => FocusNode());
+  final List<TextEditingController> _controllers = List.generate(4, (_) => TextEditingController());
+  final List<FocusNode> _focusNodes = List.generate(4, (_) => FocusNode());
 
   @override
   void dispose() {
-    _controllers.forEach((controller) => controller.dispose());
-    _focusNodes.forEach((focusNode) => focusNode.dispose());
+    for (var controller in _controllers) {
+      controller.dispose();
+    }
+    for (var focusNode in _focusNodes) {
+      focusNode.dispose();
+    }
     super.dispose();
   }
 
@@ -38,7 +44,7 @@ class _OTPInputFieldState extends State<OTPInputField> {
       width: 50.w,
       height: 50.h,
       decoration: BoxDecoration(
-        color: Color(0xFFD9D9D9),
+        color: const Color(0xFFD9D9D9),
         borderRadius: BorderRadius.circular(12.0),
       ),
       alignment: Alignment.center,
@@ -62,7 +68,7 @@ class _OTPInputFieldState extends State<OTPInputField> {
             }
           }
         },
-        decoration: InputDecoration(
+        decoration: const InputDecoration(
           counterText: '',
           border: InputBorder.none, // Removes border from TextField
         ),

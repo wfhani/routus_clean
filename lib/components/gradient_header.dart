@@ -9,13 +9,13 @@ class GradientHeader extends StatelessWidget {
   final double height;
 
   const GradientHeader({
-    Key? key,
+    super.key,
     required this.title,
     required this.subtitle,
      this.onSettingsTap,
      this.onNotificationsTap,
     this.height = 250,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

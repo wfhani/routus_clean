@@ -1,4 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import '../weather/data/weather_model.dart';
 import '../weather/data/weather_service.dart';
 

@@ -1,47 +1,57 @@
-// import 'package:flutter/material.dart';
-// import 'package:flutter_bloc/flutter_bloc.dart';
-// import '../weather_cubit.dart';
-// import 'weather_bottom_sheet.dart';
-//
-// class WeatherSection extends StatelessWidget {
-//   final String city;
-//
-//   const WeatherSection({Key? key, required this.city}) : super(key: key);
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return BlocBuilder<WeatherCubit, WeatherState>(
-//       builder: (context, state) {
-//         if (state is WeatherLoading) {
-//           return const Center(child: CircularProgressIndicator());
-//         } else if (state is WeatherLoaded) {
-//           return Column(
-//             crossAxisAlignment: CrossAxisAlignment.start,
-//             children: [
-//               const Text(
-//                 "AI School Recommendation",
-//                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-//               ),
-//               const SizedBox(height: 5),
-//               Container(
-//                 padding: const EdgeInsets.all(12),
-//                 decoration: BoxDecoration(
-//                   color: Colors.blue.shade50,
-//                   borderRadius: BorderRadius.circular(12),
-//                 ),
-//                 child: Text(state.weather.aiRecommendation, style: const TextStyle(fontSize: 14)),
-//               ),
-//               const SizedBox(height: 20),
-//               ElevatedButton(
-//                 onPressed: () => showWeatherReportBottomSheet(context, state.weather),
-//                 child: const Text("Show Full Weather Report"),
-//               ),
-//             ],
-//           );
-//         } else {
-//           return const Text("Error loading weather");
-//         }
-//       },
-//     );
-//   }
-// }
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+class WeatherSection extends StatelessWidget {
+  const WeatherSection({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    // ✅ Mocked weather data (Replace with API later)
+    final String description = "The weather is bad today, we recommend not to go to school";
+    final double temperature = 18.5;
+    final String iconUrl = "https://openweathermap.org/img/wn/10d.png"; // Example icon
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          "Check Today's Weather",
+          style: TextStyle(
+            fontSize: 18.sp,
+            fontWeight: FontWeight.bold,
+            fontFamily: 'Comfortaa',
+            color: Color(0xFF052A43),
+          ),
+        ),
+        SizedBox(height: 5.h),
+        Text(
+          description,
+          style: TextStyle(
+            fontSize: 14.sp,
+            fontFamily: 'Comfortaa',
+            color: Colors.black54,
+          ),
+        ),
+        SizedBox(height: 15.h),
+        Row(
+          children: [
+            Image.network(
+              iconUrl, // Mock icon
+              width: 50.w,
+              height: 50.h,
+            ),
+            SizedBox(width: 10.w),
+            Text(
+              "${temperature.toStringAsFixed(1)}°C",
+              style: TextStyle(
+                fontSize: 24.sp,
+                fontWeight: FontWeight.bold,
+                color: Color(0xFF052A43),
+              ),
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+}

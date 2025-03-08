@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart'; // Import ScreenUtil
 import 'package:google_fonts/google_fonts.dart';
-import 'package:shared_project/features/onboarding/onboarding3/third_container_clipper.dart';
+import 'package:routus_clean/features/onboarding/onboarding3/third_container_clipper.dart';
+
 import '../../../components/custom_button.dart';
 import '../../auth/presentation/screens/sign_in_screen.dart'; // Import the SignIn screen
 
@@ -34,7 +35,7 @@ class _Onboarding3State extends State<Onboarding3> {
       width: isActive ? 29.w : 10.w, // Responsive width
       height: 10.h, // Responsive height
       decoration: BoxDecoration(
-        color: isActive ? const Color(0xffFDC70A) : Color(0xffD9D9D9),
+        color: isActive ? const Color(0xffFDC70A) : const Color(0xffD9D9D9),
         borderRadius: BorderRadius.circular(12.r), // Responsive radius
       ),
     );

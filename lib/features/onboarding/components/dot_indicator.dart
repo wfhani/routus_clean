@@ -7,8 +7,8 @@ class DotIndicator extends StatelessWidget {
   const DotIndicator({
     required this.currentPage,
     required this.totalPages,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {

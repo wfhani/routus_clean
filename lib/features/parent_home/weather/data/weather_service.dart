@@ -1,6 +1,7 @@
 import 'dart:convert';
+
 import 'package:http/http.dart' as http;
-import 'package:shared_project/features/parent_home/weather/data/weather_model.dart';
+import 'package:routus_clean/features/parent_home/weather/data/weather_model.dart';
 
 class WeatherService {
   static const String baseUrl = "http://174.129.6.228:8000";

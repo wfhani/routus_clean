@@ -6,7 +6,7 @@ class TermsItem extends StatelessWidget {
   final String title;
   final String description;
 
-   TermsItem({
+   const TermsItem({super.key, 
     required this.title,
     required this.description,
   });

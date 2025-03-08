@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import '../../../../components/custom_button.dart';
 import '../../../../components/custom_rich_text_button.dart';
 import '../../../../components/otp_input_field.dart';
@@ -9,7 +10,7 @@ import 'set_new_password.dart';
 class OTPVerificationScreen extends StatelessWidget {
   final bool isEmailSelected;
 
-  OTPVerificationScreen({required this.isEmailSelected});
+  const OTPVerificationScreen({super.key, required this.isEmailSelected});
 
   @override
   Widget build(BuildContext context) {
@@ -36,14 +37,14 @@ class OTPVerificationScreen extends StatelessWidget {
                   style: Theme.of(context).textTheme.bodyMedium, // Apply theme style for body text
                 ),
                 SizedBox(height: 16.h),
-                OTPInputField(), // Use the custom OTP input component
+                const OTPInputField(), // Use the custom OTP input component
                 SizedBox(height: 16.h),
                 CustomRichTextButton(
                   regularText: "Didn’t receive code? ",
                   buttonText: 'Resend again',
                   navigateToScreen: OTPVerificationScreen(isEmailSelected: isEmailSelected),
                 ), // Rich text button moved above the verify button
-                Expanded(child: SizedBox()), // This expands and pushes the button to the bottom
+                const Expanded(child: SizedBox()), // This expands and pushes the button to the bottom
                 CustomButton(
                   text: 'Verify',
                   onPressed: () {

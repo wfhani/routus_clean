@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:shared_project/features/settings/presentation/screens/account/change_password.dart';
-import 'package:shared_project/features/settings/presentation/screens/help&support/FAQs.dart';
-import 'package:shared_project/features/settings/presentation/screens/help&support/privacy_policy.dart';
-import 'package:shared_project/features/settings/presentation/screens/help&support/terms.dart';
-import 'package:shared_project/features/settings/presentation/screens/settings/widgets/settings_tile.dart';
+import 'package:routus_clean/features/settings/presentation/screens/account/change_password.dart';
+import 'package:routus_clean/features/settings/presentation/screens/help&support/FAQs.dart';
+import 'package:routus_clean/features/settings/presentation/screens/help&support/privacy_policy.dart';
+import 'package:routus_clean/features/settings/presentation/screens/help&support/terms.dart';
+import 'package:routus_clean/features/settings/presentation/screens/settings/widgets/settings_tile.dart';
+
 import '../../../../../core/theme/app_theme.dart';
 import '../account/DeleteAccountDialog.dart';
-import '../preferences/language_bottom_sheet.dart';
 import '../help&support/about_us.dart';
 import '../help&support/contact_us.dart';
+import '../preferences/language_bottom_sheet.dart';
 import '../preferences/notification.dart';
-import '../help&support/FAQs.dart';
 class SettingsScreen extends StatelessWidget {
-  const SettingsScreen({Key? key}) : super(key: key);
+  const SettingsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +37,7 @@ class SettingsScreen extends StatelessWidget {
                   title: "Notification",
                   iconPath: 'assets/icons/settings_icons/notification.svg',
                   onTap: () {
-                    _navigateTo(context, NotificationSettingsScreen());
+                    _navigateTo(context, const NotificationSettingsScreen());
                   },
                 ),
                 _buildDivider(),
@@ -59,7 +59,7 @@ class SettingsScreen extends StatelessWidget {
                   title: "Privacy policy",
                   iconPath: 'assets/icons/settings_icons/priv.svg',
                   onTap: () {
-                    _navigateTo(context, PrivacyPolicyScreen());
+                    _navigateTo(context, const PrivacyPolicyScreen());
                   },
                 ),
                 _buildDivider(),
@@ -67,7 +67,7 @@ class SettingsScreen extends StatelessWidget {
                   title: "About us",
                   iconPath: 'assets/icons/settings_icons/about.svg',
                   onTap: () {
-                    _navigateTo(context, AboutUsScreen());
+                    _navigateTo(context, const AboutUsScreen());
                   },
                 ),
                 _buildDivider(),
@@ -75,7 +75,7 @@ class SettingsScreen extends StatelessWidget {
                   title: "FAQs",
                   iconPath: 'assets/icons/settings_icons/FAQs.svg',
                   onTap: () {
-                    _navigateTo(context, FAQScreen());
+                    _navigateTo(context, const FAQScreen());
                   },
                 ),
                 _buildDivider(),
@@ -83,7 +83,7 @@ class SettingsScreen extends StatelessWidget {
                   title: "Terms & conditions",
                   iconPath: 'assets/icons/settings_icons/terms.svg',
                   onTap: () {
-                    _navigateTo(context, TermsAndConditionsScreen());
+                    _navigateTo(context, const TermsAndConditionsScreen());
                   },
                 ),
                 _buildDivider(),
@@ -91,7 +91,7 @@ class SettingsScreen extends StatelessWidget {
                   title: "Contact us",
                   iconPath: 'assets/icons/settings_icons/contact us.svg',
                   onTap: () {
-                    _navigateTo(context, ContactUsScreen());
+                    _navigateTo(context, const ContactUsScreen());
                   },
                 ),
               ]),
