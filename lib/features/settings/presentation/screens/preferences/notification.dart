@@ -5,14 +5,14 @@ import 'package:routus_clean/features/settings/presentation/screens/preferences/
 
 import '../../../../../core/theme/app_theme.dart';
 
-class NotificationSettingsScreen extends StatefulWidget {
-  const NotificationSettingsScreen({super.key});
+class NotificationScreen extends StatefulWidget {
+  const NotificationScreen({super.key});
 
   @override
   NotificationSettingsScreenState createState() => NotificationSettingsScreenState();
 }
 
-class NotificationSettingsScreenState extends State<NotificationSettingsScreen> {
+class NotificationSettingsScreenState extends State<NotificationScreen> {
   // Notification toggles
   bool busJourneyUpdates = true;
   bool safetyNotifications = true;

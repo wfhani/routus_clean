@@ -37,7 +37,7 @@ class SettingsScreen extends StatelessWidget {
                   title: "Notification",
                   iconPath: 'assets/icons/settings_icons/notification.svg',
                   onTap: () {
-                    _navigateTo(context, const NotificationSettingsScreen());
+                    _navigateTo(context, const NotificationScreen());
                   },
                 ),
                 _buildDivider(),

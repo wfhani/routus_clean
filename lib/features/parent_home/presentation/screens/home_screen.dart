@@ -7,7 +7,7 @@ import 'package:routus_clean/features/parent_home/presentation/cubit/home_cubit.
 import 'package:routus_clean/features/parent_home/presentation/widgets/home_action_button.dart';
 import 'package:routus_clean/features/parent_home/presentation/widgets/tutorial_card.dart';
 import 'package:routus_clean/features/parent_home/presentation/widgets/home_quick_actions.dart';
-import 'package:routus_clean/features/weather/presentation/widgets/weather_section.dart'; // ✅ Added Weather Section
+import 'package:routus_clean/features/weather/presentation/widgets/weather_section.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -85,7 +85,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     children: [
                       GestureDetector(
                         onTap: () {
-                          // Handle settings action
+                          Navigator.pushNamed(context, '/settings'); // ✅ Navigates to settings
                         },
                         child: SvgPicture.asset(
                           'assets/icons/settings.svg',
@@ -96,7 +96,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                       GestureDetector(
                         onTap: () {
-                          // Handle notifications
+                          Navigator.pushNamed(context, '/notifications'); // ✅ Navigates to notification settings
                         },
                         child: SvgPicture.asset(
                           'assets/icons/notification.svg',
@@ -173,7 +173,7 @@ class _HomeContent extends StatelessWidget {
     return SingleChildScrollView(
       padding: EdgeInsets.symmetric(horizontal: 20.w),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start, // Align items left
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           // **Tutorial Card**
           SizedBox(
@@ -224,12 +224,14 @@ class _HomeContent extends StatelessWidget {
             ],
           ),
 
-          SizedBox(height: 20.h), // Space before the next section (if any)
+          SizedBox(height: 20.h),
         ],
       ),
     );
   }
 }
+
+
 
 
 

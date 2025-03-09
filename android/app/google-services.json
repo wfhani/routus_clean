@@ -1,13 +1,13 @@
 {
   "project_info": {
-    "project_number": "649004395439",
-    "project_id": "device-streaming-9b639089",
-    "storage_bucket": "device-streaming-9b639089.firebasestorage.app"
+    "project_number": "533538439569",
+    "project_id": "routus-2e2cd",
+    "storage_bucket": "routus-2e2cd.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:649004395439:android:b00df8713d4adfc7ca1d5a",
+        "mobilesdk_app_id": "1:533538439569:android:3c1a1e1c73b10eaf3c9a30",
         "android_client_info": {
           "package_name": "com.example.routus"
         }
@@ -15,7 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyBvu499r8nEfiIphCbtmZHfGJXe3lO0nqE"
+          "current_key": "AIzaSyDg6dASLjm_y65F3ncvw98S4luvMrqOA14"
         }
       ],
       "services": {

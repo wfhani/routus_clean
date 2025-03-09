@@ -41,46 +41,48 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyB9dou1GsEd6MLqcf8q35lgr_fwTrbeb24',
-    appId: '1:649004395439:web:4c0a422780b72ac4ca1d5a',
-    messagingSenderId: '649004395439',
-    projectId: 'device-streaming-9b639089',
-    authDomain: 'device-streaming-9b639089.firebaseapp.com',
-    storageBucket: 'device-streaming-9b639089.firebasestorage.app',
+    apiKey: 'AIzaSyCRDiF-7da-FZnLhUeOEPlHqhxRg3R9L5E',
+    appId: '1:533538439569:web:03813db8f170ee7b3c9a30',
+    messagingSenderId: '533538439569',
+    projectId: 'routus-2e2cd',
+    authDomain: 'routus-2e2cd.firebaseapp.com',
+    storageBucket: 'routus-2e2cd.firebasestorage.app',
+    measurementId: 'G-F4RVF979H8',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyBvu499r8nEfiIphCbtmZHfGJXe3lO0nqE',
-    appId: '1:649004395439:android:b00df8713d4adfc7ca1d5a',
-    messagingSenderId: '649004395439',
-    projectId: 'device-streaming-9b639089',
-    storageBucket: 'device-streaming-9b639089.firebasestorage.app',
+    apiKey: 'AIzaSyDg6dASLjm_y65F3ncvw98S4luvMrqOA14',
+    appId: '1:533538439569:android:3c1a1e1c73b10eaf3c9a30',
+    messagingSenderId: '533538439569',
+    projectId: 'routus-2e2cd',
+    storageBucket: 'routus-2e2cd.firebasestorage.app',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyBJVP8aYfzOk2cP89WAAm4v2GzY90k3tcM',
-    appId: '1:649004395439:ios:d9d6f074c5906194ca1d5a',
-    messagingSenderId: '649004395439',
-    projectId: 'device-streaming-9b639089',
-    storageBucket: 'device-streaming-9b639089.firebasestorage.app',
+    apiKey: 'AIzaSyAFqSChBX_45q2peEuKNas6lT7i3syJfis',
+    appId: '1:533538439569:ios:d6e314b0ba7951be3c9a30',
+    messagingSenderId: '533538439569',
+    projectId: 'routus-2e2cd',
+    storageBucket: 'routus-2e2cd.firebasestorage.app',
     iosBundleId: 'com.example.routus',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyBJVP8aYfzOk2cP89WAAm4v2GzY90k3tcM',
-    appId: '1:649004395439:ios:d9d6f074c5906194ca1d5a',
-    messagingSenderId: '649004395439',
-    projectId: 'device-streaming-9b639089',
-    storageBucket: 'device-streaming-9b639089.firebasestorage.app',
+    apiKey: 'AIzaSyAFqSChBX_45q2peEuKNas6lT7i3syJfis',
+    appId: '1:533538439569:ios:d6e314b0ba7951be3c9a30',
+    messagingSenderId: '533538439569',
+    projectId: 'routus-2e2cd',
+    storageBucket: 'routus-2e2cd.firebasestorage.app',
     iosBundleId: 'com.example.routus',
   );
 
   static const FirebaseOptions windows = FirebaseOptions(
-    apiKey: 'AIzaSyB9dou1GsEd6MLqcf8q35lgr_fwTrbeb24',
-    appId: '1:649004395439:web:0c51da7336c4239aca1d5a',
-    messagingSenderId: '649004395439',
-    projectId: 'device-streaming-9b639089',
-    authDomain: 'device-streaming-9b639089.firebaseapp.com',
-    storageBucket: 'device-streaming-9b639089.firebasestorage.app',
+    apiKey: 'AIzaSyCRDiF-7da-FZnLhUeOEPlHqhxRg3R9L5E',
+    appId: '1:533538439569:web:cc55f06e30de21cb3c9a30',
+    messagingSenderId: '533538439569',
+    projectId: 'routus-2e2cd',
+    authDomain: 'routus-2e2cd.firebaseapp.com',
+    storageBucket: 'routus-2e2cd.firebasestorage.app',
+    measurementId: 'G-PEELWJDDGZ',
   );
 }

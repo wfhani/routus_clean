@@ -4,7 +4,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:routus_clean/features/parent_home/presentation/cubit/home_cubit.dart';
 import 'package:routus_clean/features/parent_home/presentation/screens/home_screen.dart';
-import 'firebase_options.dart'; // Import the generated Firebase config file
+import 'package:routus_clean/features/settings/presentation/screens/settings/settings_screen.dart';
+import 'package:routus_clean/features/settings/presentation/screens/preferences/notification.dart'; // ✅ Import NotificationScreen
+import 'firebase_options.dart';
 
 import 'core/theme/app_theme.dart';
 import 'features/auth/presentation/screens/forgot_password.dart';
@@ -38,7 +40,7 @@ class MyApp extends StatelessWidget {
         builder: (_, child) {
           return MaterialApp(
             debugShowCheckedModeBanner: false,
-            theme: appTheme, // Use the theme defined in app_theme.dart
+            theme: appTheme,
             initialRoute: '/',
             routes: {
               '/': (context) => const HomeScreen(),
@@ -49,6 +51,8 @@ class MyApp extends StatelessWidget {
               '/onboarding2': (context) => const Onboarding2(),
               '/onboarding3': (context) => const Onboarding3(),
               '/contactus': (context) => const ContactUsScreen(),
+              '/settings': (context) => const SettingsScreen(), // ✅ Settings Route
+              '/notifications': (context) => const NotificationScreen(), // ✅ Notification Route
             },
           );
         },
@@ -56,5 +60,7 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
+
 
 
