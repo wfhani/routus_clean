@@ -24,7 +24,16 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
   @override
   Widget build(BuildContext context) {
     return GradientScaffold(
-      child: SafeArea(
+        child: Scaffold(
+        backgroundColor: Colors.transparent,
+        appBar: AppBar(
+        title: const Text('forgot Password'),
+    leading: IconButton(
+    icon: const Icon(Icons.arrow_back, color: Colors.white),
+    onPressed: () => Navigator.pop(context),
+    ),
+    ),
+      body: SafeArea(
         child: LayoutBuilder(
           builder: (context, constraints) {
             return Stack(
@@ -34,12 +43,6 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      SizedBox(height: 16.h),
-                      Text(
-                        'Forget Password',
-                        style: Theme.of(context).textTheme.displayLarge,
-                      ),
-                      SizedBox(height: 25.0.h),
                       Text(
                         'Which contact details should be\n used to reset your password?',
                         textAlign: TextAlign.center,
@@ -99,6 +102,6 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
           },
         ),
       ),
-    );
+    ));
   }
 }

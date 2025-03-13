@@ -3,12 +3,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-
+import 'package:routus_clean/features/parent_home/presentation/screens/home_screen.dart';
 import '../../../../components/custom_button.dart';
 import '../../../../components/custom_rich_text_button.dart';
 import '../../../../components/custom_text_field.dart';
 import '../../../../core/theme/app_theme.dart';
-import '../../data/repositories/auth_repository.dart';
+import '../../data/models/register/register_request.dart';
 import '../cubit/auth_cubit.dart';
 import '../widgets/custom_divider_with_text.dart';
 import 'sign_in_screen.dart';
@@ -25,190 +25,158 @@ class SignUpScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => AuthCubit(AuthRepository()),
-      child: GradientScaffold(
-        child: Scaffold(
-          body: SafeArea(
-            child: SingleChildScrollView(
-              child: Padding(
-                padding: EdgeInsets.all(23.0.sp),
-                child: BlocConsumer<AuthCubit, AuthState>(
-                  listener: (context, state) {
-                    if (state is AuthSuccess) {
-                      // Navigate to the next screen or show success message
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('Registration successful!')),
-                      );
-                      // Example: Navigate to the home screen
-                      // Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => HomeScreen()));
-                    } else if (state is AuthFailure) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(content: Text(state.error)),
-                      );
-                    }
-                  },
-                  builder: (context, state) {
-                    return Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        SizedBox(height: 16.h),
+    return GradientScaffold(
+      child: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.all(23.0),
+          child: BlocConsumer<AuthCubit, AuthState>(
+            listener: (context, state) {
+              if (state is AuthSuccess) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(content: Text('Registration successful!')),
+                );
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (_) => HomeScreen()),
+                );
+              } else if (state is AuthFailure) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(content: Text(state.error)),
+                );
+              }
+            },
+            builder: (context, state) {
+              return Column(
+                children: [
+                  const SizedBox(height: 16),
+                  const Text(
+                    'Create New Account',
+                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                  ),
+                  const SizedBox(height: 12),
+                  const Text(
+                    'Provide your information to set up your account.',
+                    textAlign: TextAlign.center,
+                  ),
+                  const SizedBox(height: 32),
 
-                        // Title
-                        Text(
-                          'Create New Account',
-                          style: Theme.of(context).textTheme.displayLarge,
+                  Row(
+                    children: [
+                      Expanded(
+                        child: CustomTextField(
+                          hintText: 'First Name',
+                          controller: firstNameController, obscureText: false,
                         ),
+                      ),
+                      const SizedBox(width: 12),
+                      Expanded(
+                        child: CustomTextField(
+                          hintText: 'Last Name',
+                          controller: lastNameController, obscureText: false,
+                        ),
+                      ),
+                    ],
+                  ),
 
-                        SizedBox(height: 12.0.h),
+                  CustomTextField(
+                    hintText: 'Email Address',
+                    controller: emailController, obscureText: false,
+                  ),
 
-                        // Subtitle
-                        Center(
-                          child: Text(
-                            'Provide your information to set up your account.',
-                            textAlign: TextAlign.center,
-                            style: Theme.of(context).textTheme.bodyMedium,
+                  CustomTextField(
+                    hintText: 'Phone Number',
+                    controller: phoneController, obscureText: false,
+                  ),
+
+                  CustomTextField(
+                    hintText: 'Password',
+                    obscureText: true,
+                    controller: passwordController,
+                  ),
+                  CustomTextField(
+                    hintText: 'Confirm Password',
+                    obscureText: true,
+                    controller: confirmPasswordController,
+                  ),
+
+                  const SizedBox(height: 40),
+
+                  CustomButton(
+                    text: state is AuthLoading ? 'Signing Up...' : 'Sign Up',
+                    onPressed: state is AuthLoading ? () {} : () => _register(context),
+                  ),
+
+
+
+                  const SizedBox(height: 28),
+
+                  const CustomDividerWithText(text: 'or Sign up with'),
+
+                  const SizedBox(height: 32),
+
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      IconButton(
+                        onPressed: () {
+                          // Handle Google sign-in
+                        },
+                        icon: SvgPicture.asset(
+                          'assets/icons/Button with centered icon.svg', // Your original Google icon
+                          width: 45.w,
+                          height: 45.h,
+                        ),
+                      ),
+                      const SizedBox(width: 9),
+                      GestureDetector(
+                        onTap: () {
+                          // Handle Facebook sign-in
+                        },
+                        child: Container(
+                          width: 45.w,
+                          height: 45.h,
+                          decoration: const BoxDecoration(
+                            color: Colors.white,
+                            shape: BoxShape.circle,
+                          ),
+                          child: Center(
+                            child: FaIcon(
+                              FontAwesomeIcons.facebookF,
+                              color: Color(0xFF1877F2),
+                              size: 25.w,
+                            ),
                           ),
                         ),
+                      ),
+                    ],
+                  ),
 
-                        SizedBox(height: 32.0.h),
+                  const SizedBox(height: 32),
 
-                        // First Name & Last Name
-                        Row(
-                          children: [
-                            Expanded(
-                              child: CustomTextField(
-                                hintText: 'First Name',
-                                obscureText: false,
-                                controller: firstNameController,
-                              ),
-                            ),
-                            SizedBox(width: 12.w),
-                            Expanded(
-                              child: CustomTextField(
-                                hintText: 'Last Name',
-                                obscureText: false,
-                                controller: lastNameController,
-                              ),
-                            ),
-                          ],
-                        ),
-
-                        // Email Field
-                        CustomTextField(
-                          hintText: 'Email Address',
-                          obscureText: false,
-                          controller: emailController,
-                        ),
-
-                        // Phone Number Field
-                        CustomTextField(
-                          hintText: 'Phone Number',
-                          obscureText: false,
-                          controller: phoneController,
-                          keyboardType: TextInputType.phone,
-                        ),
-
-                        // Password Fields
-                        CustomTextField(
-                          hintText: 'Password',
-                          obscureText: true,
-                          controller: passwordController,
-                        ),
-                        CustomTextField(
-                          hintText: 'Confirm Password',
-                          obscureText: true,
-                          controller: confirmPasswordController,
-                        ),
-
-                        SizedBox(height: 40.0.h),
-
-                        // Sign Up Button
-                        CustomButton(
-                          text: 'Sign Up',
-                          onPressed: () {
-                            if (passwordController.text != confirmPasswordController.text) {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(content: Text('Passwords do not match')),
-                              );
-                              return;
-                            }
-                            context.read<AuthCubit>().register(
-                              firstNameController.text,
-                              lastNameController.text,
-                              emailController.text,
-                              phoneController.text,
-                              passwordController.text,
-                              confirmPasswordController.text,
-                            );
-                          },
-                        ),
-
-                        SizedBox(height: 28.0.h),
-
-                        // Divider
-                        const CustomDividerWithText(
-                          text: 'or Sign up with',
-                        ),
-
-                        SizedBox(height: 32.0.h),
-
-                        // Social Sign Up Options
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            IconButton(
-                              onPressed: () {
-                                // Handle Google sign in
-                              },
-                              icon: SvgPicture.asset(
-                                'assets/icons/Button with centered icon.svg',
-                                width: 45.w,
-                                height: 45.h,
-                              ),
-                              iconSize: 45.w,
-                            ),
-                            SizedBox(width: 9.0.w),
-                            GestureDetector(
-                              onTap: () {
-                                // Handle Facebook sign in
-                              },
-                              child: Container(
-                                width: 45.w,
-                                height: 45.h,
-                                decoration: const BoxDecoration(
-                                  color: Colors.white,
-                                  shape: BoxShape.circle,
-                                ),
-                                child: Center(
-                                  child: FaIcon(
-                                    FontAwesomeIcons.facebookF,
-                                    color: const Color(0xFF1877F2),
-                                    size: 25.w,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-
-                        SizedBox(height: 32.0.h),
-
-                        // Sign In Option
-                        CustomRichTextButton(
-                          regularText: "Already have an account? ",
-                          buttonText: 'Sign In',
-                          navigateToScreen: SignInScreen(),
-                        ),
-                      ],
-                    );
-                  },
-                ),
-              ),
-            ),
+                  CustomRichTextButton(
+                    regularText: "Already have an account? ",
+                    buttonText: 'Sign In',
+                    navigateToScreen: SignInScreen(),
+                  ),
+                ],
+              );
+            },
           ),
         ),
       ),
     );
+  }
+
+  void _register(BuildContext context) {
+    final request = RegisterRequest(
+      firstName: firstNameController.text.trim(),
+      lastName: lastNameController.text.trim(),
+      email: emailController.text.trim(),
+      phone: phoneController.text.trim(),
+      password: passwordController.text,
+      confirmPassword: confirmPasswordController.text,
+    );
+
+    context.read<AuthCubit>().register(request);
   }
 }

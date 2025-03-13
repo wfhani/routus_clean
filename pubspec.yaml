@@ -55,6 +55,7 @@ dependencies:
   cupertino_icons: ^1.0.8
   firebase_auth: ^5.5.0
   cloud_firestore: ^5.6.4
+  shared_preferences: ^2.5.2
 
 
 dev_dependencies:
@@ -94,6 +95,7 @@ flutter:
     - assets/images/settings/
     - assets/images/splash/
     - assets/images/onboarding/
+    - assets/images/the_team/
     - assets/icons/
     - assets/icons/navbar/
     - assets/icons/settings_icons/

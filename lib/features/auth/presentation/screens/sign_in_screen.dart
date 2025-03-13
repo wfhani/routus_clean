@@ -9,7 +9,6 @@ import '../../../../components/custom_rich_text_button.dart';
 import '../../../../components/custom_text_field.dart';
 import '../../../../core/theme/app_theme.dart';
 import '../../../parent_home/presentation/screens/home_screen.dart';
-import '../../data/repositories/auth_repository.dart';
 import '../cubit/auth_cubit.dart';
 import '../widgets/custom_divider_with_text.dart';
 import 'forgot_password.dart';
@@ -23,161 +22,131 @@ class SignInScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => AuthCubit(AuthRepository()),
-      child: GradientScaffold(
-        child: Scaffold(
-          backgroundColor: Colors.transparent,
-          body: SafeArea(
-            child: BlocListener<AuthCubit, AuthState>(
-              listener: (context, state) {
-                if (state is AuthSuccess) {
-                  // Navigate to the next screen after successful login
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const HomeScreen(),
+    return GradientScaffold(
+      child: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.all(23.0),
+          child: BlocConsumer<AuthCubit, AuthState>(
+            listener: (context, state) {
+              if (state is AuthSuccess) {
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (_) => const HomeScreen()),
+                );
+              } else if (state is AuthFailure) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(content: Text(state.error)),
+                );
+              }
+            },
+            builder: (context, state) {
+              return Column(
+                children: [
+                  const SizedBox(height: 16),
+                  const Text(
+                    'Welcome Back',
+                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                  ),
+                  const SizedBox(height: 12),
+                  const Text('Hey! Good to see you again'),
+                  const SizedBox(height: 32),
+
+                  CustomTextField(
+                    hintText: 'Email Address',
+                    controller: emailController,
+                    obscureText: false,
+                  ),
+                  CustomTextField(
+                    hintText: 'Password',
+                    obscureText: true,
+                    controller: passwordController,
+                  ),
+
+                  const SizedBox(height: 40),
+
+                  CustomButton(
+                    text: state is AuthLoading ? 'Signing In...' : 'Sign In',
+                    onPressed: state is AuthLoading ? () {} : () => _login(context),
+                  ),
+
+                  const SizedBox(height: 28),
+
+                  TextButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (_) => const ForgetPasswordScreen()),
+                      );
+                    },
+                    child: const Text(
+                      'Forgot your password?',
+                      style: TextStyle(color: Color(0xffFDC70A), fontSize: 16),
                     ),
-                  );
-                } else if (state is AuthFailure) {
-                  // Show error message if login fails
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(content: Text(state.error)),
-                  );
-                }
-              },
-              child: SingleChildScrollView(
-                child: Padding(
-                  padding: EdgeInsets.all(23.0.sp),
-                  child: Column(
+                  ),
+
+                  const SizedBox(height: 41),
+
+                  const CustomDividerWithText(text: 'or Sign in with'),
+
+                  const SizedBox(height: 32),
+
+                  Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      SizedBox(height: 16.h),
-                      Text(
-                        'Welcome Back',
-                        style: Theme.of(context).textTheme.displayLarge,
-                      ),
-                      SizedBox(height: 12.0.h),
-                      Text(
-                        'Hey! Good to see you again',
-                        style: Theme.of(context).textTheme.bodyMedium,
-                      ),
-                      SizedBox(height: 32.0.h),
-                      CustomTextField(
-                        hintText: 'Email Address',
-                        obscureText: false,
-                        controller: emailController,
-                      ),
-                      CustomTextField(
-                        hintText: 'Password',
-                        obscureText: true,
-                        controller: passwordController,
-                      ),
-                      SizedBox(height: 40.0.h),
-                      BlocBuilder<AuthCubit, AuthState>(
-                        builder: (context, state) {
-                          return CustomButton(
-                            text: state is AuthLoading ? 'Signing In...' : 'Sign In',
-                            onPressed: () {
-                              if (state is! AuthLoading) {
-                                final email = emailController.text.trim();
-                                final password = passwordController.text.trim();
-
-                                if (email.isEmpty || password.isEmpty) {
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    const SnackBar(content: Text('Please fill in all fields')),
-                                  );
-                                  return;
-                                }
-
-                                if (!email.contains('@')) {
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    const SnackBar(content: Text('Please enter a valid email address')),
-                                  );
-                                  return;
-                                }
-
-                                context.read<AuthCubit>().login(email, password);
-                              }
-                            },
-                          );
-                        },
-                      ),
-                      SizedBox(height: 28.0.h),
-                      TextButton(
+                      IconButton(
                         onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => const ForgetPasswordScreen(),
-                            ),
-                          );
+                          // Handle Google sign-in
                         },
-                        child: Text(
-                          'Forgot your password?',
-                          style: TextStyle(
-                            fontFamily: 'Comfortaa',
-                            color: const Color(0xffFDC70A),
-                            fontSize: 16.sp,
+                        icon: SvgPicture.asset(
+                          'assets/icons/Button with centered icon.svg', // Your original Google icon
+                          width: 45.w,
+                          height: 45.h,
+                        ),
+                      ),
+                      const SizedBox(width: 9),
+                      GestureDetector(
+                        onTap: () {
+                          // Handle Facebook sign-in
+                        },
+                        child: Container(
+                          width: 45.w,
+                          height: 45.h,
+                          decoration: const BoxDecoration(
+                            color: Colors.white,
+                            shape: BoxShape.circle,
+                          ),
+                          child: Center(
+                            child: FaIcon(
+                              FontAwesomeIcons.facebookF,
+                              color: Color(0xFF1877F2),
+                              size: 25.w,
+                            ),
                           ),
                         ),
                       ),
-                      SizedBox(height: 41.0.h),
-                      const CustomDividerWithText(
-                        text: 'or Sign in with',
-                      ),
-                      SizedBox(height: 32.0.h),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          IconButton(
-                            onPressed: () {
-                              // Handle Google sign in
-                            },
-                            icon: SvgPicture.asset(
-                              'assets/icons/Button with centered icon.svg',
-                              width: 45.w,
-                              height: 45.h,
-                            ),
-                            iconSize: 45.w,
-                          ),
-                          SizedBox(width: 9.0.w),
-                          GestureDetector(
-                            onTap: () {
-                              // Handle Facebook sign in
-                            },
-                            child: Container(
-                              width: 45.w,
-                              height: 45.h,
-                              decoration: const BoxDecoration(
-                                color: Colors.white,
-                                shape: BoxShape.circle,
-                              ),
-                              child: Center(
-                                child: FaIcon(
-                                  FontAwesomeIcons.facebookF,
-                                  color: const Color(0xFF1877F2),
-                                  size: 25.w,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(height: 32.0.h),
-                      CustomRichTextButton(
-                        regularText: "Don't have an account? ",
-                        buttonText: 'Sign up',
-                        navigateToScreen: SignUpScreen(),
-                      ),
                     ],
                   ),
-                ),
-              ),
-            ),
+
+                  const SizedBox(height: 32),
+
+                  CustomRichTextButton(
+                    regularText: "Don't have an account? ",
+                    buttonText: 'Sign up',
+                    navigateToScreen: SignUpScreen(),
+                  ),
+                ],
+              );
+            },
           ),
         ),
       ),
+    );
+  }
+
+  void _login(BuildContext context) {
+    context.read<AuthCubit>().login(
+      emailController.text.trim(),
+      passwordController.text,
     );
   }
 }

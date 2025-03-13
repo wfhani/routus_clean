@@ -23,13 +23,13 @@ android {
     defaultConfig {
         // Specify your unique Application ID
         applicationId = "com.example.routus"
-<<<<<<< HEAD
-        minSdk = flutter.minSdkVersion
-=======
+        ndk {
+            abiFilters "armeabi-v7a", "arm64-v8a", "x86_64"  // Ensure x86_64 is included
+        }
         // You can update the following values to match your application needs.
         // For more information, see: https://flutter.dev/to/review-gradle-config.
         minSdk = 23
->>>>>>> origin/master
+
         targetSdk = flutter.targetSdkVersion
         versionCode = flutter.versionCode
         versionName = flutter.versionName
@@ -44,8 +44,8 @@ android {
 }
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation 'androidx.core:core-ktx:1.9.0'
-    implementation platform('com.google.firebase:firebase-bom:32.7.2')  // Firebase BoM
+    implementation 'androidx.core:core-ktx:1.15.0'
+    implementation platform('com.google.firebase:firebase-bom:33.10.0')  // Firebase BoM
     implementation 'com.google.firebase:firebase-messaging-ktx'  // FCM
 }
 flutter {

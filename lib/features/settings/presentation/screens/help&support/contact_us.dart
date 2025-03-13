@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import 'widgets/contact_card.dart';
+import 'widgets/contact_us_card.dart';
 
 class ContactUsScreen extends StatelessWidget {
   const ContactUsScreen({super.key});

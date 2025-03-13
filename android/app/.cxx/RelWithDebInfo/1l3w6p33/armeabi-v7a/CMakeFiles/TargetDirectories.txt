@@ -1,0 +1,2 @@
+C:/Users/hpenv/Desktop/routus_clean/android/app/.cxx/RelWithDebInfo/1l3w6p33/armeabi-v7a/CMakeFiles/edit_cache.dir
+C:/Users/hpenv/Desktop/routus_clean/android/app/.cxx/RelWithDebInfo/1l3w6p33/armeabi-v7a/CMakeFiles/rebuild_cache.dir
