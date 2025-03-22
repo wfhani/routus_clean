@@ -2,7 +2,9 @@ buildscript {
     ext.kotlin_version = "1.9.10"  // ✅ Ensure Kotlin version is set
 
     repositories {
-        google()  // ✅ Required for Firebase and other dependencies
+        maven { url 'https://maven.aliyun.com/repository/google' }
+        maven { url 'https://maven.aliyun.com/repository/central' }
+        google()
         mavenCentral()
     }
 

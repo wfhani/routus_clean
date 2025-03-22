@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:routus_clean/features/children/data/repositories/children_repository.dart';
+import 'package:routus_clean/features/children/presentation/cubit/children_cubit.dart';
+import 'package:routus_clean/features/children/presentation/screens/add_children_screen.dart';
 
 import 'core/theme/app_theme.dart';
 import 'features/auth/data/repositories/auth_repository.dart';
@@ -19,7 +22,7 @@ import 'firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
+  await Firebase.initializeApp();
 
 
   // ✅ Retrieve FCM Token (For Push Notifications)
@@ -41,7 +44,8 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (context) => HomeCubit()), // ✅ HomeCubit
-        BlocProvider(create: (context) => AuthCubit(AuthRepository())), // ✅ AuthCubit
+        BlocProvider(create: (context) => AuthCubit(AuthRepository())),
+        BlocProvider(create: (context) => ChildrenCubit(ChildrenRepository())),
       ],
       child: ScreenUtilInit(
         designSize: const Size(375, 812),
@@ -53,7 +57,7 @@ class MyApp extends StatelessWidget {
             theme: appTheme,
             initialRoute: '/',
             routes: {
-              '/': (context) => SignInScreen(),
+              '/': (context) => AddChildrenScreen(),
               '/signin': (context) => SignInScreen(),
               '/signup': (context) => SignUpScreen(),
               '/forgetpassword': (context) => const ForgetPasswordScreen(),
