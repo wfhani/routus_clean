@@ -6,6 +6,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:routus_clean/features/children/data/repositories/children_repository.dart';
 import 'package:routus_clean/features/children/presentation/cubit/children_cubit.dart';
 import 'package:routus_clean/features/children/presentation/screens/add_children_screen.dart';
+import 'package:routus_clean/features/parent_home/presentation/screens/home_screen.dart';
 
 import 'core/theme/app_theme.dart';
 import 'features/auth/data/repositories/auth_repository.dart';
@@ -57,7 +58,7 @@ class MyApp extends StatelessWidget {
             theme: appTheme,
             initialRoute: '/',
             routes: {
-              '/': (context) => AddChildrenScreen(),
+              '/': (context) => HomeScreen(),
               '/signin': (context) => SignInScreen(),
               '/signup': (context) => SignUpScreen(),
               '/forgetpassword': (context) => const ForgetPasswordScreen(),
