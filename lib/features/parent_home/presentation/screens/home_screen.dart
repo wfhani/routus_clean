@@ -2,12 +2,22 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+
 import 'package:routus_clean/components/custom_nav_bar.dart';
 import 'package:routus_clean/features/parent_home/presentation/cubit/home_cubit.dart';
 import 'package:routus_clean/features/parent_home/presentation/widgets/home_action_button.dart';
 import 'package:routus_clean/features/parent_home/presentation/widgets/tutorial_card.dart';
 import 'package:routus_clean/features/parent_home/presentation/widgets/home_quick_actions.dart';
-import 'package:routus_clean/features/weather/presentation/widgets/weather_section.dart'; // ✅ Added Weather Section
+import 'package:routus_clean/features/weather/presentation/widgets/weather_section.dart';
+import 'package:routus_clean/features/weather/presentation/cubit/weather_cubit.dart';
+import 'package:routus_clean/features/weather/data/weather_api_service.dart';
+import 'package:routus_clean/features/weather/data/weather_ai_service.dart';
+import 'package:routus_clean/features/parent_profile/presentation/screens/parent_profile_screen.dart';
+import 'package:routus_clean/features/child_profile/presentation/screens/child_profile_screen.dart';
+import 'package:routus_clean/features/contacts/contacts_screen.dart';
+
+
+
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -26,10 +36,13 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   final List<Widget> _screens = [
-    _HomeContent(),
-    Container(color: Colors.green), // Contacts
-    Container(color: Colors.blue), // My Bus
-    Container(color: Colors.orange), // Profile
+    BlocProvider(
+      create: (_) => WeatherCubit(WeatherApiService(), WeatherAIService()),
+      child: const _HomeContent(),
+    ),
+    Container(), // Contacts tab
+    Container(), // My Bus tab
+    const ParentProfileScreen(),
   ];
 
   @override
@@ -75,71 +88,77 @@ class _HomeScreenState extends State<HomeScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(height: 30.h),
-
-                // **Header with Icons and Text**
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 20.w),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      GestureDetector(
-                        onTap: () {
-                          // Handle settings action
-                        },
-                        child: SvgPicture.asset(
-                          'assets/icons/settings.svg',
-                          width: 28.w,
-                          height: 28.h,
-                          colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn),
-                        ),
-                      ),
-                      GestureDetector(
-                        onTap: () {
-                          // Handle notifications
-                        },
-                        child: SvgPicture.asset(
-                          'assets/icons/notification.svg',
-                          width: 28.w,
-                          height: 28.h,
-                          colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-
                 SizedBox(height: 20.h),
 
-                // **Welcome Text**
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 20.w),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "Welcome!",
-                        style: TextStyle(
-                          fontSize: 20.sp,
-                          fontWeight: FontWeight.bold,
-                          fontFamily: 'Nunito',
-                          color: Colors.white,
+                // ✅ Show Header + Welcome only on Home Tab
+                if (selectedIndex == 0) ...[
+                  // **Header with Icons and Text**
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 20.w),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.pushNamed(context, '/settings');
+                          },
+                          child: SvgPicture.asset(
+                            'assets/icons/settings.svg',
+                            width: 28.w,
+                            height: 28.h,
+                            colorFilter: const ColorFilter.mode(
+                                Colors.white, BlendMode.srcIn),
+                          ),
                         ),
-                      ),
-                      Text(
-                        "Your child's journey starts here",
-                        style: TextStyle(
-                          fontSize: 20.sp,
-                          fontFamily: 'Nunito',
-                          color: Colors.white,
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.pushNamed(context, '/notifications');
+                          },
+                          child: SvgPicture.asset(
+                            'assets/icons/notification.svg',
+                            width: 28.w,
+                            height: 28.h,
+                            colorFilter: const ColorFilter.mode(
+                                Colors.white, BlendMode.srcIn),
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
-                ),
 
-                SizedBox(height: 40.h),
+                  SizedBox(height: 25.h),
 
+                  // **Welcome Text**
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 20.w),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Welcome!",
+                          style: TextStyle(
+                            fontSize: 20.sp,
+                            fontWeight: FontWeight.bold,
+                            fontFamily: 'Nunito',
+                            color: Colors.white,
+                          ),
+                        ),
+                        Text(
+                          "Your child's journey starts here",
+                          style: TextStyle(
+                            fontSize: 20.sp,
+                            fontFamily: 'Nunito',
+                            color: Colors.white,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+
+                  SizedBox(height: 50.h),
+                ],
+
+                // ✅ Main content
                 Expanded(
                   child: IndexedStack(
                     index: selectedIndex,
@@ -149,7 +168,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
                 // **Custom Bottom Navigation**
                 Padding(
-                  padding: EdgeInsets.only(bottom: MediaQuery.of(context).padding.bottom),
+                  padding: EdgeInsets.only(
+                      bottom: MediaQuery.of(context).padding.bottom),
                   child: CustomNavBar(
                     currentIndex: selectedIndex,
                     onTabSelected: _onTabSelected,
@@ -164,7 +184,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 }
 
-// ✅ **Updated _HomeContent with Weather Section**
+// ✅ WeatherCubit is now injected above this widget
 class _HomeContent extends StatelessWidget {
   const _HomeContent();
 
@@ -173,27 +193,17 @@ class _HomeContent extends StatelessWidget {
     return SingleChildScrollView(
       padding: EdgeInsets.symmetric(horizontal: 20.w),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start, // Align items left
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // **Tutorial Card**
           SizedBox(
             width: 330.w,
             child: const TutorialCard(),
           ),
-
-          SizedBox(height: 20.h), // Keep spacing after tutorial card
-
-          // **New Quick Actions Row**
+          SizedBox(height: 20.h),
           HomeQuickActions(),
-
-          SizedBox(height: 10.h), // 🔹 Reduce space before WeatherSection
-
-          // **Weather Section**
-          const WeatherSection(), // ✅ Positioned right after quick actions
-
-          SizedBox(height: 20.h), // Add some space before the next section
-
-          // **Action Buttons Row**
+          SizedBox(height: 10.h),
+          const WeatherSection(),
+          SizedBox(height: 20.h),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -201,51 +211,48 @@ class _HomeContent extends StatelessWidget {
                 child: HomeActionButton(
                   iconPath: 'assets/icons/child_profile.svg',
                   label: "Child profile",
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => const ChildProfileScreen()),
+                    );
+                  },
                 ),
               ),
+
               Expanded(
                 child: HomeActionButton(
                   iconPath: 'assets/icons/face_id.svg',
                   label: "Set face ID",
+                  onTap: () {
+                    // Implement navigation or functionality here
+                  },
                 ),
               ),
               Expanded(
                 child: HomeActionButton(
                   iconPath: 'assets/icons/change_address.svg',
                   label: "Change address",
+                  onTap: () {
+                    // Implement navigation or functionality here
+                  },
                 ),
               ),
               Expanded(
                 child: HomeActionButton(
                   iconPath: 'assets/icons/report_absent.svg',
                   label: "Report absent",
+                  onTap: () {
+                    // Implement navigation or functionality here
+                  },
                 ),
               ),
             ],
           ),
-
-          SizedBox(height: 20.h), // Space before the next section (if any)
+          SizedBox(height: 20.h),
         ],
       ),
     );
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

@@ -17,7 +17,7 @@ class HomeActionButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: onTap ?? () {}, // Default empty function if not provided
+      onTap: onTap ?? () {},
       child: Column(
         children: [
           Container(

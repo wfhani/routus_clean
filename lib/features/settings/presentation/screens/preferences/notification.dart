@@ -13,7 +13,6 @@ class NotificationSettingsScreen extends StatefulWidget {
 }
 
 class NotificationSettingsScreenState extends State<NotificationSettingsScreen> {
-  // Notification toggles
   bool busJourneyUpdates = true;
   bool safetyNotifications = true;
   bool studentStatus = true;
@@ -32,108 +31,127 @@ class NotificationSettingsScreenState extends State<NotificationSettingsScreen> 
             onPressed: () => Navigator.pop(context),
           ),
           backgroundColor: Colors.transparent,
-          elevation: 0, // Remove shadow
+          elevation: 0,
         ),
         body: SafeArea(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              // Section Title
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 10.h),
-                child: Text(
-                  "Adjust notification",
-                  style: TextStyle(
-                    fontSize: 18.sp,
-                    fontWeight: FontWeight.bold,
-                    fontFamily: 'Comfortaa',
-                    color: Colors.white,
+          child: SingleChildScrollView(
+            padding: EdgeInsets.only(bottom: 24.h),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                // Section Title
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 10.h),
+                  child: Text(
+                    "Adjust notification",
+                    style: TextStyle(
+                      fontSize: 18.sp,
+                      fontWeight: FontWeight.bold,
+                      fontFamily: 'Comfortaa',
+                      color: Colors.white,
+                    ),
                   ),
                 ),
-              ),
-              SizedBox(height: 10.h),
+                SizedBox(height: 10.h),
 
-              // Notification Settings List
-              NotificationCard(
-                title: "Bus Journey Updates",
-                subtitle: "Alerts when the bus starts, arrives at a pickup point, or reaches the destination.",
-                value: busJourneyUpdates,
-                onChanged: (value) {
-                  setState(() {
-                    busJourneyUpdates = value;
-                  });
-                },
-              ),
-              NotificationCard(
-                title: "Safety Notifications",
-                subtitle: "Updates on delays, route changes, and safety advisories.",
-                value: safetyNotifications,
-                onChanged: (value) {
-                  setState(() {
-                    safetyNotifications = value;
-                  });
-                },
-              ),
-              NotificationCard(
-                title: "Student Status",
-                subtitle: "Confirmation alerts when a student gets on/off the bus or arrives at school.",
-                value: studentStatus,
-                onChanged: (value) {
-                  setState(() {
-                    studentStatus = value;
-                  });
-                },
-              ),
-              NotificationCard(
-                title: "Real-Time Tracking",
-                subtitle: "Notifications when the bus departs from or arrives at a specific location.",
-                value: realTimeTracking,
-                onChanged: (value) {
-                  setState(() {
-                    realTimeTracking = value;
-                  });
-                },
-              ),
-              NotificationCard(
-                title: "Show Preview",
-                subtitle: "Preview message text inside new message notifications.",
-                value: showPreview,
-                onChanged: (value) {
-                  setState(() {
-                    showPreview = value;
-                  });
-                },
-              ),
-
-              SizedBox(height: 20.h),
-
-
-              Center(
-                child: ResetButton(
-                  onPressed: () {
+                NotificationCard(
+                  title: "Bus Journey Updates",
+                  subtitle: "Alerts when the bus starts, arrives at a pickup point, or reaches the destination.",
+                  value: busJourneyUpdates,
+                  onChanged: (value) {
                     setState(() {
-                      busJourneyUpdates = false;
-                      safetyNotifications = false;
-                      studentStatus = false;
-                      realTimeTracking = false;
-                      showPreview = false;
+                      busJourneyUpdates = value;
                     });
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text("Notification settings reset.")),
-                    );
                   },
                 ),
-              ),
-
-              SizedBox(height: 12.h),
-              Center(
-                child: Text(
-                  "Reset all notification settings and restore them to their default state.",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(color: Colors.white, fontSize: 13.sp),
+                NotificationCard(
+                  title: "Safety Notifications",
+                  subtitle: "Updates on delays, route changes, and safety advisories.",
+                  value: safetyNotifications,
+                  onChanged: (value) {
+                    setState(() {
+                      safetyNotifications = value;
+                    });
+                  },
                 ),
-              ),
-            ],
+                NotificationCard(
+                  title: "Student Status",
+                  subtitle: "Confirmation alerts when a student gets on/off the bus or arrives at school.",
+                  value: studentStatus,
+                  onChanged: (value) {
+                    setState(() {
+                      studentStatus = value;
+                    });
+                  },
+                ),
+                NotificationCard(
+                  title: "Real-Time Tracking",
+                  subtitle: "Notifications when the bus departs from or arrives at a specific location.",
+                  value: realTimeTracking,
+                  onChanged: (value) {
+                    setState(() {
+                      realTimeTracking = value;
+                    });
+                  },
+                ),
+                NotificationCard(
+                  title: "Show Preview",
+                  subtitle: "Preview message text inside new message notifications.",
+                  value: showPreview,
+                  onChanged: (value) {
+                    setState(() {
+                      showPreview = value;
+                    });
+                  },
+                ),
+
+
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 16.w),
+                  child: Text(
+                    "Preview message text inside new message notification",
+                    style: TextStyle(
+                      fontSize: 14.sp,
+                      color: Colors.white,
+                      fontFamily: 'Comfortaa',
+                    ),
+                  ),
+                ),
+
+                SizedBox(height: 14.h),
+
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 16.w),
+                  child: SizedBox(
+                    width: double.infinity,
+                    child: ResetButton(
+                      onPressed: () {
+                        setState(() {
+                          busJourneyUpdates = false;
+                          safetyNotifications = false;
+                          studentStatus = false;
+                          realTimeTracking = false;
+                          showPreview = false;
+                        });
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(content: Text("Notification settings reset.")),
+                        );
+                      },
+                    ),
+                  ),
+                ),
+
+                SizedBox(height: 12.h),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 16.w),
+                  child: Text(
+                    "Reset all notification settings and restore them to their default state.",
+                    style: TextStyle(color: Colors.white, fontSize: 13.sp),
+                  ),
+                ),
+                SizedBox(height: 20.h),
+              ],
+            ),
           ),
         ),
       ),

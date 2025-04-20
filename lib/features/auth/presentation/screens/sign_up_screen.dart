@@ -27,7 +27,7 @@ class SignUpScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return GradientScaffold(
       child: SafeArea(
-        child: Padding(
+        child: SingleChildScrollView(
           padding: const EdgeInsets.all(23.0),
           child: BlocConsumer<AuthCubit, AuthState>(
             listener: (context, state) {

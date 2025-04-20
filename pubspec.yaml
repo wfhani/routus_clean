@@ -49,6 +49,7 @@ dependencies:
   firebase_core: ^3.12.1
   firebase_messaging: ^15.2.4
   flutter_local_notifications: ^18.0.1
+  url_launcher: ^6.1.10
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -96,7 +97,9 @@ flutter:
     - assets/images/splash/
     - assets/images/onboarding/
     - assets/images/the_team/
-    - assets/icons/
+    - assets/images/
+    - assets/images/onboarding/
+    - assets/images/onboarding/illustration 2.svg
     - assets/icons/navbar/
     - assets/icons/settings_icons/
   #   - images/a_dot_ham.jpeg

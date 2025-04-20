@@ -44,7 +44,7 @@ class _AddChildFormScreenState extends State<AddChildFormScreen> {
   Widget build(BuildContext context) {
     return GradientScaffold(
       child: SafeArea(
-        child: Padding(
+        child: SingleChildScrollView(
           padding: EdgeInsets.symmetric(horizontal: 23.w, vertical: 16.h),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,

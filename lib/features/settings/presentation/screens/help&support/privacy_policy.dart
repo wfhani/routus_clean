@@ -1,101 +1,93 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
-import '../../../../../core/theme/app_theme.dart';
-import 'widgets/policy_cards.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class PrivacyPolicyScreen extends StatelessWidget {
   const PrivacyPolicyScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return GradientScaffold(
+    return Container(
+      decoration: const BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+          colors: [
+            Color(0xFF052A43),
+            Color(0xFF0D6AA9),
+          ],
+        ),
+      ),
       child: Scaffold(
+        backgroundColor: Colors.transparent,
         appBar: AppBar(
-          title: const Text('Privacy Policy'),
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          title: const Text("Privacy Policy"),
           leading: IconButton(
             icon: const Icon(Icons.arrow_back, color: Colors.white),
-            onPressed: () => Navigator.pop(context),
+            onPressed: () => Navigator.of(context).pop(),
           ),
         ),
-        body: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 23.w),
-          child: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                SizedBox(height: 32.h),
-
-                // Privacy Policy Image
-                Center(
-                  child: SizedBox(
-                    width: 326.w,
-                    height: 242.h,
-                    child: Image.asset('assets/images/settings/Privacy policy-bro 1.svg', fit: BoxFit.contain),
-                  ),
+        body: SingleChildScrollView(
+          padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 16.h),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Center(
+                child: SvgPicture.asset(
+                  'assets/images/settings/Privacy policy-bro 1.svg',
+                  width: 326.w,
+                  height: 242.h,
+                  fit: BoxFit.contain,
                 ),
+              ),
+              SizedBox(height: 24.h),
+              _policyCard("Data Collection", "We collect personal info (name, email, phone) and child data (e.g., Face ID) for safety and app functionality; location data is used for bus tracking and notifications."),
+              SizedBox(height: 24.h),
+              _policyCard("Data Usage", "Data ensures app features like tracking and notifications work efficiently. No data is sold or shared with advertisers."),
+              SizedBox(height: 24.h),
+              _policyCard("Data Security", "Your data is encrypted and secured with modern safety measures."),
+              SizedBox(height: 24.h),
+              _policyCard("Third-Party Services", "Trusted third parties handle GPS tracking and analytics."),
+              SizedBox(height: 24.h),
+              _policyCard("Parental Consent", "Parents’ explicit consent is required for all data collection."),
+              SizedBox(height: 24.h),
+              _policyCard("User Rights", "Users can access, update, or delete their personal data at any time."),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
 
-                SizedBox(height: 32.h),
-
-                // Privacy Policy Sections
-                const PolicyCard(
-                  title: "Data Collection",
-                  content: "We collect personal info (name, email, phone) and child data (e.g., Face ID) for safety and app functionality; location data is used for bus tracking and notifications.",
-                ),
-
-                SizedBox(height: 24.h),
-                const PolicyCard(
-                  title: "Data Usage",
-                  content: "Data ensures app features like tracking and notifications work efficiently. No data is sold or shared with advertisers.",
-                ),
-
-                SizedBox(height: 24.h),
-                const PolicyCard(
-                  title: "Data Security",
-                  content: "Your data is encrypted and secured with regular audits.",
-                ),
-
-                SizedBox(height: 24.h),
-                const PolicyCard(
-                  title: "Third-Party Services",
-                  content: "Trusted third parties handle GPS tracking and notifications securely.",
-                ),
-
-                SizedBox(height: 24.h),
-                const PolicyCard(
-                  title: "Parental Consent",
-                  content: "Parents’ explicit consent is required for collecting and using children's data.",
-                ),
-
-                SizedBox(height: 24.h),
-                const PolicyCard(
-                  title: "User Rights",
-                  content: "Users can access, update, or delete their data anytime.",
-                ),
-
-                SizedBox(height: 24.h),
-                const PolicyCard(
-                  title: "Cookies and Analytics",
-                  content: "Non-personal data, such as app usage patterns, is collected to improve app functionality. Cookies are used for app optimization, and users can disable them through device settings.",
-                ),
-
-                SizedBox(height: 24.h),
-                const PolicyCard(
-                  title: "Changes to Policy",
-                  content: "Changes will be shared via the app—review regularly.",
-                ),
-
-                SizedBox(height: 24.h),
-                const PolicyCard(
-                  title: "Contact Us",
-                  content: "For questions or concerns about privacy, contact us at support@routus.com",
-                ),
-
-                SizedBox(height: 32.h),
-              ],
+  Widget _policyCard(String title, String text) {
+    return Container(
+      padding: EdgeInsets.all(16.r),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(12.r),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            title,
+            style: TextStyle(
+              fontSize: 16.sp,
+              fontWeight: FontWeight.bold,
+              color: const Color(0xFF0D6AA9),
             ),
           ),
-        ),
+          SizedBox(height: 8.h),
+          Text(
+            text,
+            style: TextStyle(
+              fontSize: 13.sp,
+              color: Colors.black87,
+            ),
+          ),
+        ],
       ),
     );
   }

@@ -23,31 +23,24 @@ class _AddChildrenScreenState extends State<AddChildrenScreen> {
   Widget build(BuildContext context) {
     return GradientScaffold(
       child: SafeArea(
-        child: Center(
-          child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 23.w),
+        child: SingleChildScrollView(
+          padding: EdgeInsets.symmetric(horizontal: 23.w),
+          child: Center(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                SizedBox(height: 16.h),
+                SizedBox(height: 40.h),
 
                 // **Greeting Text**
                 Text(
                   "Hello! Sarah",
-                  style: Theme
-                      .of(context)
-                      .textTheme
-                      .displayLarge,
+                  style: Theme.of(context).textTheme.displayLarge,
                 ),
                 SizedBox(height: 12.h),
                 Text(
                   "Welcome to tracking your child",
-                  style: Theme
-                      .of(context)
-                      .textTheme
-                      .bodyLarge,
+                  style: Theme.of(context).textTheme.bodyLarge,
                 ),
-
                 SizedBox(height: 32.h),
 
                 // **Illustration**
@@ -62,12 +55,14 @@ class _AddChildrenScreenState extends State<AddChildrenScreen> {
                 BlocConsumer<ChildrenCubit, ChildrenState>(
                   listener: (context, state) {
                     if (state is ChildrenError) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(content: Text(state.message)));
+                      ScaffoldMessenger.of(context)
+                          .showSnackBar(SnackBar(content: Text(state.message)));
                     }
                     if (state is ChildrenLoaded) {
-                      Navigator.pushReplacement(context, MaterialPageRoute(
-                          builder: (_) => const ChildListScreen()));
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(builder: (_) => const ChildListScreen()),
+                      );
                     }
                   },
                   builder: (context, state) {
@@ -78,9 +73,9 @@ class _AddChildrenScreenState extends State<AddChildrenScreen> {
                       text: 'Add Child',
                       onPressed: () {
                         Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (_) => const AddChildFormScreen()));
+                          context,
+                          MaterialPageRoute(builder: (_) => const AddChildFormScreen()),
+                        );
                       },
                     );
                   },
