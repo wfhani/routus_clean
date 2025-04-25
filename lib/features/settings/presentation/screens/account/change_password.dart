@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../../../components/custom_button.dart';
 import '../../../../../components/custom_text_field.dart';
@@ -14,11 +15,13 @@ class ChangePasswordScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final local = AppLocalizations.of(context)!;
+
     return GradientScaffold(
       child: Scaffold(
         backgroundColor: Colors.transparent,
         appBar: AppBar(
-          title: const Text('Change Password'),
+          title: Text(local.changePassword),
           leading: IconButton(
             icon: const Icon(Icons.arrow_back, color: Colors.white),
             onPressed: () => Navigator.pop(context),
@@ -31,56 +34,49 @@ class ChangePasswordScreen extends StatelessWidget {
               child: Column(
                 children: [
                   SizedBox(height: 32.h),
-                  // Current Password Field
                   CustomTextField(
-                    hintText: 'Current Password',
+                    hintText: local.currentPassword,
                     obscureText: true,
                     controller: currentPasswordController,
                   ),
                   SizedBox(height: 12.h),
-                  // New Password Field
                   CustomTextField(
-                    hintText: 'New Password',
+                    hintText: local.newPassword,
                     obscureText: true,
                     controller: newPasswordController,
                   ),
                   SizedBox(height: 12.h),
-                  // Confirm New Password Field
                   CustomTextField(
-                    hintText: 'Confirm New Password',
+                    hintText: local.confirmNewPassword,
                     obscureText: true,
                     controller: confirmNewPasswordController,
                   ),
                   SizedBox(height: 40.h),
-                  // Save Button
                   CustomButton(
-                    text: 'Save',
+                    text: local.save,
                     onPressed: () {
-                      // Add your logic here (e.g., validation and password change)
                       final currentPassword = currentPasswordController.text.trim();
                       final newPassword = newPasswordController.text.trim();
                       final confirmNewPassword = confirmNewPasswordController.text.trim();
 
-                      // Simple validation
                       if (currentPassword.isEmpty ||
                           newPassword.isEmpty ||
                           confirmNewPassword.isEmpty) {
                         ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(content: Text('Please fill in all fields')),
+                          SnackBar(content: Text(local.pleaseFillFields)),
                         );
                         return;
                       }
 
                       if (newPassword != confirmNewPassword) {
                         ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(content: Text('New passwords do not match')),
+                          SnackBar(content: Text(local.passwordsMismatch)),
                         );
                         return;
                       }
 
-                      // If validation passes, show a success message
                       ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('Password changed successfully!')),
+                        SnackBar(content: Text(local.passwordChangeSuccess)),
                       );
                     },
                   ),

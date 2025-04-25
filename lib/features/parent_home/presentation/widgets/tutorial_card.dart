@@ -3,79 +3,73 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:video_player/video_player.dart';
 import 'package:routus_clean/features/parent_home/presentation/screens/video_player_screen.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class TutorialCard extends StatelessWidget {
   const TutorialCard({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+
     return Container(
-      width: double.infinity, // Full width
-      height: 170.h, // Adjust based on Figma reference
+      width: double.infinity,
+      height: 170.h,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(23.r), // Rounded corners
+        borderRadius: BorderRadius.circular(23.r),
         gradient: const LinearGradient(
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
           colors: [
-            Color(0xFF052A43), // Dark Blue (Top)
-            Color(0xFF0D6AA9), // Light Blue (Bottom)
+            Color(0xFF052A43),
+            Color(0xFF0D6AA9),
           ],
         ),
       ),
       padding: EdgeInsets.symmetric(horizontal: 5.w, vertical: 10.h),
       child: Row(
         children: [
-          // **SVG Illustration on the Left**
           SvgPicture.asset(
-            'assets/images/tutorial_illustration.svg', // ✅ Correct asset path
-            width: 130.w, // Figma size
+            'assets/images/tutorial_illustration.svg',
+            width: 130.w,
             height: 130.h,
           ),
-
-          SizedBox(width: 10.w), // Increased spacing for better alignment
-
-          // **Text and Video Icon on the Right**
+          SizedBox(width: 10.w),
           Expanded(
             child: Stack(
-              alignment: Alignment.bottomRight, // ✅ Play button at bottom-right
+              alignment: Alignment.bottomRight,
               children: [
-                // **Text Content**
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    // **Bold Comfortaa Font for the Title**
                     Padding(
-                      padding: EdgeInsets.only(bottom: 5.h), // Fine-tuned spacing
+                      padding: EdgeInsets.only(bottom: 5.h),
                       child: Text(
-                        "Navigate with Routus:",
+                        l10n.tutorialTitle,
                         style: TextStyle(
                           fontSize: 14.sp,
                           fontWeight: FontWeight.bold,
-                          fontFamily: 'Comfortaa', // ✅ Apply Comfortaa font
+                          fontFamily: 'Comfortaa',
                           color: Colors.white,
                         ),
                       ),
                     ),
-
-                    // **Regular Comfortaa Font for the Subtitle**
                     Text(
-                      "A Guide to Seamless \nBus Tracking!\n\n3 minutes",
+                      l10n.tutorialSubtitle,
                       style: TextStyle(
                         fontSize: 14.sp,
                         fontWeight: FontWeight.normal,
-                        fontFamily: 'Comfortaa', // ✅ Apply Comfortaa font
+                        fontFamily: 'Comfortaa',
                         color: Colors.white,
                       ),
                     ),
                   ],
                 ),
-
-                // **Clickable Play Button**
                 Positioned(
-                  bottom: 5.h, // ✅ Adjusted offset
-                  right: 5.w, // ✅ Adjusted offset
+                  bottom: 5.h,
+                  left: Directionality.of(context) == TextDirection.rtl ? 5.w : null,
+                  right: Directionality.of(context) == TextDirection.ltr ? 5.w : null,
                   child: GestureDetector(
                     onTap: () {
                       Navigator.push(
@@ -90,11 +84,11 @@ class TutorialCard extends StatelessWidget {
                       height: 40.h,
                       decoration: const BoxDecoration(
                         shape: BoxShape.circle,
-                        color: Colors.white, // ✅ Solid white background
+                        color: Colors.white,
                       ),
                       child: Icon(
                         Icons.play_arrow,
-                        color: Colors.black.withOpacity(0.5), // ✅ Semi-transparent black arrow
+                        color: Colors.black.withOpacity(0.5),
                         size: 24.sp,
                       ),
                     ),
@@ -108,12 +102,3 @@ class TutorialCard extends StatelessWidget {
     );
   }
 }
-
-
-
-
-
-
-
-
-

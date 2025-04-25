@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart'; // ✅ For SVG
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../components/next_button.dart';
 import '../components/skip_button.dart';
@@ -51,7 +52,7 @@ class _Onboarding2State extends State<Onboarding2> {
     );
   }
 
-  Widget _buildOnboardingContent() {
+  Widget _buildOnboardingContent(AppLocalizations local) {
     return Container(
       padding: EdgeInsets.all(20.w),
       decoration: const BoxDecoration(
@@ -68,7 +69,7 @@ class _Onboarding2State extends State<Onboarding2> {
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 20.w),
             child: Text(
-              "Real-Time Updates\n",
+              local.realTimeUpdates,
               style: GoogleFonts.nunito(
                 fontSize: 28.sp,
                 fontWeight: FontWeight.bold,
@@ -80,7 +81,7 @@ class _Onboarding2State extends State<Onboarding2> {
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 5.w),
             child: Text(
-              "Receive alerts about delays, arrivals, and emergencies to stay updated at all times.\n",
+              local.realTimeUpdatesDesc,
               textAlign: TextAlign.center,
               style: GoogleFonts.comfortaa(
                 fontSize: 16.sp,
@@ -101,7 +102,7 @@ class _Onboarding2State extends State<Onboarding2> {
     );
   }
 
-  Widget _buildBottomContainer() {
+  Widget _buildBottomContainer(AppLocalizations local) {
     return Stack(
       children: [
         ClipPath(
@@ -127,7 +128,7 @@ class _Onboarding2State extends State<Onboarding2> {
           child: Align(
             alignment: Alignment.center,
             child: SvgPicture.asset(
-              'assets/images/onboarding/illustration 2.svg', // ✅ SVG here
+              'assets/images/onboarding/illustration 2.svg',
               width: 331.w,
               height: 300.h,
               fit: BoxFit.contain,
@@ -145,6 +146,7 @@ class _Onboarding2State extends State<Onboarding2> {
                 onPressed: () {
                   // TODO: Skip logic
                 },
+                text: local.skip,
               ),
               NextButton(
                 onPressed: () {
@@ -155,6 +157,7 @@ class _Onboarding2State extends State<Onboarding2> {
                     ),
                   );
                 },
+                text: local.next,
               ),
             ],
           ),
@@ -165,12 +168,14 @@ class _Onboarding2State extends State<Onboarding2> {
 
   @override
   Widget build(BuildContext context) {
+    final local = AppLocalizations.of(context)!;
+
     return Scaffold(
       backgroundColor: Colors.white,
       body: Column(
         children: [
-          Expanded(flex: 1, child: _buildOnboardingContent()),
-          Expanded(flex: 1, child: _buildBottomContainer()),
+          Expanded(flex: 1, child: _buildOnboardingContent(local)),
+          Expanded(flex: 1, child: _buildBottomContainer(local)),
         ],
       ),
     );

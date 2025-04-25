@@ -1,0 +1,2 @@
+C:/Users/Shahd/IdeaProjects/routus_clean/android/app/.cxx/Debug/306t1w6q/x86_64/CMakeFiles/edit_cache.dir
+C:/Users/Shahd/IdeaProjects/routus_clean/android/app/.cxx/Debug/306t1w6q/x86_64/CMakeFiles/rebuild_cache.dir

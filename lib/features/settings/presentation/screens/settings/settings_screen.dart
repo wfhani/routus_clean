@@ -5,22 +5,26 @@ import 'package:routus_clean/features/settings/presentation/screens/help&support
 import 'package:routus_clean/features/settings/presentation/screens/help&support/privacy_policy.dart';
 import 'package:routus_clean/features/settings/presentation/screens/help&support/terms.dart';
 import 'package:routus_clean/features/settings/presentation/screens/settings/widgets/settings_tile.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../../../core/theme/app_theme.dart';
 import '../account/DeleteAccountDialog.dart';
 import '../help&support/about_us.dart';
 import '../help&support/contact_us.dart';
-import '../preferences/language_bottom_sheet.dart';
+import 'package:routus_clean/features/settings/presentation/screens/preferences/language_bottom_sheet.dart';
 import '../preferences/notification.dart';
+
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final localizations = AppLocalizations.of(context)!;
+
     return GradientScaffold(
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('Settings'),
+          title: Text(localizations.settings),
           leading: IconButton(
             icon: const Icon(Icons.arrow_back, color: Colors.white),
             onPressed: () => Navigator.pop(context),
@@ -31,10 +35,10 @@ class SettingsScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              _buildSectionTitle("Preference"),
+              _buildSectionTitle(localizations.preference),
               _buildSettingsContainer([
                 SettingsTile(
-                  title: "Notification",
+                  title: localizations.notification,
                   iconPath: 'assets/icons/settings_icons/notification.svg',
                   onTap: () {
                     _navigateTo(context, const NotificationSettingsScreen());
@@ -42,21 +46,18 @@ class SettingsScreen extends StatelessWidget {
                 ),
                 _buildDivider(),
                 SettingsTile(
-                  title: "Language",
+                  title: localizations.language,
                   iconPath: 'assets/icons/settings_icons/language.svg',
                   onTap: () {
-                    showLanguageBottomSheet(context); //
-                  }
-                  ,
+                    showLanguageBottomSheet(context);
+                  },
                 ),
               ]),
-
               SizedBox(height: 16.h),
-
-              _buildSectionTitle("Help & Support"),
+              _buildSectionTitle(localizations.helpSupport),
               _buildSettingsContainer([
                 SettingsTile(
-                  title: "Privacy policy",
+                  title: localizations.privacyPolicy,
                   iconPath: 'assets/icons/settings_icons/priv.svg',
                   onTap: () {
                     _navigateTo(context, const PrivacyPolicyScreen());
@@ -64,7 +65,7 @@ class SettingsScreen extends StatelessWidget {
                 ),
                 _buildDivider(),
                 SettingsTile(
-                  title: "About us",
+                  title: localizations.aboutUs,
                   iconPath: 'assets/icons/settings_icons/about.svg',
                   onTap: () {
                     _navigateTo(context, const AboutUsScreen());
@@ -72,7 +73,7 @@ class SettingsScreen extends StatelessWidget {
                 ),
                 _buildDivider(),
                 SettingsTile(
-                  title: "FAQs",
+                  title: localizations.faqs,
                   iconPath: 'assets/icons/settings_icons/FAQs.svg',
                   onTap: () {
                     _navigateTo(context, const FAQScreen());
@@ -80,7 +81,7 @@ class SettingsScreen extends StatelessWidget {
                 ),
                 _buildDivider(),
                 SettingsTile(
-                  title: "Terms & conditions",
+                  title: localizations.termsConditions,
                   iconPath: 'assets/icons/settings_icons/terms.svg',
                   onTap: () {
                     _navigateTo(context, const TermsAndConditionsScreen());
@@ -88,20 +89,18 @@ class SettingsScreen extends StatelessWidget {
                 ),
                 _buildDivider(),
                 SettingsTile(
-                  title: "Contact us",
+                  title: localizations.contactUs,
                   iconPath: 'assets/icons/settings_icons/contact us.svg',
                   onTap: () {
                     _navigateTo(context, const ContactUsScreen());
                   },
                 ),
               ]),
-
               SizedBox(height: 16.h),
-
-              _buildSectionTitle("Account"),
+              _buildSectionTitle(localizations.account),
               _buildSettingsContainer([
                 SettingsTile(
-                  title: "Change password",
+                  title: localizations.changePassword,
                   iconPath: 'assets/icons/settings_icons/change pass.svg',
                   onTap: () {
                     _navigateTo(context, ChangePasswordScreen());
@@ -109,7 +108,7 @@ class SettingsScreen extends StatelessWidget {
                 ),
                 _buildDivider(),
                 SettingsTile(
-                  title: "Delete account",
+                  title: localizations.deleteAccount,
                   iconPath: 'assets/icons/settings_icons/delete acc.svg',
                   onTap: () {
                     showDeleteAccountDialog(context);

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart'; // ✅ Added for SVG
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../components/dot_indicator.dart';
 import '../components/next_button.dart';
@@ -32,6 +33,8 @@ class _Onboarding1State extends State<Onboarding1> {
 
   @override
   Widget build(BuildContext context) {
+    final local = AppLocalizations.of(context)!;
+
     return Scaffold(
       backgroundColor: Colors.white,
       body: Column(
@@ -59,7 +62,7 @@ class _Onboarding1State extends State<Onboarding1> {
                   child: Align(
                     alignment: Alignment.center,
                     child: SvgPicture.asset(
-                      'assets/images/onboarding/illustration 1.svg', // ✅ SVG path
+                      'assets/images/onboarding/illustration 1.svg',
                       width: 331.w,
                       height: 300.h,
                       fit: BoxFit.contain,
@@ -92,7 +95,7 @@ class _Onboarding1State extends State<Onboarding1> {
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: 20.w),
                     child: Text(
-                      "Track your bus",
+                      local.trackYourBus,
                       style: GoogleFonts.nunito(
                         fontSize: 28.sp,
                         fontWeight: FontWeight.bold,
@@ -105,7 +108,7 @@ class _Onboarding1State extends State<Onboarding1> {
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: 5.w),
                     child: Text(
-                      "Easily locate your child's bus in real-time and ensure their safety on every journey.",
+                      local.trackYourBusDesc,
                       textAlign: TextAlign.center,
                       style: GoogleFonts.comfortaa(
                         fontSize: 16.sp,
@@ -121,11 +124,13 @@ class _Onboarding1State extends State<Onboarding1> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         SkipButton(
+                          text: local.skip,
                           onPressed: () {
                             // TODO: Skip logic
                           },
                         ),
                         NextButton(
+                          text: local.next,
                           onPressed: () {
                             Navigator.push(
                               context,

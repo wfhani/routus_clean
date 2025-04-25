@@ -1,12 +1,12 @@
-
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class TermsItem extends StatelessWidget {
   final String title;
   final String description;
 
-   const TermsItem({super.key, 
+  const TermsItem({
+    super.key,
     required this.title,
     required this.description,
   });
@@ -24,6 +24,7 @@ class TermsItem extends StatelessWidget {
               fontSize: 18.sp,
               fontWeight: FontWeight.bold,
               fontFamily: 'Comfortaa',
+              color: Colors.white,
             ),
           ),
           SizedBox(height: 12.h),
@@ -33,6 +34,7 @@ class TermsItem extends StatelessWidget {
               fontSize: 16.sp,
               fontWeight: FontWeight.normal,
               fontFamily: 'Comfortaa',
+              color: Colors.white,
             ),
           ),
         ],

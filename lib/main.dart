@@ -4,6 +4,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'package:routus_clean/core/theme/app_theme.dart';
 import 'package:routus_clean/firebase_options.dart';
@@ -13,6 +15,7 @@ import 'package:routus_clean/features/auth/presentation/cubit/auth_cubit.dart';
 import 'package:routus_clean/features/auth/presentation/screens/forgot_password.dart';
 import 'package:routus_clean/features/auth/presentation/screens/sign_in_screen.dart';
 import 'package:routus_clean/features/auth/presentation/screens/sign_up_screen.dart';
+import 'package:routus_clean/features/auth/presentation/screens/OTP_verification.dart';
 
 import 'package:routus_clean/features/children/data/repositories/children_repository.dart';
 import 'package:routus_clean/features/children/presentation/cubit/children_cubit.dart';
@@ -32,9 +35,20 @@ import 'package:routus_clean/features/onboarding/onboarding3/onboarding3.dart';
 import 'package:routus_clean/features/settings/presentation/screens/settings/settings_screen.dart';
 import 'package:routus_clean/features/settings/presentation/screens/help&support/contact_us.dart';
 
+import 'core/cubit/locale_cubit.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+
+  try {
+    if (Firebase.apps.isEmpty) {
+      await Firebase.initializeApp(
+        options: DefaultFirebaseOptions.currentPlatform,
+      );
+    }
+  } catch (e) {
+    print("Firebase initialization failed: $e");
+  }
 
   SystemChrome.setSystemUIOverlayStyle(
     const SystemUiOverlayStyle(
@@ -63,28 +77,57 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => HomeCubit()),
         BlocProvider(create: (context) => AuthCubit(AuthRepository())),
         BlocProvider(create: (context) => ChildrenCubit(ChildrenRepository())),
+        BlocProvider(create: (context) => LocaleCubit()),
       ],
       child: ScreenUtilInit(
         designSize: const Size(375, 812),
         minTextAdapt: true,
         splitScreenMode: true,
         builder: (_, child) {
-          return MaterialApp(
-            debugShowCheckedModeBanner: false,
-            theme: appTheme,
-            initialRoute: '/',
-            routes: {
-              '/': (context) => HomeScreen(),
-              '/signin': (context) => SignInScreen(),
-              '/signup': (context) => SignUpScreen(),
-              '/forgetpassword': (context) => const ForgetPasswordScreen(),
-              '/onboarding1': (context) => const Onboarding1(),
-              '/onboarding2': (context) => const Onboarding2(),
-              '/onboarding3': (context) => const Onboarding3(),
-              '/contactus': (context) => const ContactUsScreen(),
-              '/notifications': (context) => const NotificationScreen(),
-              '/settings': (context) => const SettingsScreen(),
-              '/childProfileScreen': (context) => const ChildProfileScreen(),
+          return BlocBuilder<LocaleCubit, Locale>(
+            builder: (context, locale) {
+              return MaterialApp(
+                debugShowCheckedModeBanner: false,
+                theme: appTheme,
+                locale: locale,
+                supportedLocales: const [
+                  Locale('en'),
+                  Locale('ar'),
+                ],
+                localizationsDelegates: const [
+                  AppLocalizations.delegate,
+                  GlobalMaterialLocalizations.delegate,
+                  GlobalWidgetsLocalizations.delegate,
+                  GlobalCupertinoLocalizations.delegate,
+                ],
+                initialRoute: '/',
+                //home: OTPVerificationScreen(isEmailSelected: true),
+
+                routes: {
+                  '/': (context) => const HomeScreen(),
+                  '/signin': (context) => SignInScreen(),
+                  '/signup': (context) => SignUpScreen(),
+                  '/forgetpassword': (context) => const ForgetPasswordScreen(),
+                  '/onboarding1': (context) => const Onboarding1(),
+                  '/onboarding2': (context) => const Onboarding2(),
+                  '/onboarding3': (context) => const Onboarding3(),
+                  '/contactus': (context) => const ContactUsScreen(),
+                  '/notifications': (context) => const NotificationScreen(),
+                  '/settings': (context) => const SettingsScreen(),
+                  '/childProfileScreen': (context) => const ChildProfileScreen(),
+                },
+                onGenerateRoute: (settings) {
+                  if (settings.name == '/otpVerification') {
+                    final args = settings.arguments as Map<String, dynamic>;
+                    return MaterialPageRoute(
+                      builder: (context) => OTPVerificationScreen(
+                        isEmailSelected: args['isEmailSelected'] ?? true,
+                      ),
+                    );
+                  }
+                  return null;
+                },
+              );
             },
           );
         },

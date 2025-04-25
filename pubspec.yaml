@@ -32,6 +32,9 @@ dependencies:
   curved_navigation_bar: ^1.0.6
   flutter:
     sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+  intl: ^0.19.0
   video_player: ^2.8.2
   chewie: ^1.7.0
   flutter_screenutil: ^5.9.3
@@ -76,8 +79,7 @@ dev_dependencies:
 # The following section is specific to Flutter packages.
 
 flutter:
-
-  # The following line ensures that the Material Icons font is
+    # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
@@ -102,6 +104,7 @@ flutter:
     - assets/images/onboarding/illustration 2.svg
     - assets/icons/navbar/
     - assets/icons/settings_icons/
+  generate: true
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

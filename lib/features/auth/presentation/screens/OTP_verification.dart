@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../../components/custom_button.dart';
 import '../../../../components/custom_rich_text_button.dart';
@@ -14,12 +15,14 @@ class OTPVerificationScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+
     return GradientScaffold(
       child: Scaffold(
         appBar: AppBar(
           title: Text(
-            isEmailSelected ? 'Email Verification' : 'Phone Verification',
-            style: Theme.of(context).appBarTheme.titleTextStyle, // Use the theme for title
+            isEmailSelected ? l10n.emailVerification : l10n.phoneVerification,
+            style: Theme.of(context).appBarTheme.titleTextStyle,
           ),
         ),
         body: SafeArea(
@@ -31,24 +34,24 @@ class OTPVerificationScreen extends StatelessWidget {
                 SizedBox(height: 48.h),
                 Text(
                   isEmailSelected
-                      ? 'The code is sent to your email'
-                      : 'The code is sent to your phone',
+                      ? l10n.otpSentToEmail
+                      : l10n.otpSentToPhone,
                   textAlign: TextAlign.center,
-                  style: Theme.of(context).textTheme.bodyMedium, // Apply theme style for body text
+                  style: Theme.of(context).textTheme.bodyMedium,
                 ),
                 SizedBox(height: 16.h),
-                const OTPInputField(), // Use the custom OTP input component
+                const OTPInputField(),
                 SizedBox(height: 16.h),
                 CustomRichTextButton(
-                  regularText: "Didn’t receive code? ",
-                  buttonText: 'Resend again',
+                  regularText: l10n.didNotReceiveCode,
+                  buttonText: l10n.resend,
                   navigateToScreen: OTPVerificationScreen(isEmailSelected: isEmailSelected),
-                ), // Rich text button moved above the verify button
-                const Expanded(child: SizedBox()), // This expands and pushes the button to the bottom
+                ),
+                const Expanded(child: SizedBox()),
                 CustomButton(
-                  text: 'Verify',
+                  text: l10n.verify,
                   onPressed: () {
-                    Navigator.push(
+                    Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(
                         builder: (context) => SetNewPasswordScreen(),

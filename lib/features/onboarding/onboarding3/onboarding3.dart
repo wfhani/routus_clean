@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart'; // ✅ SVG support
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:routus_clean/features/onboarding/onboarding3/third_container_clipper.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../components/custom_button.dart';
 import '../../auth/presentation/screens/sign_in_screen.dart';
+import 'third_container_clipper.dart';
 
 class Onboarding3 extends StatefulWidget {
   const Onboarding3({super.key});
@@ -43,6 +44,8 @@ class _Onboarding3State extends State<Onboarding3> {
 
   @override
   Widget build(BuildContext context) {
+    final local = AppLocalizations.of(context)!;
+
     return Scaffold(
       backgroundColor: Colors.white,
       body: Column(
@@ -73,7 +76,7 @@ class _Onboarding3State extends State<Onboarding3> {
                   child: Align(
                     alignment: Alignment.center,
                     child: SvgPicture.asset(
-                      'assets/images/onboarding/illustration 3.svg', // ✅ SVG version
+                      'assets/images/onboarding/illustration 3.svg',
                       width: 331.w,
                       height: 300.h,
                       fit: BoxFit.contain,
@@ -107,7 +110,7 @@ class _Onboarding3State extends State<Onboarding3> {
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: 20.w),
                     child: Text(
-                      "Your Child's\nDetails in One Place",
+                      local.childDetailsTitle,
                       style: GoogleFonts.nunito(
                         fontSize: 28.sp,
                         fontWeight: FontWeight.bold,
@@ -120,7 +123,7 @@ class _Onboarding3State extends State<Onboarding3> {
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: 5.w),
                     child: Text(
-                      "View and update your child's profile, health, and transportation details with ease.",
+                      local.childDetailsDesc,
                       textAlign: TextAlign.center,
                       style: GoogleFonts.comfortaa(
                         fontSize: 16.sp,
@@ -131,7 +134,7 @@ class _Onboarding3State extends State<Onboarding3> {
                   ),
                   SizedBox(height: 62.h),
                   CustomButton(
-                    text: 'Get started',
+                    text: local.getStarted,
                     onPressed: () {
                       Navigator.push(
                         context,

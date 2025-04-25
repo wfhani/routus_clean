@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:routus_clean/features/settings/presentation/screens/preferences/widgets/NotificationCard.dart';
 import 'package:routus_clean/features/settings/presentation/screens/preferences/widgets/reset_button.dart';
 
@@ -21,11 +22,13 @@ class NotificationSettingsScreenState extends State<NotificationSettingsScreen> 
 
   @override
   Widget build(BuildContext context) {
+    final localizations = AppLocalizations.of(context)!;
+
     return GradientScaffold(
       child: Scaffold(
         backgroundColor: Colors.transparent,
         appBar: AppBar(
-          title: const Text('Notification'),
+          title: Text(localizations.notification),
           leading: IconButton(
             icon: const Icon(Icons.arrow_back, color: Colors.white),
             onPressed: () => Navigator.pop(context),
@@ -39,11 +42,10 @@ class NotificationSettingsScreenState extends State<NotificationSettingsScreen> 
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // Section Title
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 10.h),
                   child: Text(
-                    "Adjust notification",
+                    localizations.adjustNotification,
                     style: TextStyle(
                       fontSize: 18.sp,
                       fontWeight: FontWeight.bold,
@@ -55,8 +57,8 @@ class NotificationSettingsScreenState extends State<NotificationSettingsScreen> 
                 SizedBox(height: 10.h),
 
                 NotificationCard(
-                  title: "Bus Journey Updates",
-                  subtitle: "Alerts when the bus starts, arrives at a pickup point, or reaches the destination.",
+                  title: localizations.busJourneyUpdates,
+                  subtitle: localizations.busJourneyUpdatesDesc,
                   value: busJourneyUpdates,
                   onChanged: (value) {
                     setState(() {
@@ -65,8 +67,8 @@ class NotificationSettingsScreenState extends State<NotificationSettingsScreen> 
                   },
                 ),
                 NotificationCard(
-                  title: "Safety Notifications",
-                  subtitle: "Updates on delays, route changes, and safety advisories.",
+                  title: localizations.safetyNotifications,
+                  subtitle: localizations.safetyNotificationsDesc,
                   value: safetyNotifications,
                   onChanged: (value) {
                     setState(() {
@@ -75,8 +77,8 @@ class NotificationSettingsScreenState extends State<NotificationSettingsScreen> 
                   },
                 ),
                 NotificationCard(
-                  title: "Student Status",
-                  subtitle: "Confirmation alerts when a student gets on/off the bus or arrives at school.",
+                  title: localizations.studentStatus,
+                  subtitle: localizations.studentStatusDesc,
                   value: studentStatus,
                   onChanged: (value) {
                     setState(() {
@@ -85,8 +87,8 @@ class NotificationSettingsScreenState extends State<NotificationSettingsScreen> 
                   },
                 ),
                 NotificationCard(
-                  title: "Real-Time Tracking",
-                  subtitle: "Notifications when the bus departs from or arrives at a specific location.",
+                  title: localizations.realTimeTracking,
+                  subtitle: localizations.realTimeTrackingDesc,
                   value: realTimeTracking,
                   onChanged: (value) {
                     setState(() {
@@ -95,8 +97,8 @@ class NotificationSettingsScreenState extends State<NotificationSettingsScreen> 
                   },
                 ),
                 NotificationCard(
-                  title: "Show Preview",
-                  subtitle: "Preview message text inside new message notifications.",
+                  title: localizations.showPreview,
+                  subtitle: localizations.showPreviewDesc,
                   value: showPreview,
                   onChanged: (value) {
                     setState(() {
@@ -105,11 +107,10 @@ class NotificationSettingsScreenState extends State<NotificationSettingsScreen> 
                   },
                 ),
 
-
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 16.w),
                   child: Text(
-                    "Preview message text inside new message notification",
+                    localizations.previewMessage,
                     style: TextStyle(
                       fontSize: 14.sp,
                       color: Colors.white,
@@ -134,7 +135,7 @@ class NotificationSettingsScreenState extends State<NotificationSettingsScreen> 
                           showPreview = false;
                         });
                         ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(content: Text("Notification settings reset.")),
+                          SnackBar(content: Text(localizations.notificationReset)),
                         );
                       },
                     ),
@@ -145,7 +146,7 @@ class NotificationSettingsScreenState extends State<NotificationSettingsScreen> 
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 16.w),
                   child: Text(
-                    "Reset all notification settings and restore them to their default state.",
+                    localizations.notificationResetDesc,
                     style: TextStyle(color: Colors.white, fontSize: 13.sp),
                   ),
                 ),

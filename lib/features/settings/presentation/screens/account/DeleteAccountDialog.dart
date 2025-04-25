@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 void showDeleteAccountDialog(BuildContext context) {
+  final local = AppLocalizations.of(context)!;
+
   showDialog(
     context: context,
     barrierDismissible: false,
@@ -10,23 +13,22 @@ void showDeleteAccountDialog(BuildContext context) {
       return Dialog(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(30.r),
-        ),backgroundColor: Colors.white ,
+        ),
+        backgroundColor: Colors.white,
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 30.h),
           child: Column(
-            mainAxisSize: MainAxisSize.min, // Makes dialog height dynamic
+            mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
-              // Warning Icon
               SvgPicture.asset(
                 'aassets/icons/deleteAccountDialog/Frame.svg',
                 width: 32.w,
                 height: 32.h,
               ),
-              SizedBox(height: 16.h), // Adjusted spacing
-              // Title
+              SizedBox(height: 16.h),
               Text(
-                'Warning:',
+                local.warningTitle,
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 24.sp,
@@ -34,10 +36,9 @@ void showDeleteAccountDialog(BuildContext context) {
                   color: const Color(0xFF052A43),
                 ),
               ),
-              SizedBox(height: 16.h), // Adjusted spacing
-              // Warning text
+              SizedBox(height: 16.h),
               Text(
-                'Deleting your account will permanently remove all your data, including your personal information, saved preferences, and access to the app. This action cannot be undone. Are you sure you want to proceed?',
+                local.warningDescription,
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 16.sp,
@@ -45,12 +46,10 @@ void showDeleteAccountDialog(BuildContext context) {
                   color: const Color(0xFF052A43),
                 ),
               ),
-              SizedBox(height: 24.h), // Adjusted spacing
-              // Buttons row
+              SizedBox(height: 24.h),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  // Cancel button
                   SizedBox(
                     width: 113.w,
                     height: 48.h,
@@ -65,7 +64,7 @@ void showDeleteAccountDialog(BuildContext context) {
                         ),
                       ),
                       child: Text(
-                        'Cancel',
+                        local.cancel,
                         style: TextStyle(
                           color: const Color(0xFF052A43),
                           fontSize: 20.sp,
@@ -74,13 +73,12 @@ void showDeleteAccountDialog(BuildContext context) {
                     ),
                   ),
                   SizedBox(width: 14.w),
-                  // Delete button
                   SizedBox(
                     width: 113.w,
                     height: 48.h,
                     child: TextButton(
                       onPressed: () {
-                        Navigator.of(context).pop(); // Close the dialog
+                        Navigator.of(context).pop();
                         // Add account deletion logic here
                       },
                       style: TextButton.styleFrom(
@@ -90,7 +88,7 @@ void showDeleteAccountDialog(BuildContext context) {
                         ),
                       ),
                       child: Text(
-                        'Delete',
+                        local.delete,
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 20.sp,

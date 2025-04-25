@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:routus_clean/features/onboarding/onboarding1/onboarding1.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class RoleSelectionScreen extends StatefulWidget {
   const RoleSelectionScreen({super.key});
@@ -16,6 +17,8 @@ class _RoleSelectionScreenState extends State<RoleSelectionScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final local = AppLocalizations.of(context)!;
+
     return Scaffold(
       body: Container(
         width: double.infinity,
@@ -36,7 +39,7 @@ class _RoleSelectionScreenState extends State<RoleSelectionScreen> {
               SizedBox(height: 20.h),
 
               Text(
-                'Choose your role',
+                local.chooseYourRole,
                 style: TextStyle(
                   fontFamily: 'Nunito',
                   fontSize: 28.sp,
@@ -51,7 +54,7 @@ class _RoleSelectionScreenState extends State<RoleSelectionScreen> {
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 32.w),
                 child: Text(
-                  'Select your role to personalize your experience',
+                  local.selectRoleDesc,
                   style: TextStyle(
                     fontSize: 16.sp,
                     color: Colors.white,
@@ -74,21 +77,21 @@ class _RoleSelectionScreenState extends State<RoleSelectionScreen> {
                     _buildRoleCard(
                       context,
                       image: 'assets/images/parent.svg',
-                      title: 'Parent',
+                      title: local.parent,
                       color: const Color(0xFF699CFF),
                       isSelected: _currentPage == 0,
                     ),
                     _buildRoleCard(
                       context,
                       image: 'assets/images/supervisor.svg',
-                      title: 'Bus\nsupervisor',
+                      title: local.busSupervisor,
                       color: const Color(0xFF699CFF),
                       isSelected: _currentPage == 1,
                     ),
                     _buildRoleCard(
                       context,
                       image: 'assets/images/admin.svg',
-                      title: 'School\nadministrator',
+                      title: local.schoolAdmin,
                       color: const Color(0xFF699CFF),
                       isSelected: _currentPage == 2,
                     ),
@@ -114,8 +117,8 @@ class _RoleSelectionScreenState extends State<RoleSelectionScreen> {
                         );
                       } else {
                         ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
-                            content: Text("Only Parent role is available right now"),
+                          SnackBar(
+                            content: Text(local.onlyParentAvailable),
                           ),
                         );
                       }
@@ -128,7 +131,7 @@ class _RoleSelectionScreenState extends State<RoleSelectionScreen> {
                       elevation: 2,
                     ),
                     child: Text(
-                      'Next',
+                      local.next,
                       style: TextStyle(
                         color: const Color(0xFF052A43),
                         fontSize: 18.sp,
@@ -145,7 +148,6 @@ class _RoleSelectionScreenState extends State<RoleSelectionScreen> {
     );
   }
 
-  /// 🔹 Card Widget with Highlight if Selected
   Widget _buildRoleCard(
       BuildContext context, {
         required String image,
@@ -161,9 +163,7 @@ class _RoleSelectionScreenState extends State<RoleSelectionScreen> {
         decoration: BoxDecoration(
           color: color,
           borderRadius: BorderRadius.circular(40.r),
-          border: isSelected
-              ? Border.all(color: Colors.white, width: 3.w)
-              : null,
+          border: isSelected ? Border.all(color: Colors.white, width: 3.w) : null,
           boxShadow: isSelected
               ? [
             BoxShadow(
@@ -199,11 +199,3 @@ class _RoleSelectionScreenState extends State<RoleSelectionScreen> {
     );
   }
 }
-
-
-
-
-
-
-
-

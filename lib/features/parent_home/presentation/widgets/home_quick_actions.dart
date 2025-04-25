@@ -1,53 +1,61 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import '../../../../../core/cubit/locale_cubit.dart';
 
 class HomeQuickActions extends StatelessWidget {
-  const HomeQuickActions({Key? key}) : super(key: key);
+  HomeQuickActions({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 0.w), // ✅ Aligned closer to edges
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          _buildActionButton(
-            context,
-            "assets/icons/child_profile.svg",
-            "Child Profile",
-            "/childProfileScreen",
+    return BlocBuilder<LocaleCubit, Locale>(
+      builder: (context, locale) {
+        final l10n = AppLocalizations.of(context)!;
+
+        return Padding(
+          padding: EdgeInsets.symmetric(horizontal: 0.w),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              _buildActionButton(
+                context,
+                "assets/icons/child_profile.svg",
+                l10n.childProfile,
+                "/childProfileScreen",
+              ),
+              _buildActionButton(
+                context,
+                "assets/icons/face_id.svg",
+                l10n.setFaceId,
+                "/faceIdScreen",
+              ),
+              _buildActionButton(
+                context,
+                "assets/icons/change_address.svg",
+                l10n.changeAddress,
+                "/changeAddressScreen",
+              ),
+              _buildActionButton(
+                context,
+                "assets/icons/report_absent.svg",
+                l10n.reportAbsent,
+                "/reportAbsentScreen",
+              ),
+            ],
           ),
-          _buildActionButton(
-            context,
-            "assets/icons/face_id.svg",
-            "Set Face ID",
-            "/faceIdScreen",
-          ),
-          _buildActionButton(
-            context,
-            "assets/icons/change_address.svg",
-            "Change Address",
-            "/changeAddressScreen",
-          ),
-          _buildActionButton(
-            context,
-            "assets/icons/report_absent.svg",
-            "Report Absent",
-            "/reportAbsentScreen",
-          ),
-        ],
-      ),
+        );
+      },
     );
   }
 
-  /// **Helper function for creating each action button**
   Widget _buildActionButton(
       BuildContext context, String iconPath, String label, String route) {
     return GestureDetector(
       onTap: () {
-        Navigator.pushNamed(context, route); // ✅ Navigates to the given screen
+        Navigator.pushNamed(context, route);
       },
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -61,8 +69,8 @@ class HomeQuickActions extends StatelessWidget {
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
                 colors: [
-                  Color(0xFF052A43), // Dark Blue (Top)
-                  Color(0xFF0D6AA9), // Light Blue (Bottom)
+                  Color(0xFF052A43),
+                  Color(0xFF0D6AA9),
                 ],
               ),
               boxShadow: [
@@ -77,8 +85,8 @@ class HomeQuickActions extends StatelessWidget {
             child: Center(
               child: SvgPicture.asset(
                 iconPath,
-                width: 32.w, // ⬆️ **Increased icon size**
-                height: 32.h, // ⬆️ **Increased icon size**
+                width: 32.w,
+                height: 32.h,
                 fit: BoxFit.contain,
               ),
             ),
@@ -90,9 +98,9 @@ class HomeQuickActions extends StatelessWidget {
               label,
               style: TextStyle(
                 fontSize: 16.sp,
-                fontFamily: 'Comfortaa', // ✅ Now uses Comfortaa Regular
-                fontWeight: FontWeight.normal, // ✅ Regular weight
-                color: Color(0xFF052A43),
+                fontFamily: 'Comfortaa',
+                fontWeight: FontWeight.normal,
+                color: const Color(0xFF052A43),
               ),
               textAlign: TextAlign.center,
             ),
@@ -102,14 +110,3 @@ class HomeQuickActions extends StatelessWidget {
     );
   }
 }
-
-
-
-
-
-
-
-
-
-
-

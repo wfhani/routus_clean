@@ -1,0 +1,2 @@
+C:/Users/Shahd/IdeaProjects/routus_clean/android/app/.cxx/RelWithDebInfo/5u30264f/arm64-v8a/CMakeFiles/edit_cache.dir
+C:/Users/Shahd/IdeaProjects/routus_clean/android/app/.cxx/RelWithDebInfo/5u30264f/arm64-v8a/CMakeFiles/rebuild_cache.dir

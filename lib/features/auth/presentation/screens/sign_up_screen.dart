@@ -4,6 +4,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:routus_clean/features/parent_home/presentation/screens/home_screen.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart'; // ✅ Added
+
 import '../../../../components/custom_button.dart';
 import '../../../../components/custom_rich_text_button.dart';
 import '../../../../components/custom_text_field.dart';
@@ -25,6 +27,8 @@ class SignUpScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!; // ✅ Access localization
+
     return GradientScaffold(
       child: SafeArea(
         child: SingleChildScrollView(
@@ -33,7 +37,7 @@ class SignUpScreen extends StatelessWidget {
             listener: (context, state) {
               if (state is AuthSuccess) {
                 ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text('Registration successful!')),
+                  SnackBar(content: Text('Registration successful!')),
                 );
                 Navigator.pushReplacement(
                   context,
@@ -49,13 +53,13 @@ class SignUpScreen extends StatelessWidget {
               return Column(
                 children: [
                   const SizedBox(height: 16),
-                  const Text(
-                    'Create New Account',
-                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                  Text(
+                    l10n.signUpTitle,
+                    style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                   ),
                   const SizedBox(height: 12),
-                  const Text(
-                    'Provide your information to set up your account.',
+                  Text(
+                    l10n.signUpSubtitle,
                     textAlign: TextAlign.center,
                   ),
                   const SizedBox(height: 32),
@@ -64,37 +68,41 @@ class SignUpScreen extends StatelessWidget {
                     children: [
                       Expanded(
                         child: CustomTextField(
-                          hintText: 'First Name',
-                          controller: firstNameController, obscureText: false,
+                          hintText: l10n.firstName,
+                          controller: firstNameController,
+                          obscureText: false,
                         ),
                       ),
                       const SizedBox(width: 12),
                       Expanded(
                         child: CustomTextField(
-                          hintText: 'Last Name',
-                          controller: lastNameController, obscureText: false,
+                          hintText: l10n.lastName,
+                          controller: lastNameController,
+                          obscureText: false,
                         ),
                       ),
                     ],
                   ),
 
                   CustomTextField(
-                    hintText: 'Email Address',
-                    controller: emailController, obscureText: false,
+                    hintText: l10n.email,
+                    controller: emailController,
+                    obscureText: false,
                   ),
 
                   CustomTextField(
-                    hintText: 'Phone Number',
-                    controller: phoneController, obscureText: false,
+                    hintText: l10n.phone,
+                    controller: phoneController,
+                    obscureText: false,
                   ),
 
                   CustomTextField(
-                    hintText: 'Password',
+                    hintText: l10n.password,
                     obscureText: true,
                     controller: passwordController,
                   ),
                   CustomTextField(
-                    hintText: 'Confirm Password',
+                    hintText: l10n.confirmPassword,
                     obscureText: true,
                     controller: confirmPasswordController,
                   ),
@@ -102,15 +110,13 @@ class SignUpScreen extends StatelessWidget {
                   const SizedBox(height: 40),
 
                   CustomButton(
-                    text: state is AuthLoading ? 'Signing Up...' : 'Sign Up',
+                    text: state is AuthLoading ? l10n.signingUp : l10n.signUp,
                     onPressed: state is AuthLoading ? () {} : () => _register(context),
                   ),
 
-
-
                   const SizedBox(height: 28),
 
-                  const CustomDividerWithText(text: 'or Sign up with'),
+                  CustomDividerWithText(text: l10n.signUpWith),
 
                   const SizedBox(height: 32),
 
@@ -122,7 +128,7 @@ class SignUpScreen extends StatelessWidget {
                           // Handle Google sign-in
                         },
                         icon: SvgPicture.asset(
-                          'assets/icons/Button with centered icon.svg', // Your original Google icon
+                          'assets/icons/Button with centered icon.svg',
                           width: 45.w,
                           height: 45.h,
                         ),
@@ -154,8 +160,8 @@ class SignUpScreen extends StatelessWidget {
                   const SizedBox(height: 32),
 
                   CustomRichTextButton(
-                    regularText: "Already have an account? ",
-                    buttonText: 'Sign In',
+                    regularText: l10n.alreadyHaveAccount,
+                    buttonText: l10n.signIn,
                     navigateToScreen: SignInScreen(),
                   ),
                 ],

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class NotificationScreen extends StatefulWidget {
   const NotificationScreen({super.key});
@@ -27,10 +28,11 @@ class _NotificationScreenState extends State<NotificationScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final local = AppLocalizations.of(context)!;
+
     return Scaffold(
       body: Stack(
         children: [
-          // 🔹 Background Gradient
           Container(
             decoration: const BoxDecoration(
               gradient: LinearGradient(
@@ -43,7 +45,6 @@ class _NotificationScreenState extends State<NotificationScreen> {
               ),
             ),
           ),
-
           SafeArea(
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: 20.w),
@@ -51,8 +52,6 @@ class _NotificationScreenState extends State<NotificationScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   SizedBox(height: 10.h),
-
-                  // 🔹 Unified Header Row (Arrow + Title + Filter)
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -61,7 +60,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
                         child: const Icon(Icons.arrow_back, color: Colors.white, size: 26),
                       ),
                       Text(
-                        "Notification",
+                        local.notificationTitle,
                         style: TextStyle(
                           fontSize: 22.sp,
                           fontWeight: FontWeight.bold,
@@ -76,25 +75,19 @@ class _NotificationScreenState extends State<NotificationScreen> {
                       ),
                     ],
                   ),
-
                   SizedBox(height: 20.h),
-
-                  // 🔹 Tabs
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      _buildTabButton("All", "all"),
-                      _buildTabButton("Unread", "unread"),
-                      _buildTabButton("Emergency", "emergency"),
+                      _buildTabButton(local.notificationAll, "all"),
+                      _buildTabButton(local.notificationUnread, "unread"),
+                      _buildTabButton(local.notificationEmergency, "emergency"),
                     ],
                   ),
-
                   SizedBox(height: 30.h),
-
-                  // 🔹 Main Content
                   Expanded(
                     child: notifications.isEmpty
-                        ? _buildEmptyState()
+                        ? _buildEmptyState(local)
                         : _buildNotificationList(),
                   ),
                 ],
@@ -134,7 +127,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
     );
   }
 
-  Widget _buildEmptyState() {
+  Widget _buildEmptyState(AppLocalizations local) {
     return Column(
       children: [
         SizedBox(height: 15.h),
@@ -151,8 +144,8 @@ class _NotificationScreenState extends State<NotificationScreen> {
         Center(
           child: Text(
             selectedTab == "emergency"
-                ? "No news is good news !"
-                : "You don’t have any notifications \nyet",
+                ? local.noNewsGoodNews
+                : local.noNotificationsYet,
             textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: 16.sp,

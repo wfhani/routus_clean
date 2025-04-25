@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class PrivacyPolicyScreen extends StatelessWidget {
   const PrivacyPolicyScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final localizations = AppLocalizations.of(context)!;
+
     return Container(
       decoration: const BoxDecoration(
         gradient: LinearGradient(
@@ -23,7 +26,7 @@ class PrivacyPolicyScreen extends StatelessWidget {
         appBar: AppBar(
           backgroundColor: Colors.transparent,
           elevation: 0,
-          title: const Text("Privacy Policy"),
+          title: Text(localizations.privacyPolicyTitle),
           leading: IconButton(
             icon: const Icon(Icons.arrow_back, color: Colors.white),
             onPressed: () => Navigator.of(context).pop(),
@@ -43,17 +46,35 @@ class PrivacyPolicyScreen extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 24.h),
-              _policyCard("Data Collection", "We collect personal info (name, email, phone) and child data (e.g., Face ID) for safety and app functionality; location data is used for bus tracking and notifications."),
+              _policyCard(
+                localizations.privacyPolicySection1Title,
+                localizations.privacyPolicySection1Desc,
+              ),
               SizedBox(height: 24.h),
-              _policyCard("Data Usage", "Data ensures app features like tracking and notifications work efficiently. No data is sold or shared with advertisers."),
+              _policyCard(
+                localizations.privacyPolicySection2Title,
+                localizations.privacyPolicySection2Desc,
+              ),
               SizedBox(height: 24.h),
-              _policyCard("Data Security", "Your data is encrypted and secured with modern safety measures."),
+              _policyCard(
+                localizations.privacyPolicySection3Title,
+                localizations.privacyPolicySection3Desc,
+              ),
               SizedBox(height: 24.h),
-              _policyCard("Third-Party Services", "Trusted third parties handle GPS tracking and analytics."),
+              _policyCard(
+                localizations.privacyPolicySection4Title,
+                localizations.privacyPolicySection4Desc,
+              ),
               SizedBox(height: 24.h),
-              _policyCard("Parental Consent", "Parents’ explicit consent is required for all data collection."),
+              _policyCard(
+                localizations.privacyPolicySection5Title,
+                localizations.privacyPolicySection5Desc,
+              ),
               SizedBox(height: 24.h),
-              _policyCard("User Rights", "Users can access, update, or delete their personal data at any time."),
+              _policyCard(
+                localizations.privacyPolicySection6Title,
+                localizations.privacyPolicySection6Desc,
+              ),
             ],
           ),
         ),
@@ -62,33 +83,37 @@ class PrivacyPolicyScreen extends StatelessWidget {
   }
 
   Widget _policyCard(String title, String text) {
-    return Container(
-      padding: EdgeInsets.all(16.r),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(12.r),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            title,
-            style: TextStyle(
-              fontSize: 16.sp,
-              fontWeight: FontWeight.bold,
-              color: const Color(0xFF0D6AA9),
+    return SizedBox(
+      width: double.infinity, // Ensures full width
+      child: Container(
+        padding: EdgeInsets.all(16.r),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(12.r),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              title,
+              style: TextStyle(
+                fontSize: 16.sp,
+                fontWeight: FontWeight.bold,
+                color: const Color(0xFF0D6AA9),
+              ),
             ),
-          ),
-          SizedBox(height: 8.h),
-          Text(
-            text,
-            style: TextStyle(
-              fontSize: 13.sp,
-              color: Colors.black87,
+            SizedBox(height: 8.h),
+            Text(
+              text,
+              style: TextStyle(
+                fontSize: 13.sp,
+                color: Colors.black87,
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
+
 }

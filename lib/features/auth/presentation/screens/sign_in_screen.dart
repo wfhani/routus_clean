@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart'; // ✅ Added for localization
 
 import '../../../../components/custom_button.dart';
 import '../../../../components/custom_rich_text_button.dart';
@@ -22,6 +23,8 @@ class SignInScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!; // ✅ Access localized strings
+
     return GradientScaffold(
       child: SafeArea(
         child: SingleChildScrollView(
@@ -43,21 +46,21 @@ class SignInScreen extends StatelessWidget {
               return Column(
                 children: [
                   const SizedBox(height: 16),
-                  const Text(
-                    'Welcome Back',
-                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                  Text(
+                    l10n.signInTitle,
+                    style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                   ),
                   const SizedBox(height: 12),
-                  const Text('Hey! Good to see you again'),
+                  Text(l10n.signInSubtitle),
                   const SizedBox(height: 32),
 
                   CustomTextField(
-                    hintText: 'Email Address',
+                    hintText: l10n.email,
                     controller: emailController,
                     obscureText: false,
                   ),
                   CustomTextField(
-                    hintText: 'Password',
+                    hintText: l10n.password,
                     obscureText: true,
                     controller: passwordController,
                   ),
@@ -65,7 +68,7 @@ class SignInScreen extends StatelessWidget {
                   const SizedBox(height: 40),
 
                   CustomButton(
-                    text: state is AuthLoading ? 'Signing In...' : 'Sign In',
+                    text: state is AuthLoading ? l10n.signingIn : l10n.signIn,
                     onPressed: state is AuthLoading ? () {} : () => _login(context),
                   ),
 
@@ -78,15 +81,15 @@ class SignInScreen extends StatelessWidget {
                         MaterialPageRoute(builder: (_) => const ForgetPasswordScreen()),
                       );
                     },
-                    child: const Text(
-                      'Forgot your password?',
-                      style: TextStyle(color: Color(0xffFDC70A), fontSize: 16),
+                    child: Text(
+                      l10n.forgotPassword,
+                      style: const TextStyle(color: Color(0xffFDC70A), fontSize: 16),
                     ),
                   ),
 
                   const SizedBox(height: 41),
 
-                  const CustomDividerWithText(text: 'or Sign in with'),
+                  CustomDividerWithText(text: l10n.signInWith),
 
                   const SizedBox(height: 32),
 
@@ -98,7 +101,7 @@ class SignInScreen extends StatelessWidget {
                           // Handle Google sign-in
                         },
                         icon: SvgPicture.asset(
-                          'assets/icons/Button with centered icon.svg', // Your original Google icon
+                          'assets/icons/Button with centered icon.svg',
                           width: 45.w,
                           height: 45.h,
                         ),
@@ -130,8 +133,8 @@ class SignInScreen extends StatelessWidget {
                   const SizedBox(height: 32),
 
                   CustomRichTextButton(
-                    regularText: "Don't have an account? ",
-                    buttonText: 'Sign up',
+                    regularText: l10n.dontHaveAccount,
+                    buttonText: l10n.signUp,
                     navigateToScreen: SignUpScreen(),
                   ),
                 ],

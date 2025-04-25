@@ -4,24 +4,24 @@ import 'package:google_fonts/google_fonts.dart';
 
 class SkipButton extends StatelessWidget {
   final VoidCallback onPressed;
+  final String text;
 
-  const SkipButton({super.key, required this.onPressed});
+  const SkipButton({
+    super.key,
+    required this.onPressed,
+    required this.text,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: onPressed, // Handle the tap event
-      splashColor: Colors.transparent, // No splash effect
-      highlightColor: Colors.transparent, // No highlight effect
-      child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 40.w, vertical: 15.h), // Add padding for better tap area
-        child: Text(
-          "Skip",
-          style: GoogleFonts.comfortaa(
-            color: const Color(0xff85A8BF),
-            fontSize: 18.sp, // Responsive font size
-            fontWeight: FontWeight.bold,
-          ),
+    return TextButton(
+      onPressed: onPressed,
+      child: Text(
+        text,
+        style: TextStyle(
+          fontSize: 16.sp,
+          fontWeight: FontWeight.bold,
+          color: const Color(0xff052A43),
         ),
       ),
     );

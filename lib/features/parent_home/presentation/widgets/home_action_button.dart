@@ -1,21 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class HomeActionButton extends StatelessWidget {
   final String iconPath;
-  final String label;
+  final String localizationKey;
   final VoidCallback? onTap;
 
-  const HomeActionButton({
+   HomeActionButton({
     super.key,
     required this.iconPath,
-    required this.label,
+    required this.localizationKey,
     this.onTap,
   });
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+
+    // Get localized label from the key
+    final label = _getLocalizedLabel(l10n, localizationKey);
+    print("🔁 Label: $label");
+
     return GestureDetector(
       onTap: onTap ?? () {},
       child: Column(
@@ -51,5 +58,20 @@ class HomeActionButton extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  String _getLocalizedLabel(AppLocalizations l10n, String key) {
+    switch (key) {
+      case 'childProfile':
+        return l10n.childProfile;
+      case 'setFaceId':
+        return l10n.setFaceId;
+      case 'changeAddress':
+        return l10n.changeAddress;
+      case 'reportAbsent':
+        return l10n.reportAbsent;
+      default:
+        return key;
+    }
   }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../../../core/theme/app_theme.dart';
 import 'widgets/terms_items.dart';
@@ -9,10 +10,12 @@ class TermsAndConditionsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final local = AppLocalizations.of(context)!;
+
     return GradientScaffold(
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('Terms and Conditions'),
+          title: Text(local.termsAndConditions),
           leading: IconButton(
             icon: const Icon(Icons.arrow_back, color: Colors.white),
             onPressed: () => Navigator.pop(context),
@@ -33,7 +36,7 @@ class TermsAndConditionsScreen extends StatelessWidget {
                 ),
                 SizedBox(height: 24.h),
                 Text(
-                  'By using the Routus app, you agree to comply with the following terms:',
+                  local.termsIntro,
                   style: TextStyle(
                     fontSize: 20.sp,
                     fontWeight: FontWeight.bold,
@@ -42,37 +45,37 @@ class TermsAndConditionsScreen extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: 24.h),
-                const TermsItem(
-                  title: '1. Account Responsibility',
-                  description: 'You must create and maintain an accurate account. Keep your login details secure.',
+                TermsItem(
+                  title: local.termsTitle1,
+                  description: local.termsDesc1,
                 ),
-                const TermsItem(
-                  title: '2. App Usage',
-                  description: "Use Routus to track buses, receive notifications, and communicate with relevant parties. Do not misuse the app or violate others' rights.",
+                TermsItem(
+                  title: local.termsTitle2,
+                  description: local.termsDesc2,
                 ),
-                const TermsItem(
-                  title: '3. Privacy',
-                  description: 'We protect your personal data as described in our Privacy Policy. By using the app, you consent to this data collection.',
+                TermsItem(
+                  title: local.termsTitle3,
+                  description: local.termsDesc3,
                 ),
-                const TermsItem(
-                  title: '4. Notifications',
-                  description: 'Ensure notifications are enabled to receive updates on bus status and other important information.',
+                TermsItem(
+                  title: local.termsTitle4,
+                  description: local.termsDesc4,
                 ),
-                const TermsItem(
-                  title: '5. Third-Party Links',
-                  description: 'Routus may link to external sites. We are not responsible for their content or practices.',
+                TermsItem(
+                  title: local.termsTitle5,
+                  description: local.termsDesc5,
                 ),
-                const TermsItem(
-                  title: '6. Modifications',
-                  description: 'We may update these Terms at any time. Continued use of the app means you accept the new terms.',
+                TermsItem(
+                  title: local.termsTitle6,
+                  description: local.termsDesc6,
                 ),
-                const TermsItem(
-                  title: '7. Limitation of Liability',
-                  description: 'Routus is not liable for any damages or issues caused by using the app.',
+                TermsItem(
+                  title: local.termsTitle7,
+                  description: local.termsDesc7,
                 ),
-                const TermsItem(
-                  title: '8. Account Termination',
-                  description: 'We may suspend or terminate your account if these terms are violated.',
+                TermsItem(
+                  title: local.termsTitle8,
+                  description: local.termsDesc8,
                 ),
               ],
             ),

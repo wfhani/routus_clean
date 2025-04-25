@@ -1,27 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../../../../components/custom_button.dart'; // ✅ Import Custom Button
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+import '../../../../components/custom_button.dart';
 import '../../../../core/theme/app_theme.dart';
 import '../../../parent_home/presentation/screens/home_screen.dart';
 import '../cubit/children_cubit.dart';
 import '../widgets/child_card.dart';
-import 'add_child_form_screen.dart'; // ✅ Import Add Child Form
+import 'add_child_form_screen.dart';
 
 class ChildListScreen extends StatelessWidget {
   const ChildListScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final local = AppLocalizations.of(context)!;
+
     return GradientScaffold(
       child: SafeArea(
         child: Column(
           children: [
-            // ✅ **"Done" Button on Top Right**
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 23.w),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.end, // ✅ Aligns "Done" to the right
+                mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   BlocBuilder<ChildrenCubit, ChildrenState>(
                     builder: (context, state) {
@@ -34,11 +37,11 @@ class ChildListScreen extends StatelessWidget {
                             MaterialPageRoute(builder: (_) => const HomeScreen()),
                           );
                         }
-                            : null, // ✅ Disabled if no children exist
+                            : null,
                         child: Text(
-                          "Done",
+                          local.done,
                           style: TextStyle(
-                            color: hasChildren ? Colors.amber : Colors.grey, // ✅ Disabled state color
+                            color: hasChildren ? Colors.amber : Colors.grey,
                             fontSize: 18.sp,
                             fontWeight: FontWeight.bold,
                           ),
@@ -50,32 +53,30 @@ class ChildListScreen extends StatelessWidget {
               ),
             ),
 
-            // ✅ **Centered Greeting Text**
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 32.w),
               child: Column(
                 children: [
                   Text(
-                    "Hello! Sarah",
+                    local.helloSarah,
                     style: Theme.of(context).textTheme.displayLarge,
-                    textAlign: TextAlign.center, // ✅ Center the text
+                    textAlign: TextAlign.center,
                   ),
                   SizedBox(height: 12.h),
                   Text(
-                    "Welcome to tracking your child",
+                    local.welcomeTracking,
                     style: Theme.of(context).textTheme.bodyLarge,
-                    textAlign: TextAlign.center, // ✅ Center the text
+                    textAlign: TextAlign.center,
                   ),
                 ],
               ),
             ),
             SizedBox(height: 24.h),
 
-            // ✅ **Add Child Button (Centered)**
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 16.w),
               child: CustomButton(
-                text: "Add Child",
+                text: local.addChildButton,
                 onPressed: () {
                   Navigator.push(
                     context,
@@ -86,7 +87,6 @@ class ChildListScreen extends StatelessWidget {
             ),
             SizedBox(height: 32.h),
 
-            // ✅ **Child List or Empty State**
             Expanded(
               child: BlocBuilder<ChildrenCubit, ChildrenState>(
                 builder: (context, state) {
@@ -97,13 +97,13 @@ class ChildListScreen extends StatelessWidget {
                       itemBuilder: (context, index) {
                         return ChildCard(child: state.children[index]);
                       },
-                      separatorBuilder: (context, index) => SizedBox(height: 12.h), // ✅ Space between cards
+                      separatorBuilder: (context, index) => SizedBox(height: 12.h),
                     );
                   }
-                  return const Center(
+                  return Center(
                     child: Text(
-                      "No children added yet.",
-                      style: TextStyle(fontSize: 16, color: Colors.white70),
+                      local.noChildrenYet,
+                      style: const TextStyle(fontSize: 16, color: Colors.white70),
                     ),
                   );
                 },

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ChildProfileScreen extends StatefulWidget {
   const ChildProfileScreen({super.key});
@@ -14,6 +15,8 @@ class _ChildProfileScreenState extends State<ChildProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final local = AppLocalizations.of(context)!;
+
     return Scaffold(
       extendBodyBehindAppBar: true,
       body: Container(
@@ -30,7 +33,7 @@ class _ChildProfileScreenState extends State<ChildProfileScreen> {
               AppBar(
                 backgroundColor: Colors.transparent,
                 elevation: 0,
-                title: const Text("Child Profile"),
+                title: Text(local.childProfile),
                 centerTitle: true,
                 leading: IconButton(
                   icon: const Icon(Icons.arrow_back, color: Colors.white),
@@ -42,7 +45,7 @@ class _ChildProfileScreenState extends State<ChildProfileScreen> {
                       'assets/icons/filter.svg',
                       height: 24.h,
                       width: 24.h,
-                      color: Color(0xFFFDC70A),
+                      color: const Color(0xFFFDC70A),
                     ),
                     onPressed: () {},
                   ),
@@ -50,12 +53,11 @@ class _ChildProfileScreenState extends State<ChildProfileScreen> {
               ),
               SizedBox(height: 20.h),
 
-              // Wrap in SizedBox to allow overflow
               SizedBox(
-                height: 160.h, // A bit taller than image to allow overflow
+                height: 160.h,
                 width: 150.h,
                 child: Stack(
-                  clipBehavior: Clip.none, // Allow overflow
+                  clipBehavior: Clip.none,
                   alignment: Alignment.center,
                   children: [
                     ClipRRect(
@@ -68,13 +70,13 @@ class _ChildProfileScreenState extends State<ChildProfileScreen> {
                       ),
                     ),
                     Positioned(
-                      bottom: -5, // push out of bounds
+                      bottom: -5,
                       right: -10,
                       child: Container(
                         height: 45.r,
                         width: 45.r,
                         decoration: BoxDecoration(
-                          color: Color(0xFFFDC70A),
+                          color: const Color(0xFFFDC70A),
                           borderRadius: BorderRadius.circular(11.r),
                         ),
                         child: const Icon(
@@ -88,14 +90,8 @@ class _ChildProfileScreenState extends State<ChildProfileScreen> {
                 ),
               ),
 
-
-
-
-
-
               SizedBox(height: 20.h),
 
-              // Tabs
               Container(
                 width: 320.w,
                 height: 46.h,
@@ -126,7 +122,7 @@ class _ChildProfileScreenState extends State<ChildProfileScreen> {
                         ),
                         alignment: Alignment.center,
                         child: Text(
-                          "Profile\nInformation",
+                          local.profileInformation,
                           style: TextStyle(
                             fontSize: 15.sp,
                             fontWeight: FontWeight.normal,
@@ -153,7 +149,7 @@ class _ChildProfileScreenState extends State<ChildProfileScreen> {
                         ),
                         alignment: Alignment.center,
                         child: Text(
-                          "Medical\nHistory",
+                          local.medicalHistory,
                           style: TextStyle(
                             fontSize: 15.sp,
                             fontWeight: FontWeight.normal,
@@ -167,7 +163,6 @@ class _ChildProfileScreenState extends State<ChildProfileScreen> {
                 ),
               ),
 
-              // Pen Icon aligned right
               if (!isProfileTab)
                 Padding(
                   padding: EdgeInsets.only(right: 24.w, top: 6.h),
@@ -179,13 +174,12 @@ class _ChildProfileScreenState extends State<ChildProfileScreen> {
                   ),
                 ),
 
-
               SizedBox(height: 30.h),
 
               Expanded(
                 child: SingleChildScrollView(
                   padding: EdgeInsets.symmetric(horizontal: 24.w),
-                  child: isProfileTab ? _buildProfileInfo() : _buildMedicalHistory(),
+                  child: isProfileTab ? _buildProfileInfo(local) : _buildMedicalHistory(local),
                 ),
               ),
             ],
@@ -195,17 +189,17 @@ class _ChildProfileScreenState extends State<ChildProfileScreen> {
     );
   }
 
-  Widget _buildProfileInfo() {
+  Widget _buildProfileInfo(AppLocalizations local) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        _infoColumn("Name", "Nermin Ahmed"),
-        _infoColumn("Child ID", "242502"),
-        _infoColumn("Bus ID", "543468"),
-        _infoColumn("Grade", "3th"),
-        _infoColumn("Gender", "Female"),
-        _infoColumn("Date of birth", "17/2/2016"),
-        _infoColumn("Address", "Nasr St, Cairo"),
+        _infoColumn(local.name, "Nermin Ahmed"),
+        _infoColumn(local.childId, "242502"),
+        _infoColumn(local.busId, "543468"),
+        _infoColumn(local.grade, "3th"),
+        _infoColumn(local.gender, "Female"),
+        _infoColumn(local.dateOfBirth, "17/2/2016"),
+        _infoColumn(local.address, "Nasr St, Cairo"),
       ],
     );
   }
@@ -233,14 +227,14 @@ class _ChildProfileScreenState extends State<ChildProfileScreen> {
     );
   }
 
-  Widget _buildMedicalHistory() {
+  Widget _buildMedicalHistory(AppLocalizations local) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        _medicalSection("Chronic conditions and allergies", "Pollen Allergy: Experiences sneezing and watery eyes during spring"),
-        _medicalSection("Immunization Records", "All required vaccines are up to date"),
-        _medicalSection("Past hospitalizations", "Appendectomy (2022): Recovered fully, no complications."),
-        _medicalSection("Emergency Info", "Preferred Hospital: City Health Center\nCurrent medications : None"),
+        _medicalSection(local.chronicConditions, local.pollenAllergy),
+        _medicalSection(local.immunizationRecords, local.vaccinesUpToDate),
+        _medicalSection(local.pastHospitalizations, local.appendectomyNote),
+        _medicalSection(local.emergencyInfo, local.hospitalInfo),
         SizedBox(height: 20.h),
       ],
     );

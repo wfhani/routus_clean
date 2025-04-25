@@ -1,6 +1,7 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class CustomNavBar extends StatefulWidget {
   final int currentIndex;
@@ -17,7 +18,6 @@ class CustomNavBar extends StatefulWidget {
 }
 
 class _CustomNavBarState extends State<CustomNavBar> {
-  final List<String> labels = ["Home", "Contacts", "My Bus", "Profile"];
   final List<String> icons = [
     "assets/icons/home.svg",
     "assets/icons/contacts.svg",
@@ -27,11 +27,18 @@ class _CustomNavBarState extends State<CustomNavBar> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+    final labels = [
+      l10n.navHome,
+      l10n.navContacts,
+      l10n.navBus,
+      l10n.navProfile,
+    ];
+
     return Stack(
       clipBehavior: Clip.none,
       alignment: Alignment.center,
       children: [
-        // Shadow effect behind navbar
         Positioned(
           top: -10,
           left: 0,
@@ -51,11 +58,9 @@ class _CustomNavBarState extends State<CustomNavBar> {
             ),
           ),
         ),
-
-        // Curved Navigation Bar
         CurvedNavigationBar(
           index: widget.currentIndex,
-          height: 65.0, // Keeps navbar compact
+          height: 65.0,
           backgroundColor: Colors.transparent,
           color: Colors.white,
           buttonBackgroundColor: Colors.white,
@@ -67,10 +72,8 @@ class _CustomNavBarState extends State<CustomNavBar> {
           ),
           onTap: widget.onTabSelected,
         ),
-
-        // Labels inside the navbar with fine-tuned spacing
         Positioned(
-          bottom: 6, // Keeps the text inside the nav bar
+          bottom: 6,
           left: 0,
           right: 0,
           child: Row(
@@ -78,20 +81,19 @@ class _CustomNavBarState extends State<CustomNavBar> {
             children: List.generate(
               labels.length,
                   (index) {
-                double offset = 0; // Default position
-
-                if (index == 0) offset = 4;  // Move "Home" slightly to the right
-                if (index == 2) offset = -4; // Move "My Bus" slightly to the left (2px instead of 4px)
-                if (index == 3) offset = -2; // Move "Profile" slightly to the left
+                double offset = 0;
+                if (index == 0) offset = 4;
+                if (index == 2) offset = -4;
+                if (index == 3) offset = -2;
 
                 return Transform.translate(
-                  offset: Offset(offset, 0), // Shift text slightly
+                  offset: Offset(offset, 0),
                   child: ShaderMask(
                     shaderCallback: (bounds) {
                       return LinearGradient(
                         colors: widget.currentIndex == index
-                            ? [Color(0xFF052A43), Color(0xFF0D6AA9)] // Selected gradient
-                            : [Color(0xFFA4A4A4), Color(0xFFA4A4A4)], // Unselected gray
+                            ? [Color(0xFF052A43), Color(0xFF0D6AA9)]
+                            : [Color(0xFFA4A4A4), Color(0xFFA4A4A4)],
                         begin: Alignment.topCenter,
                         end: Alignment.bottomCenter,
                       ).createShader(bounds);
@@ -102,8 +104,8 @@ class _CustomNavBarState extends State<CustomNavBar> {
                       style: TextStyle(
                         fontSize: 12,
                         fontFamily: 'Comfortaa',
-                        fontWeight: FontWeight.bold, // 👈 Make text bold
-                        color: Colors.white, // Controlled by ShaderMask
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
                       ),
                     ),
                   ),
@@ -116,7 +118,6 @@ class _CustomNavBarState extends State<CustomNavBar> {
     );
   }
 
-  /// Builds only the navigation icons with gradient color
   Widget _buildNavIcon(String iconPath, int index) {
     bool isSelected = widget.currentIndex == index;
 
@@ -124,8 +125,8 @@ class _CustomNavBarState extends State<CustomNavBar> {
       shaderCallback: (Rect bounds) {
         return LinearGradient(
           colors: isSelected
-              ? [Color(0xFF052A43), Color(0xFF0D6AA9)] // Gradient for selected
-              : [Color(0xFFA4A4A4), Color(0xFFA4A4A4)], // Gray for unselected
+              ? [Color(0xFF052A43), Color(0xFF0D6AA9)]
+              : [Color(0xFFA4A4A4), Color(0xFFA4A4A4)],
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
         ).createShader(bounds);
@@ -139,8 +140,3 @@ class _CustomNavBarState extends State<CustomNavBar> {
     );
   }
 }
-
-
-
-
-

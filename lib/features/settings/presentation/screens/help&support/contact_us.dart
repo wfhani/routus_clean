@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'widgets/contact_us_card.dart';
 
@@ -24,12 +25,14 @@ class ContactUsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final local = AppLocalizations.of(context)!;
+
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        title: const Text('Contact Us'),
+        title: Text(local.contactUs),
         centerTitle: true,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back, color: Colors.white),
@@ -58,7 +61,7 @@ class ContactUsScreen extends StatelessWidget {
               ),
               SizedBox(height: 32.h),
               Text(
-                'How can we help you?',
+                local.helpHeader,
                 style: Theme.of(context).textTheme.headlineMedium?.copyWith(
                   color: Colors.white,
                   fontWeight: FontWeight.bold,
@@ -67,7 +70,7 @@ class ContactUsScreen extends StatelessWidget {
               ),
               SizedBox(height: 12.h),
               Text(
-                'It looks like you’re having a problem. Reach out to us, and we\'ll be happy to help!',
+                local.helpDescription,
                 style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                   color: Colors.white70,
                 ),
@@ -79,19 +82,18 @@ class ContactUsScreen extends StatelessWidget {
                 children: [
                   ContactCard(
                     icon: Icons.email,
-                    text: "Email Us",
+                    text: local.contactEmail,
                     onTap: _launchEmail,
                   ),
                   SizedBox(width: 42.w),
                   ContactCard(
                     icon: Icons.phone,
-                    text: "Call Us",
+                    text: local.contactCall,
                     onTap: () async {
                       final Uri callUri = Uri(scheme: 'tel', path: '01021505807');
                       try {
                         await launchUrl(callUri);
                       } catch (e) {
-                        // Handle the error, e.g., show a snackbar or dialog
                         print('Could not launch $callUri: $e');
                       }
                     },

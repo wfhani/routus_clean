@@ -4,6 +4,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:routus_clean/features/weather/presentation/cubit/weather_cubit.dart';
 import 'package:routus_clean/features/weather/presentation/screens/weather_report_screen.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 class WeatherSection extends StatelessWidget {
   const WeatherSection({super.key});
@@ -45,7 +47,7 @@ class WeatherSection extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                "Check Today’s Weather",
+                AppLocalizations.of(context)!.checkWeather,
                 style: TextStyle(
                   fontSize: 20.sp,
                   fontWeight: FontWeight.bold,
@@ -110,7 +112,7 @@ class WeatherSection extends StatelessWidget {
                         padding: EdgeInsets.zero,
                       ),
                       child: Text(
-                        "Full weather report",
+                        AppLocalizations.of(context)!.fullReport,
                         style: TextStyle(
                           fontSize: 16.sp,
                           fontWeight: FontWeight.normal,

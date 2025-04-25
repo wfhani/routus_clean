@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import '../../../../components/custom_button.dart';
 import '../../../../components/custom_text_field.dart';
 import '../../../../core/theme/app_theme.dart';
@@ -20,28 +22,29 @@ class _AddChildFormScreenState extends State<AddChildFormScreen> {
   final TextEditingController studentIdController = TextEditingController();
 
   void _addChild(BuildContext context) {
+    final local = AppLocalizations.of(context)!;
     final school = schoolController.text.trim();
     final studentId = studentIdController.text.trim();
 
     if (school.isEmpty || studentId.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text("Please fill all fields")),
+        SnackBar(content: Text(local.fillAllFields)),
       );
       return;
     }
 
-    // ✅ Show Loading Screen
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (_) => const LoadingScreen(isSuccess: false)), // Default false
+      MaterialPageRoute(builder: (_) => const LoadingScreen(isSuccess: false)),
     );
 
-    // ✅ Add child and wait for response
     context.read<ChildrenCubit>().addChild(school, studentId);
   }
 
   @override
   Widget build(BuildContext context) {
+    final local = AppLocalizations.of(context)!;
+
     return GradientScaffold(
       child: SafeArea(
         child: SingleChildScrollView(
@@ -49,48 +52,42 @@ class _AddChildFormScreenState extends State<AddChildFormScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              // **Title**
               Text(
-                "Add Child",
+                local.addChildTitle,
                 style: Theme.of(context).textTheme.displayLarge,
               ),
               SizedBox(height: 12.h),
               Text(
-                "Enter your child’s details to start tracking their bus journey.",
+                local.addChildSubtitle,
                 style: Theme.of(context).textTheme.bodyLarge,
               ),
               SizedBox(height: 40.h),
 
-              // **Custom Text Fields**
               CustomTextField(
                 controller: schoolController,
-                hintText: "Enter School Name",
+                hintText: local.enterSchoolName,
                 obscureText: false,
               ),
               CustomTextField(
                 controller: studentIdController,
-                hintText: "Enter Student ID",
+                hintText: local.enterStudentId,
                 obscureText: false,
               ),
               SizedBox(height: 32.h),
 
-              // **Bloc Listener to Handle Loading, Success & Error States**
               BlocListener<ChildrenCubit, ChildrenState>(
                 listener: (context, state) {
                   if (state is ChildrenError) {
-                    // ❌ Show failure on LoadingScreen
                     Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(builder: (_) => const LoadingScreen(isSuccess: false)),
                     );
-
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(content: Text(state.message)),
                     );
                   }
 
                   if (state is ChildrenLoaded) {
-                    // ✅ Show success on LoadingScreen, then go to list
                     Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(builder: (_) => const LoadingScreen(isSuccess: true)),
@@ -104,11 +101,10 @@ class _AddChildFormScreenState extends State<AddChildFormScreen> {
                     });
                   }
                 },
-
                 child: Padding(
                   padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom + 16.h),
                   child: CustomButton(
-                    text: "Add Child",
+                    text: local.addChildButton,
                     onPressed: () => _addChild(context),
                   ),
                 ),

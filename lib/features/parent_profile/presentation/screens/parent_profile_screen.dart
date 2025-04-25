@@ -50,7 +50,6 @@ class ParentProfileScreen extends StatelessWidget {
           backgroundColor: Colors.transparent,
           body: Stack(
             children: [
-              // Top Gradient Background
               Container(
                 height: 260.h,
                 decoration: const BoxDecoration(
@@ -64,8 +63,6 @@ class ParentProfileScreen extends StatelessWidget {
                   ),
                 ),
               ),
-
-              // White Overlay
               Positioned(
                 top: 180.h,
                 left: 0,
@@ -80,20 +77,13 @@ class ParentProfileScreen extends StatelessWidget {
                   ),
                 ),
               ),
-
-              // Actual UI
               MediaQuery.removePadding(
                 context: context,
                 removeTop: true,
                 child: Column(
                   children: [
-                    // Header Icons
                     Padding(
-                      padding: EdgeInsets.only(
-                        left: 20.w,
-                        right: 20.w,
-                        top: 20.h,
-                      ),
+                      padding: EdgeInsets.only(left: 20.w, right: 20.w, top: 20.h),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -103,10 +93,7 @@ class ParentProfileScreen extends StatelessWidget {
                               'assets/icons/settings.svg',
                               width: 28.w,
                               height: 28.h,
-                              colorFilter: const ColorFilter.mode(
-                                Colors.white,
-                                BlendMode.srcIn,
-                              ),
+                              colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn),
                             ),
                           ),
                           GestureDetector(
@@ -115,19 +102,13 @@ class ParentProfileScreen extends StatelessWidget {
                               'assets/icons/notification.svg',
                               width: 28.w,
                               height: 28.h,
-                              colorFilter: const ColorFilter.mode(
-                                Colors.white,
-                                BlendMode.srcIn,
-                              ),
+                              colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn),
                             ),
                           ),
                         ],
                       ),
                     ),
-
                     SizedBox(height: 25.h),
-
-                    // Profile Picture
                     Stack(
                       alignment: Alignment.center,
                       children: [
@@ -157,24 +138,19 @@ class ParentProfileScreen extends StatelessWidget {
                         ),
                       ],
                     ),
-
-                    // Edit Icon
                     Padding(
                       padding: EdgeInsets.only(right: 30.w, top: 20.h),
                       child: Align(
                         alignment: Alignment.centerRight,
                         child: GestureDetector(
                           onTap: () {
-                            // TODO: Navigate to edit screen
+                            // TODO: Add navigation to edit screen here
                           },
                           child: const Icon(Icons.edit, color: Color(0xFFFDC70A)),
                         ),
                       ),
                     ),
-
                     SizedBox(height: 20.h),
-
-                    // Info Fields
                     Expanded(
                       child: Padding(
                         padding: EdgeInsets.symmetric(horizontal: 20.w),
@@ -186,10 +162,7 @@ class ParentProfileScreen extends StatelessWidget {
                             ProfileInfoField(label: 'Email Address', value: profile.email),
                             ProfileInfoField(label: 'Phone Number', value: profile.phone),
                             ProfileInfoField(label: 'Gender', value: profile.gender),
-                            ProfileInfoField(
-                              label: 'Date of birth',
-                              value: profile.birthDate,
-                            ),
+                            ProfileInfoField(label: 'Date of birth', value: profile.birthDate),
                             const SizedBox(height: 15),
                             const LogoutButton(),
                           ],

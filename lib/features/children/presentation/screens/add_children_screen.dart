@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import 'package:routus_clean/core/theme/app_theme.dart';
 import '../../../../components/custom_button.dart';
 import '../cubit/children_cubit.dart';
@@ -21,6 +23,8 @@ class _AddChildrenScreenState extends State<AddChildrenScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final local = AppLocalizations.of(context)!;
+
     return GradientScaffold(
       child: SafeArea(
         child: SingleChildScrollView(
@@ -31,19 +35,17 @@ class _AddChildrenScreenState extends State<AddChildrenScreen> {
               children: [
                 SizedBox(height: 40.h),
 
-                // **Greeting Text**
                 Text(
-                  "Hello! Sarah",
+                  local.helloSarah,
                   style: Theme.of(context).textTheme.displayLarge,
                 ),
                 SizedBox(height: 12.h),
                 Text(
-                  "Welcome to tracking your child",
+                  local.welcomeTracking,
                   style: Theme.of(context).textTheme.bodyLarge,
                 ),
                 SizedBox(height: 32.h),
 
-                // **Illustration**
                 SvgPicture.asset(
                   'assets/images/add_child.svg',
                   width: 166.w,
@@ -51,7 +53,6 @@ class _AddChildrenScreenState extends State<AddChildrenScreen> {
                 ),
                 SizedBox(height: 32.h),
 
-                // **Add Children Button**
                 BlocConsumer<ChildrenCubit, ChildrenState>(
                   listener: (context, state) {
                     if (state is ChildrenError) {
@@ -70,7 +71,7 @@ class _AddChildrenScreenState extends State<AddChildrenScreen> {
                       return const CircularProgressIndicator();
                     }
                     return CustomButton(
-                      text: 'Add Child',
+                      text: local.addChildButton,
                       onPressed: () {
                         Navigator.push(
                           context,
