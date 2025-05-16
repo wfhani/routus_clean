@@ -15,7 +15,7 @@ class ErrorView extends StatelessWidget {
       child: Column(
         children: [
           const SizedBox(height: 30),
-          Lottie.asset('assets/images/empty.svg'),
+          Lottie.asset('assets/lottie/error_state.json'),
           Text(
             message,
             style: const TextStyle(
