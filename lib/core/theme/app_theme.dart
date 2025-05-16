@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:routus_clean/styles.dart';
 
 final ThemeData appTheme = ThemeData(
+  primarySwatch: Styles.primaryMaterialColor,
   fontFamily: 'Comfortaa',
   textTheme: TextTheme(
     bodyLarge: TextStyle(

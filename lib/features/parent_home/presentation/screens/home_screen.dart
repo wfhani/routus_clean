@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:routus_clean/components/custom_nav_bar.dart';
+import 'package:routus_clean/features/notifications/presentaion/notifications/notifications_view.dart';
 import 'package:routus_clean/features/parent_home/presentation/cubit/home_cubit.dart';
 import 'package:routus_clean/features/parent_home/presentation/widgets/home_action_button.dart';
 import 'package:routus_clean/features/parent_home/presentation/widgets/tutorial_card.dart';
@@ -91,18 +92,23 @@ class _HomeScreenState extends State<HomeScreen> {
                           'assets/icons/settings.svg',
                           width: 28.w,
                           height: 28.h,
-                          colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn),
+                          colorFilter: const ColorFilter.mode(
+                              Colors.white, BlendMode.srcIn),
                         ),
                       ),
                       GestureDetector(
                         onTap: () {
                           // Handle notifications
+                          Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => const NotificationsPage(),
+                          ));
                         },
                         child: SvgPicture.asset(
                           'assets/icons/notification.svg',
                           width: 28.w,
                           height: 28.h,
-                          colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn),
+                          colorFilter: const ColorFilter.mode(
+                              Colors.white, BlendMode.srcIn),
                         ),
                       ),
                     ],
@@ -149,7 +155,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
                 // **Custom Bottom Navigation**
                 Padding(
-                  padding: EdgeInsets.only(bottom: MediaQuery.of(context).padding.bottom),
+                  padding: EdgeInsets.only(
+                      bottom: MediaQuery.of(context).padding.bottom),
                   child: CustomNavBar(
                     currentIndex: selectedIndex,
                     onTabSelected: _onTabSelected,
@@ -230,22 +237,3 @@ class _HomeContent extends StatelessWidget {
     );
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
