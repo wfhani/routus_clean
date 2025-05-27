@@ -4,11 +4,13 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 class ProfileInfoField extends StatelessWidget {
   final String label;
   final String value;
+  final Color textColor;
 
   const ProfileInfoField({
     super.key,
     required this.label,
     required this.value,
+    this.textColor = Colors.black, // Default to black if not specified
   });
 
   @override
@@ -30,7 +32,7 @@ class ProfileInfoField extends StatelessWidget {
           Text(
             value,
             style: TextStyle(
-              color: const Color(0xFF052A43),
+              color: textColor,
               fontSize: 16.sp,
               fontWeight: FontWeight.bold,
             ),
@@ -41,3 +43,4 @@ class ProfileInfoField extends StatelessWidget {
     );
   }
 }
+

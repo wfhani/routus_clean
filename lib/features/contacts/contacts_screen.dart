@@ -61,7 +61,6 @@ class ContactsScreen extends StatelessWidget {
                   ),
 
                   /// Title and Subtitle
-                  /// Title and Subtitle
                   Center(
                     child: Column(
                       children: [

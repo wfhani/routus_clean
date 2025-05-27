@@ -17,7 +17,7 @@ plugins {
 }
 
 android {
-    namespace = "com.example.routus"
+    namespace = "com.example.routus"  // ✅ Consistent with AndroidManifest.xml
     compileSdk = flutter.compileSdkVersion
     ndkVersion "25.1.8937393"
 
@@ -31,7 +31,7 @@ android {
     }
 
     defaultConfig {
-        applicationId = "com.example.routus"
+        applicationId = "com.example.routus"  // ✅ Consistent with AndroidManifest.xml
         ndk {
             abiFilters "armeabi-v7a", "arm64-v8a", "x86_64"
         }
@@ -43,9 +43,19 @@ android {
 
     buildTypes {
         release {
-            signingConfig = signingConfigs.debug
+            // Enable code shrinking (ProGuard/R8) and resource shrinking
+            minifyEnabled false  // Set to true if you want code shrinking
+            shrinkResources false // Disable resource shrinking to avoid this error
+
+            // Use ProGuard or R8 (keep it default for now)
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            minifyEnabled false  // No shrinking for debug
+            shrinkResources false
         }
     }
+
 }
 
 dependencies {

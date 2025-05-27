@@ -34,6 +34,9 @@ import 'package:routus_clean/features/onboarding/onboarding3/onboarding3.dart';
 
 import 'package:routus_clean/features/settings/presentation/screens/settings/settings_screen.dart';
 import 'package:routus_clean/features/settings/presentation/screens/help&support/contact_us.dart';
+import 'features/parent_profile/data/repositories/parent_profile_repository.dart';
+import 'features/parent_profile/presentation/cubit/parent_profile_cubit.dart';
+import 'features/parent_profile/presentation/screens/parent_profile_screen.dart';
 
 import 'core/cubit/locale_cubit.dart';
 
@@ -78,6 +81,9 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => AuthCubit(AuthRepository())),
         BlocProvider(create: (context) => ChildrenCubit(ChildrenRepository())),
         BlocProvider(create: (context) => LocaleCubit()),
+        BlocProvider(
+          create: (context) => ParentProfileCubit(ParentProfileRepository()), // ✅ Corrected
+        ),
       ],
       child: ScreenUtilInit(
         designSize: const Size(375, 812),
@@ -101,8 +107,6 @@ class MyApp extends StatelessWidget {
                   GlobalCupertinoLocalizations.delegate,
                 ],
                 initialRoute: '/',
-                //home: OTPVerificationScreen(isEmailSelected: true),
-
                 routes: {
                   '/': (context) => const HomeScreen(),
                   '/signin': (context) => SignInScreen(),
@@ -115,6 +119,7 @@ class MyApp extends StatelessWidget {
                   '/notifications': (context) => const NotificationScreen(),
                   '/settings': (context) => const SettingsScreen(),
                   '/childProfileScreen': (context) => const ChildProfileScreen(),
+                  '/parentProfile': (context) => const ParentProfileScreen(),
                 },
                 onGenerateRoute: (settings) {
                   if (settings.name == '/otpVerification') {

@@ -1,3 +1,4 @@
+// lib/features/parent_profile/presentation/widgets/profile_picture_widget.dart
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -16,7 +17,7 @@ class ProfilePictureWidget extends StatelessWidget {
     return Stack(
       alignment: Alignment.center,
       children: [
-        // ⭕ Profile Image Circle
+        // Profile Image Circle
         CircleAvatar(
           radius: 50.r,
           backgroundColor: Colors.white,
@@ -25,22 +26,20 @@ class ProfilePictureWidget extends StatelessWidget {
               : const AssetImage('assets/images/default_profile.png')
           as ImageProvider,
         ),
-
-        // ⬆️ Upload Icon
+        // Edit Icon
         Positioned(
           bottom: 0,
-          right: 4.w,
+          right: 0,
           child: GestureDetector(
             onTap: () {
               // Call the image picker handler
-              // You can wire this to open a file/image picker
               onImageSelected("path/to/selected/image.png");
             },
             child: Container(
               padding: EdgeInsets.all(6.r),
               decoration: BoxDecoration(
-                shape: BoxShape.circle,
                 color: const Color(0xFFFDC70A),
+                shape: BoxShape.circle,
               ),
               child: const Icon(Icons.camera_alt, size: 18, color: Colors.black),
             ),
@@ -50,5 +49,3 @@ class ProfilePictureWidget extends StatelessWidget {
     );
   }
 }
-
-

@@ -1,7 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:routus_clean/features/weather/data/weather_api_service.dart';
 import 'package:routus_clean/features/weather/data/weather_ai_service.dart';
-import 'package:routus_clean/features/parent_home/weather/data/weather_model.dart';
+import 'package:routus_clean/features/weather/data/models/weather_report_model.dart';
 
 /// **States**
 abstract class WeatherState {}
@@ -11,7 +11,7 @@ class WeatherInitial extends WeatherState {}
 class WeatherLoading extends WeatherState {}
 
 class WeatherLoaded extends WeatherState {
-  final WeatherModel weather;
+  final WeatherReportModel weather;
   WeatherLoaded(this.weather);
 }
 
@@ -34,23 +34,25 @@ class WeatherCubit extends Cubit<WeatherState> {
 
   /// **Fetch Normal Weather**
   Future<void> fetchWeather(String city) async {
-    emit(WeatherLoading()); // ✅ Show loading before fetching
+    emit(WeatherLoading());
 
     try {
-      final weather = await weatherService.getWeather(city);
+      final weather = await weatherService.getWeatherReport(city);
       if (weather != null) {
         emit(WeatherLoaded(weather));
       } else {
         emit(WeatherError("Failed to fetch weather"));
       }
-    } catch (e) {
-      emit(WeatherError("Error: ${e.toString()}"));
+    } catch (e, stack) {
+      print("🔴 Weather fetch error: $e");
+      print("🧱 Stack trace: $stack");
+      emit(WeatherError("Failed to fetch weather"));
     }
   }
 
   /// **Fetch AI Weather Recommendation**
   Future<void> fetchWeatherAI(String city) async {
-    emit(WeatherLoading()); // ✅ Show loading before fetching AI recommendation
+    emit(WeatherLoading());
 
     try {
       final recommendation = await aiService.fetchWeatherAI(city);
@@ -59,12 +61,10 @@ class WeatherCubit extends Cubit<WeatherState> {
       } else {
         emit(WeatherError("No AI recommendation available"));
       }
-    } catch (e) {
-      emit(WeatherError("AI Fetch Error: ${e.toString()}"));
+    } catch (e, stack) {
+      print("🔴 AI weather fetch error: $e");
+      print("🧱 Stack trace: $stack");
+      emit(WeatherError("AI Fetch Error"));
     }
   }
 }
-
-
-
-

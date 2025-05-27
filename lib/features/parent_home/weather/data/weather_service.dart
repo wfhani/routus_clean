@@ -7,9 +7,9 @@ class WeatherService {
   static const String baseUrl = "http://174.129.6.228:8000";
   static const String openWeatherApiKey = "f1bfe0dbd7c15ef3f147f4b3303c0bff";
 
-  // 🌤 Fetch AI School Recommendation
+
   Future<String> getAISchoolRecommendation(String city) async {
-    final response = await http.get(Uri.parse("$baseUrl/predict/?city=$city"));
+    final response = await http.get(Uri.parse("$baseUrl/predict/?city=$city"),headers: {"Accept-Language":"ar"});
     if (response.statusCode == 200) {
       final data = json.decode(response.body);
       return data["recommendation"] ?? "No recommendation available.";
@@ -18,7 +18,7 @@ class WeatherService {
     }
   }
 
-  // 🌤 Fetch Weather Data from OpenWeather API
+
   Future<WeatherModel> fetchWeather(String city) async {
     final response = await http.get(Uri.parse(
         "https://api.openweathermap.org/data/2.5/weather?q=$city&appid=$openWeatherApiKey&units=metric"));

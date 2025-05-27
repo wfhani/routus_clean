@@ -1,177 +1,153 @@
+// lib/features/parent_profile/presentation/screens/parent_profile_screen.dart
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import '../cubit/parent_profile_cubit.dart';
+import '../widgets/profile_info_field.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-import '../../data/models/parent_profile_model.dart';
-import '../../data/repositories/parent_profile_repository.dart';
-import '../widgets/logout_button.dart';
-import '../widgets/profile_info_field.dart';
-
-class ParentProfileScreen extends StatelessWidget {
+class ParentProfileScreen extends StatefulWidget {
   const ParentProfileScreen({super.key});
 
   @override
+  State<ParentProfileScreen> createState() => _ParentProfileScreenState();
+}
+
+class _ParentProfileScreenState extends State<ParentProfileScreen> {
+  @override
+  void initState() {
+    super.initState();
+    // Hides the status bar completely
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
+    BlocProvider.of<ParentProfileCubit>(context).fetchProfile("ahmed1.ali@example.com");
+  }
+
+  @override
+  void dispose() {
+    // Restore the status bar when leaving this screen
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final repo = ParentProfileRepository();
-
-    return FutureBuilder<ParentProfileModel>(
-      future: repo.fetchParentProfile(),
-      builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return const Scaffold(
-            backgroundColor: Colors.white,
-            body: Center(child: CircularProgressIndicator()),
-          );
-        }
-
-        if (snapshot.hasError) {
-          return Scaffold(
-            backgroundColor: Colors.white,
-            body: Center(
-              child: Text(
-                'Error: ${snapshot.error}',
-                style: const TextStyle(color: Colors.red),
-              ),
-            ),
-          );
-        }
-
-        if (!snapshot.hasData) {
-          return const Scaffold(
-            backgroundColor: Colors.white,
-            body: Center(child: Text("No profile data found")),
-          );
-        }
-
-        final profile = snapshot.data!;
-
+    return BlocBuilder<ParentProfileCubit, ParentProfileState>(
+      builder: (context, state) {
         return Scaffold(
-          extendBodyBehindAppBar: true,
-          backgroundColor: Colors.transparent,
+          resizeToAvoidBottomInset: false,
           body: Stack(
             children: [
-              Container(
-                height: 260.h,
-                decoration: const BoxDecoration(
-                  gradient: LinearGradient(
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
-                    colors: [
-                      Color(0xFF052A43),
-                      Color(0xFF0D6AA9),
-                    ],
-                  ),
-                ),
-              ),
-              Positioned(
-                top: 180.h,
-                left: 0,
-                right: 0,
-                bottom: 0,
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.vertical(
-                      top: Radius.circular(35.r),
-                    ),
-                  ),
-                ),
-              ),
-              MediaQuery.removePadding(
-                context: context,
-                removeTop: true,
-                child: Column(
+              if (state is ParentProfileLoading)
+                const Center(child: CircularProgressIndicator())
+              else if (state is ParentProfileLoaded)
+                Column(
                   children: [
-                    Padding(
-                      padding: EdgeInsets.only(left: 20.w, right: 20.w, top: 20.h),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          GestureDetector(
-                            onTap: () => Navigator.pushNamed(context, '/settings'),
-                            child: SvgPicture.asset(
-                              'assets/icons/settings.svg',
-                              width: 28.w,
-                              height: 28.h,
-                              colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn),
-                            ),
-                          ),
-                          GestureDetector(
-                            onTap: () => Navigator.pushNamed(context, '/notifications'),
-                            child: SvgPicture.asset(
-                              'assets/icons/notification.svg',
-                              width: 28.w,
-                              height: 28.h,
-                              colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    SizedBox(height: 25.h),
+                    // Header with Gradient and Profile Picture
                     Stack(
                       alignment: Alignment.center,
                       children: [
                         Container(
-                          width: 120.w,
-                          height: 120.w,
-                          decoration: BoxDecoration(
-                            color: Colors.grey[200],
-                            borderRadius: BorderRadius.circular(20.r),
-                            image: const DecorationImage(
-                              image: AssetImage('assets/images/default_profile.png'),
-                              fit: BoxFit.cover,
+                          height: 200.h,
+                          width: double.infinity,
+                          decoration: const BoxDecoration(
+                            gradient: LinearGradient(
+                              colors: [Color(0xFF052A43), Color(0xFF0D6AA9)],
+                              begin: Alignment.topCenter,
+                              end: Alignment.bottomCenter,
                             ),
                           ),
                         ),
                         Positioned(
-                          bottom: 0,
+                          top: 180.h,
+                          left: 0,
                           right: 0,
+                          bottom: 0,
                           child: Container(
-                            padding: EdgeInsets.all(6.r),
                             decoration: BoxDecoration(
-                              color: const Color(0xFFFDC70A),
-                              borderRadius: BorderRadius.circular(6.r),
+                              color: Colors.white,
+                              borderRadius: const BorderRadius.vertical(
+                                top: Radius.circular(35),
+                              ),
                             ),
-                            child: const Icon(Icons.camera_alt, size: 20),
+                          ),
+                        ),
+                        Positioned(
+                          top: 70.h,
+                          child: Stack(
+                            alignment: Alignment.center,
+                            children: [
+                              ClipRRect(
+                                borderRadius: BorderRadius.circular(12.r),
+                                child: Image.asset(
+                                  'assets/images/default_profile.png',
+                                  width: 120.w,
+                                  height: 120.h,
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                              Positioned(
+                                right: 0,
+                                bottom: 0,
+                                child: GestureDetector(
+                                  onTap: () {
+                                    // Edit Profile Image Action
+                                  },
+                                  child: Container(
+                                    padding: const EdgeInsets.all(4),
+                                    decoration: const BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      color: Colors.yellow,
+                                    ),
+                                    child: const Icon(Icons.camera_alt, color: Colors.black),
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
                         ),
                       ],
                     ),
-                    Padding(
-                      padding: EdgeInsets.only(right: 30.w, top: 20.h),
-                      child: Align(
-                        alignment: Alignment.centerRight,
-                        child: GestureDetector(
-                          onTap: () {
-                            // TODO: Add navigation to edit screen here
-                          },
-                          child: const Icon(Icons.edit, color: Color(0xFFFDC70A)),
-                        ),
-                      ),
-                    ),
-                    SizedBox(height: 20.h),
+
+                    // Profile Information
                     Expanded(
-                      child: Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 20.w),
+                      child: Container(
+                        padding: EdgeInsets.all(20.w),
                         child: ListView(
                           children: [
-                            const SizedBox(height: 10),
-                            ProfileInfoField(label: 'First name', value: profile.firstName),
-                            ProfileInfoField(label: 'Last name', value: profile.lastName),
-                            ProfileInfoField(label: 'Email Address', value: profile.email),
-                            ProfileInfoField(label: 'Phone Number', value: profile.phone),
-                            ProfileInfoField(label: 'Gender', value: profile.gender),
-                            ProfileInfoField(label: 'Date of birth', value: profile.birthDate),
-                            const SizedBox(height: 15),
-                            const LogoutButton(),
+                            ProfileInfoField(
+                                label: 'First Name',
+                                value: state.profile.firstName),
+                            ProfileInfoField(
+                                label: 'Last Name',
+                                value: state.profile.lastName),
+                            ProfileInfoField(
+                                label: 'Email Address',
+                                value: state.profile.email),
+                            ProfileInfoField(
+                                label: 'Phone Number',
+                                value: state.profile.phone),
+                            ProfileInfoField(
+                                label: 'Gender',
+                                value: state.profile.gender),
+                            ProfileInfoField(
+                                label: 'Date of Birth',
+                                value: state.profile.dateOfBirth),
                           ],
                         ),
                       ),
                     ),
                   ],
-                ),
-              ),
+                )
+              else if (state is ParentProfileError)
+                  Center(
+                    child: Text(
+                      state.message,
+                      style: const TextStyle(color: Colors.red),
+                    ),
+                  )
+                else
+                  const Center(child: Text("No profile data found")),
             ],
           ),
         );

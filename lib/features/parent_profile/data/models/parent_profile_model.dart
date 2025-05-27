@@ -1,10 +1,12 @@
+// lib/features/parent_profile/data/models/parent_profile_model.dart
 class ParentProfileModel {
   final String firstName;
   final String lastName;
   final String email;
   final String phone;
   final String gender;
-  final String birthDate;
+  final String dateOfBirth; // Corrected field name
+  final String profilePicture;
 
   ParentProfileModel({
     required this.firstName,
@@ -12,7 +14,8 @@ class ParentProfileModel {
     required this.email,
     required this.phone,
     required this.gender,
-    required this.birthDate,
+    required this.dateOfBirth,
+    required this.profilePicture,
   });
 
   factory ParentProfileModel.fromJson(Map<String, dynamic> json) {
@@ -20,9 +23,10 @@ class ParentProfileModel {
       firstName: json['first_name'] ?? '',
       lastName: json['last_name'] ?? '',
       email: json['email'] ?? '',
-      phone: json['phone'] ?? '',
+      phone: json['phone_number'] ?? '',
       gender: json['gender'] ?? '',
-      birthDate: json['birth_date'] ?? '',
+      dateOfBirth: json['date_of_birth'] ?? '', // Use correct field
+      profilePicture: json['profile_picture'] ?? '',
     );
   }
 }
