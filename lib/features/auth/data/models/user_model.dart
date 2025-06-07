@@ -4,7 +4,7 @@ class UserModel {
   final String lastName;
   final String name;
   final String email;
-  final String phone; // Added phoneNumber field
+  final String phone;
 
   UserModel({
     required this.id,
@@ -12,7 +12,7 @@ class UserModel {
     required this.lastName,
     required this.name,
     required this.email,
-    required this.phone, // Include in constructor
+    required this.phone,
   });
 
   factory UserModel.fromJson(Map<String, dynamic> json) {
@@ -22,7 +22,18 @@ class UserModel {
       lastName: json['last_name'],
       name: json['name'],
       email: json['email'],
-      phone: json['phone'] ?? '', // Ensure it handles null values
+      phone: json['phone'] ?? '',
     );
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['first_name'] = firstName;
+    data['last_name'] = lastName;
+    data['name'] = name;
+    data['email'] = email;
+    data['phone'] = phone;
+    return data;
   }
 }
