@@ -20,19 +20,41 @@ class ParentProfileRepository {
           .get(url)
           .timeout(const Duration(seconds: 20)); // ⏱ Timeout Added
 
-      print("📥 Response Status: ${response.statusCode}");
-      print("📥 Response Body: ${response.body}");
+      print("📥 Response Status: \\${response.statusCode}");
+      print("📥 Response Body: \\${response.body}");
 
       if (response.statusCode == 200) {
         final data = json.decode(response.body);
         return ParentProfileModel.fromJson(data);
       } else {
-        throw Exception("Failed to fetch profile: ${response.statusCode}");
+        throw Exception("Failed to fetch profile: \\${response.statusCode}");
       }
     } on TimeoutException {
       throw Exception("Request timed out. Please try again.");
     } catch (e) {
       throw Exception("Failed to fetch profile: $e");
+    }
+  }
+
+  Future<ParentProfileModel> updateParentProfile(Map<String, dynamic> body) async {
+    final url = Uri.parse('$baseUrl/parent/profile');
+    print("🌐 Sending POST request to: $url");
+    try {
+      final response = await client
+          .post(url, body: json.encode(body), headers: {'Content-Type': 'application/json'})
+          .timeout(const Duration(seconds: 20));
+      print("📥 Response Status: \\${response.statusCode}");
+      print("📥 Response Body: \\${response.body}");
+      if (response.statusCode == 200) {
+        final data = json.decode(response.body);
+        return ParentProfileModel.fromJson(data);
+      } else {
+        throw Exception("Failed to update profile: \\${response.statusCode}");
+      }
+    } on TimeoutException {
+      throw Exception("Request timed out. Please try again.");
+    } catch (e) {
+      throw Exception("Failed to update profile: $e");
     }
   }
 }

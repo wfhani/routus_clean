@@ -50,6 +50,8 @@ import 'package:routus_clean/features/report_absent/data/repository/absence_repo
 import 'package:routus_clean/features/report_absent/presentation/cubit/absence_cubit.dart';
 import 'package:routus_clean/features/report_absent/presentation/screens/report_absent_screen.dart';
 
+import 'package:routus_clean/features/face_id/face_id_screen.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
@@ -136,7 +138,8 @@ class MyApp extends StatelessWidget {
                   const ChildProfileScreen(),
                   '/parentProfile': (context) => const ParentProfileScreen(),
                   '/reportAbsent': (context) =>
-                  const ReportAbsentScreen(), // if needed
+                  const ReportAbsentScreen(),
+                  '/faceIdScreen': (context) => const FaceIdScreen(),
                 },
                 onGenerateRoute: (settings) {
                   if (settings.name == '/otpVerification') {

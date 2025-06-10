@@ -275,8 +275,15 @@
   "supportTeamSubtitle": "تواصل مع الفريق المسؤول عن رحلة طفلك",
   "busSupervisor": "مشرفة الحافلة",
   "driver": "السائق",
-  "schoolAdmin": "مدير المدرسة"
-
+  "schoolAdmin": "مدير المدرسة",
+  "payment": "الدفع",
+  "removeAddChildren": "إضافة/إزالة الأطفال",
+  "addFacePhotos": "إضافة صور للوجه",
+  "photoRequirements": "متطلبات الصورة",
+  "min3Photos": "الحد الأدنى 3 صور واضحة للوجه",
+  "wellLit": "إضاءة جيدة",
+  "noMasks": "بدون أقنعة أو قبعات أو نظارات شمسية",
+  "frontAngles": "زوايا أمامية ويسار ويمين"
 }
 
 

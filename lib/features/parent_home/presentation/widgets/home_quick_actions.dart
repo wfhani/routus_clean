@@ -15,36 +15,55 @@ class HomeQuickActions extends StatelessWidget {
         final l10n = AppLocalizations.of(context)!;
 
         return Padding(
-          padding: EdgeInsets.symmetric(horizontal: 0.w),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              _buildActionButton(
-                context,
-                "assets/icons/child_profile.svg",
-                l10n.childProfile,
-                "/childProfileScreen",
-              ),
-              _buildActionButton(
-                context,
-                "assets/icons/face_id.svg",
-                l10n.setFaceId,
-                "/faceIdScreen",
-              ),
-              _buildActionButton(
-                context,
-                "assets/icons/change_address.svg",
-                l10n.changeAddress,
-                "/changeAddressScreen",
-              ),
-              _buildActionButton(
-                context,
-                "assets/icons/report_absent.svg",
-                l10n.reportAbsent,
-                "/reportAbsentScreen",
-              ),
-            ],
+          padding: EdgeInsets.zero,
+          child: SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              children: [
+                _buildActionButton(
+                  context,
+                  "assets/icons/child_profile.svg",
+                  l10n.childProfile,
+                  "/childProfileScreen",
+                ),
+                _buildActionButton(
+                  context,
+                  "assets/icons/face_id.svg",
+                  l10n.setFaceId,
+                  "/faceIdScreen",
+                ),
+                _buildActionButton(
+                  context,
+                  "assets/icons/change_address.svg",
+                  l10n.changeAddress,
+                  "/changeAddressScreen",
+                ),
+                _buildActionButton(
+                  context,
+                  "assets/icons/report_absent.svg",
+                  l10n.reportAbsent,
+                  "/reportAbsentScreen",
+                ),
+                SizedBox(
+                  width: 100.w,
+                  child: _buildActionButton(
+                    context,
+                    "assets/icons/payment.svg",
+                    l10n.payment,
+                    "/paymentScreen",
+                  ),
+                ),
+                SizedBox(
+                  width: 100.w,
+                  child: _buildActionButton(
+                    context,
+                    "assets/icons/payment.svg",
+                    l10n.removeAddChildren,
+                    "/removeAddChildrenScreen",
+                  ),
+                ),
+              ],
+            ),
           ),
         );
       },
@@ -57,44 +76,44 @@ class HomeQuickActions extends StatelessWidget {
       onTap: () {
         Navigator.pushNamed(context, route);
       },
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Container(
-            width: 60.w,
-            height: 60.h,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10.r),
-              gradient: const LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                colors: [
-                  Color(0xFF052A43),
-                  Color(0xFF0D6AA9),
+      child: SizedBox(
+        width: 85.w,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Container(
+              width: 60.w,
+              height: 60.h,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10.r),
+                gradient: const LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [
+                    Color(0xFF052A43),
+                    Color(0xFF0D6AA9),
+                  ],
+                ),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.1),
+                    blurRadius: 6,
+                    spreadRadius: 2,
+                    offset: Offset(0, 3),
+                  ),
                 ],
               ),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black.withOpacity(0.1),
-                  blurRadius: 6,
-                  spreadRadius: 2,
-                  offset: Offset(0, 3),
+              child: Center(
+                child: SvgPicture.asset(
+                  iconPath,
+                  width: 32.w,
+                  height: 32.h,
+                  fit: BoxFit.contain,
                 ),
-              ],
-            ),
-            child: Center(
-              child: SvgPicture.asset(
-                iconPath,
-                width: 32.w,
-                height: 32.h,
-                fit: BoxFit.contain,
               ),
             ),
-          ),
-          SizedBox(height: 5.h),
-          SizedBox(
-            width: 70.w,
-            child: Text(
+            SizedBox(height: 5.h),
+            Text(
               label,
               style: TextStyle(
                 fontSize: 16.sp,
@@ -103,9 +122,11 @@ class HomeQuickActions extends StatelessWidget {
                 color: const Color(0xFF052A43),
               ),
               textAlign: TextAlign.center,
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

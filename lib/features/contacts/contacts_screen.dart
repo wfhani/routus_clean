@@ -87,7 +87,7 @@ class ContactsScreen extends StatelessWidget {
                   ),
 
 
-                  SizedBox(height: 20.h),
+                  SizedBox(height: 40.h),
 
                   /// Filter Icon
                   Align(
