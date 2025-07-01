@@ -24,10 +24,18 @@ import 'features/report_absent/presentation/cubit/absence_cubit.dart';
 import 'features/report_absent/presentation/screens/report_absent_screen.dart';
 import 'features/settings/presentation/screens/help&support/contact_us.dart';
 import 'features/parent_home/presentation/cubit/home_cubit.dart';
+import 'features/tracking/presentation/tracking_view.dart';
 import 'firebase_options.dart';
+import 'package:google_maps_flutter_android/google_maps_flutter_android.dart';
+import 'package:google_maps_flutter_platform_interface/google_maps_flutter_platform_interface.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  final GoogleMapsFlutterPlatform mapsImplementation =
+      GoogleMapsFlutterPlatform.instance;
+  if (mapsImplementation is GoogleMapsFlutterAndroid) {
+    mapsImplementation.useAndroidViewSurface = true;
+  }
   await Firebase.initializeApp();
 
   // ✅ Retrieve FCM Token (For Push Notifications)
@@ -63,7 +71,7 @@ class MyApp extends StatelessWidget {
             theme: appTheme,
             initialRoute: '/',
             routes: {
-              '/': (context) => SignInScreen(),
+              '/': (context) => TrackingPage(),
               '/signin': (context) => SignInScreen(),
               '/signup': (context) => SignUpScreen(),
               '/forgetpassword': (context) => const ForgetPasswordScreen(),

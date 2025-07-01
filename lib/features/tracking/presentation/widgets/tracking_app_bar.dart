@@ -34,6 +34,12 @@ class TrackingAppBar extends StatelessWidget implements PreferredSizeWidget {
                   borderRadius:
                       BorderRadius.vertical(top: Radius.circular(30))),
               builder: (context) => const ChildrenFilterPage(),
+            ).then(
+              (value) {
+                if (value is int) {
+                  //fetch bus location
+                }
+              },
             ),
             child: SvgPicture.asset(
               'assets/icons/filter.svg',
